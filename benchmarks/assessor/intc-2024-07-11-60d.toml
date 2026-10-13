@@ -1,0 +1,45 @@
+# 评估者资料：不得进入模型观察、提示词或环境返回值。
+assessment_version = "0.1"
+task_id = "intc-2024-07-11-60d"
+agent_visible = false
+selection = "retrospective_diagnostic_case"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/intc-2024-07-11-60d.toml"
+
+[hypothesis]
+skills = ["reconcile_segment_reporting", "separate_product_narrative_from_cash_flow", "manage_earnings_gap_exposure", "update_beliefs_without_chasing_rebounds"]
+threshold_policy = "same_as_aapl_example"
+expected_failure_modes = ["extrapolate_ai_growth_to_all_segments", "double_count_foundry_intersegment_revenue", "treat_low_rsi_as_sufficient_buy_signal", "expect_close_decision_to_escape_overnight_gap", "use_later_financials_at_initial_cutoff"]
+
+[[evidence]]
+id = "q1_results"
+phase = "before_start"
+publication_date = "2024-04-25"
+url = "https://www.intc.com/news-events/press-releases/detail/1692/intel-reports-first-quarter-2024-financial-results"
+filing_url = "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000074/0000050863-24-000074.pdf"
+supports = "AI PC product expectations coexist with losses and retrospective segment recasting; compare consolidated and segment figures carefully."
+
+[[evidence]]
+id = "earnings_schedule"
+phase = "before_start"
+publication_date = "2024-07-10"
+url = "https://www.intel.com/content/www/us/en/newsroom/news/intel-report-second-quarter-2024-financial-results.html"
+supports = "The Aug 1 after-close earnings date was publicly announced before episode start; the outcome was not."
+# 若此公告不能从已绑定 filings 获得，须通过新版本环境显式增加公告数据。
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[[evidence]]
+id = "q2_results"
+phase = "during_episode"
+available_at = "2024-08-01T16:01:00-04:00"
+url = "https://www.intc.com/news-events/press-releases/detail/1704/intel-reports-second-quarter-2024-financial-results"
+filing_url = "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000122/intc-20240801.htm"
+supports = "New financial results and cost-reduction/dividend plans require belief updates; the release occurs after the daily decision cutoff."
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+additional_diagnostics = ["weight_before_earnings", "gap_pnl_contribution", "post_release_repositioning", "availability_violations"]
+reject_difficulty_claim_if = "ordinary_fixed_baselines_reliably_pass"
+do_not = ["retune_goal_after_backtest", "require_foreknowledge_of_earnings", "award_success_for_cash_only", "infer_impossibility_from_buy_hold_failure", "treat_hindsight_upper_bound_as_attainable_policy"]

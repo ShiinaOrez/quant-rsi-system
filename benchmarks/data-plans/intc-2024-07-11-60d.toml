@@ -1,0 +1,61 @@
+# 数据构建计划，非已完成的数据 manifest；当前不由配置校验器执行。
+plan_version = "0.1"
+task_id = "intc-2024-07-11-60d"
+status = "unmaterialized"
+
+[identity]
+symbol = "INTC"
+cik = "0000050863"
+currency = "USD"
+exchange = "NASDAQ"
+
+[coverage]
+filings_history = "all_available_edgar_history"
+filings_forms = ["10-K", "10-K/A", "10-Q", "10-Q/A", "8-K", "8-K/A"]
+filings_exhibits = true
+ohlcv_history = "all_available_provider_history"
+minimum_price_warmup_sessions = 252
+forward_sessions = 60
+calendar = "XNAS"
+incomplete_archive = "block_materialization_until_coverage_disclosed"
+
+[sources]
+filings = "https://www.intc.com/filings-reports/all-sec-filings"
+sec_archive = "https://www.sec.gov/edgar/browse/?CIK=50863&owner=exclude"
+financials = "extract_from_versioned_filings_not_latest_companyfacts_snapshot"
+ohlcv_provider = "UNSELECTED"
+corporate_actions_provider = "UNSELECTED"
+calendar_provider = "UNSELECTED"
+
+[records]
+required_columns = ["record_id", "source_url", "event_time", "available_at", "retrieved_at", "sha256"]
+filing_extra_columns = ["accession", "form", "report_period", "accepted_at", "amends_accession"]
+financial_extra_columns = ["filing_accession", "concept", "unit", "period_start", "period_end", "segment", "reporting_basis"]
+price_extra_columns = ["session", "raw_open", "raw_high", "raw_low", "raw_close", "volume"]
+
+[availability]
+filings = "accepted_at_or_verified_earlier_public_release"
+daily_bars = "session_close"
+financials = "inherit_originating_document_available_at"
+missing_publication_time = "next_session_open_after_publication_date"
+later_amendments = "append_new_version_never_overwrite"
+historical_segment_recasts = "visible_only_after_recast_publication"
+future_records = "environment_private_until_available_at"
+
+[construction]
+initial_cutoff = "2024-07-11T16:00:00-04:00"
+initial_archive = "records_available_at_lte_initial_cutoff"
+incremental_archive = "records_available_at_gt_initial_cutoff_released_stepwise"
+agent_mount = "point_in_time_query_api_only"
+assessor_mount = "forbidden"
+manifest_hash = "sha256_of_serialized_manifest_bytes"
+manifest_file_entries = ["path", "sha256", "source", "license", "coverage", "availability_policy"]
+
+[checks]
+reconcile_three_statements = true
+preserve_gaap_and_non_gaap_separately = true
+preserve_intersegment_eliminations = true
+audit_market_calendar_and_timezone = true
+audit_dividend_entitlement_and_pay_dates = true
+audit_no_future_indicator_inputs = true
+audit_no_future_documents_in_initial_observation = true

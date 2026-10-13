@@ -9,6 +9,7 @@
 - [Benchmark 配置契约](docs/benchmark/specification.md)
 - [可复用日频环境](benchmarks/environments/us-equity-daily-v1.toml)
 - [单标的周期题目](benchmarks/tasks/aapl-2023-midyear-60d.toml)
+- [INTC 财报事件诊断题](benchmarks/tasks/intc-2024-07-11-60d.toml)：沿用相同目标和交易约束，[难点与数据计划](docs/benchmark/intc-challenge.md)。难度尚待基线回测验证。
 
 配置校验与测试需要 Python 3.11+，无第三方依赖：
 

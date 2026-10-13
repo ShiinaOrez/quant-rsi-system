@@ -1,0 +1,25 @@
+schema_version = "0.1"
+id = "intc-2024-07-11-60d"
+status = "draft"
+environment = "../environments/us-equity-daily-v1.toml"
+# 根据已知历史事件构建，作为诊断/验证题，不充当封存测试题。
+split = "validation"
+
+[instrument]
+symbol = "INTC"
+
+[episode]
+as_of = "2024-07-11T16:00:00-04:00"
+start = "next_session"
+horizon_sessions = 60
+initial_cash = 100000.0
+initial_weight = 0.0
+
+[dataset]
+manifest = "UNBOUND"
+sha256 = "UNBOUND"
+
+[goal]
+type = "terminal_return_with_drawdown_limit"
+net_return_gte = 0.05
+max_drawdown_lte = 0.10

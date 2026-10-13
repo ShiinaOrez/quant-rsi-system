@@ -12,6 +12,11 @@ ENV = ROOT / "benchmarks/environments/us-equity-daily-v1.toml"
 
 
 class BenchmarkConfigTests(unittest.TestCase):
+    def test_all_repository_tasks_follow_contract(self):
+        for path in sorted((ROOT / "benchmarks/tasks").glob("*.toml")):
+            with self.subTest(task=path.name):
+                validate_task(path)
+
     def test_example_is_valid_draft_but_not_ready(self):
         self.assertEqual(validate_task(TASK)["status"], "draft")
         with self.assertRaisesRegex(ConfigError, "draft"):
