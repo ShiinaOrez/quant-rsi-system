@@ -1,0 +1,25 @@
+schema_version = "0.1"
+id = "aapl-2023-midyear-60d"
+status = "draft"
+environment = "../environments/us-equity-daily-v1.toml"
+split = "test"
+
+[instrument]
+symbol = "AAPL"
+
+[episode]
+as_of = "2023-06-30T16:00:00-04:00"
+start = "next_session"
+horizon_sessions = 60
+initial_cash = 100000.0
+initial_weight = 0.0
+
+[dataset]
+# 草案占位符：ready 状态必须绑定本地数据清单和真实 SHA-256。
+manifest = "UNBOUND"
+sha256 = "UNBOUND"
+
+[goal]
+type = "terminal_return_with_drawdown_limit"
+net_return_gte = 0.05
+max_drawdown_lte = 0.10

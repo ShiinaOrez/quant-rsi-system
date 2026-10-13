@@ -4,7 +4,18 @@
 
 项目目标：可扩展、可执行、可复现的量化 Benchmark；可运行的交易系统；可追溯的模型权重与训练流程；可评估和回滚的 RSI 迭代系统。
 
-当前阶段为文献调研。远端仓库初始为空，尚未实现交易、训练或 Benchmark，尚未产生模型权重或复现论文收益。
+当前已建立文献调研和 Benchmark v0.1 的 TOML 配置契约、草案题目与校验器。远端仓库初始为空；交易执行引擎、真实数据绑定和训练尚未实现，尚未产生模型权重或复现论文收益。
+
+- [Benchmark 配置契约](docs/benchmark/specification.md)
+- [可复用日频环境](benchmarks/environments/us-equity-daily-v1.toml)
+- [单标的周期题目](benchmarks/tasks/aapl-2023-midyear-60d.toml)
+
+配置校验与测试需要 Python 3.11+，无第三方依赖：
+
+```sh
+python3 scripts/validate_benchmark.py benchmarks/tasks/aapl-2023-midyear-60d.toml
+python3 -m unittest discover -s tests
+```
 
 - [第一轮文献调研与方向判断](docs/research/literature-review.md)
 - [实验与系统设计草案](docs/research/research-plan.md)
