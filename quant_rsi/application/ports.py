@@ -5,7 +5,7 @@ from quant_rsi.domain.benchmark import BenchmarkTask
 from quant_rsi.domain.market import MarketSnapshot, TradingSession
 from quant_rsi.domain.trading import Account, TargetWeight, TradingEpisode
 from quant_rsi.domain.training import PostTrainingPlan
-from quant_rsi.domain.trajectory import Trajectory
+from .storage_ports import TrajectoryRepository  # compatibility re-export
 
 
 class MarketHistory(Protocol):
@@ -28,8 +28,3 @@ class PostTrainingBackend(Protocol):
     def train(self, plan: PostTrainingPlan) -> str:
         """Return checkpoint reference; Tinker is one future adapter."""
         ...
-
-
-class TrajectoryRepository(Protocol):
-    def save(self, trace: Trajectory) -> str: ...
-    def get(self, trajectory_id: str) -> Trajectory: ...

@@ -1,33 +1,14 @@
 """Atomic immutable trajectory archive, JSONL export and local blob storage."""
-from dataclasses import asdict
 from contextlib import contextmanager
-from datetime import datetime
 import hashlib
-import json
 import os
 from pathlib import Path
 import sqlite3
 import tempfile
 
-from quant_rsi.domain.benchmark import DatasetSplit
 from quant_rsi.domain.shared import require
-from quant_rsi.domain.training import TrajectoryReference
-from quant_rsi.domain.trajectory import TraceEvent, TraceKind, Trajectory, object_json
-
-
-def canonical(value) -> bytes:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"),
-                      ensure_ascii=False, allow_nan=False).encode("utf-8")
-
-
-def document(trace: Trajectory) -> dict:
-    reference = asdict(trace.reference)
-    reference["split"] = trace.reference.split.value
-    return {"schema_version": "trajectory.v1", "reference": reference,
-            "run_id": trace.run_id, "kind": trace.kind.value, "status": trace.status,
-            "events": [{"sequence": e.sequence, "occurred_at": e.occurred_at.isoformat(),
-                        "event_type": e.event_type, "payload": object_json(e.payload_json)}
-                       for e in trace.events]}
+from quant_rsi.domain.trajectory import Trajectory
+from quant_rsi.serialization.trajectory import canonical, document, decode_document
 
 
 class SQLiteTrajectoryStore:
@@ -81,25 +62,12 @@ class SQLiteTrajectoryStore:
         require(row is not None, "trajectory not found")
         digest, raw = row
         require(hashlib.sha256(raw).hexdigest() == digest, "trajectory integrity failure")
-        value = json.loads(raw)
-        require(value["schema_version"] == "trajectory.v1", "unsupported trajectory schema")
-        ref = value["reference"]
-        ref["split"] = DatasetSplit(ref["split"])
-        return Trajectory(TrajectoryReference(**ref), value["run_id"], TraceKind(value["kind"]),
-                          value["status"], tuple(TraceEvent(
-                              e["sequence"], datetime.fromisoformat(e["occurred_at"]),
-                              e["event_type"], canonical(e["payload"]).decode()) for e in value["events"]))
+        return decode_document(raw)
 
     def export_jsonl(self, trajectory_id: str) -> bytes:
-        value = document(self.get(trajectory_id))
-        events = value.pop("events")
-        lines = [canonical({"record_type": "header", **value})]
-        lines.extend(canonical({"record_type": "event", **event}) for event in events)
-        # Integrity footer covers exact preceding bytes, including newlines.
-        body = b"\n".join(lines) + b"\n"
-        footer = canonical({"record_type": "footer", "event_count": len(events),
-                            "body_sha256": hashlib.sha256(body).hexdigest()})
-        return body + footer + b"\n"
+        # Compatibility shim; export is implemented outside the database adapter.
+        from quant_rsi.application.trajectory_export import export_jsonl
+        return export_jsonl(self, trajectory_id)
 
 
 class LocalArtifactStore:

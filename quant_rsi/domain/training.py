@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from enum import StrEnum
 
-from .benchmark import DatasetSplit
-from .shared import require
+from .shared import DatasetSplit, require
 
 
 class TrainingMethod(StrEnum):

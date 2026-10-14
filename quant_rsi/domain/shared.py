@@ -1,5 +1,12 @@
 from datetime import datetime
 from decimal import Decimal
+from enum import StrEnum
+
+
+class DatasetSplit(StrEnum):
+    TRAIN = "train"
+    VALIDATION = "validation"
+    TEST = "test"
 
 
 class DomainError(ValueError):

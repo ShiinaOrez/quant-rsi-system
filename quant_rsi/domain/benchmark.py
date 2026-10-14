@@ -1,15 +1,8 @@
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
-from enum import StrEnum
 
-from .shared import aware, number, require
-
-
-class DatasetSplit(StrEnum):
-    TRAIN = "train"
-    VALIDATION = "validation"
-    TEST = "test"
+from .shared import DatasetSplit, aware, number, require
 
 
 @dataclass(frozen=True)

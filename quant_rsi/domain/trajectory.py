@@ -4,9 +4,8 @@ from datetime import datetime
 from enum import StrEnum
 import json
 
-from .shared import aware, require
+from .shared import DatasetSplit, aware, require
 from .training import TrajectoryReference
-from .benchmark import DatasetSplit
 
 
 class TraceKind(StrEnum):
