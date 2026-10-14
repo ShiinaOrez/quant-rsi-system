@@ -1,0 +1,25 @@
+# 模型选型记录，尚未接入训练/推理适配器，不是可直接运行的训练配置。
+config_version = "0.1"
+id = "initial-trader-qwen3-8b"
+provider = "tinker"
+model_id = "Qwen/Qwen3-8B"
+huggingface_id = "Qwen/Qwen3-8B"
+license = "Apache-2.0"
+# 此模型已做通用后训练；base 指本项目继续训练的起点。
+starting_checkpoint_kind = "general_posttrained"
+training_mode = "lora"
+service_context_tokens = 32768
+checked_at = "2026-10-14"
+runtime_verified = false
+revision = "UNRESOLVED"
+renderer = "UNRESOLVED"
+
+[sources]
+model_card = "https://huggingface.co/Qwen/Qwen3-8B"
+service_support = "https://tinker-docs.thinkingmachines.ai/tinker/models/models_and_pricing/"
+
+[experiment_policy]
+comparison = ["initial_checkpoint", "sft_checkpoint", "sft_rl_checkpoint"]
+freeze_renderer_and_sampling_per_comparison = true
+record_service_model_metadata_before_training = true
+historical_tasks_may_have_pretraining_contamination = true
