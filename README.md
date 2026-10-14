@@ -13,6 +13,7 @@
 - [本地 Qwen 运行与 INTC 60 日试运行](docs/benchmark/local-pilot.md)：真实行情子集，明确保留数据未完整状态。
 - [本地部署与量化版本记录](configs/models/qwen3-8b-local.toml)：模型摘要、运行参数与本机硬件。
 - [Tinker checkpoint 本地部署](docs/research/tinker-local-deployment.md)：LoRA 导出、合并与 Mac 推理路径。
+- [DeepSeek Harness Researcher 范式与复用调查](docs/research/research-agent-paradigms.md)：近期论文、源码接口和受控实验闭环设计。
 
 运行领域 demo（人工行情，不是历史回测）：
 

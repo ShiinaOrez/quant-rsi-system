@@ -301,5 +301,307 @@
     "reading_status": "selected_methods_and_evaluation",
     "artifact_status": "not_verified",
     "reproduced": false
+  },
+  {
+    "key": "aide",
+    "arxiv_id": "2502.13138",
+    "version": "2502.13138v1",
+    "title": "AIDE: AI-Driven Exploration in the Space of Code",
+    "authors": [
+      "Zhengyao Jiang",
+      "Dominik Schmidt",
+      "Dhruv Srikanth",
+      "Dixing Xu",
+      "Ian Kaplan",
+      "Deniss Jacenko",
+      "Yuxiang Wu"
+    ],
+    "year": 2025,
+    "category": "research_agent",
+    "url": "https://arxiv.org/abs/2502.13138v1",
+    "full_text_url": "https://arxiv.org/html/2502.13138v1",
+    "accessed": "2026-10-15",
+    "reading_status": "selected_sections",
+    "reading_scope": [
+      "abstract",
+      "selected_methods"
+    ],
+    "artifact_status": "not_verified",
+    "reproduced": false,
+    "code_url": "https://github.com/WecoAI/aideml"
+  },
+  {
+    "key": "ai_scientist_v2",
+    "arxiv_id": "2504.08066",
+    "version": "2504.08066v1",
+    "title": "The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search",
+    "authors": [
+      "Yutaro Yamada",
+      "Robert Tjarko Lange",
+      "Cong Lu",
+      "Shengran Hu",
+      "Chris Lu",
+      "Jakob Foerster",
+      "Jeff Clune",
+      "David Ha"
+    ],
+    "year": 2025,
+    "category": "research_agent",
+    "url": "https://arxiv.org/abs/2504.08066v1",
+    "full_text_url": "https://arxiv.org/html/2504.08066v1",
+    "accessed": "2026-10-15",
+    "reading_status": "selected_sections",
+    "reading_scope": [
+      "abstract",
+      "selected_methods"
+    ],
+    "artifact_status": "not_verified",
+    "reproduced": false,
+    "code_url": "https://github.com/SakanaAI/AI-Scientist-v2"
+  },
+  {
+    "key": "gepa",
+    "arxiv_id": "2507.19457",
+    "version": "2507.19457v2",
+    "title": "GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning",
+    "authors": [
+      "Lakshya A Agrawal",
+      "Shangyin Tan",
+      "Dilara Soylu",
+      "Noah Ziems",
+      "Rishi Khare",
+      "Krista Opsahl-Ong",
+      "Arnav Singhvi",
+      "Herumb Shandilya",
+      "Michael J Ryan",
+      "Meng Jiang",
+      "Christopher Potts",
+      "Koushik Sen",
+      "Alexandros G. Dimakis",
+      "Ion Stoica",
+      "Dan Klein",
+      "Matei Zaharia",
+      "Omar Khattab"
+    ],
+    "year": 2025,
+    "category": "research_agent",
+    "url": "https://arxiv.org/abs/2507.19457v2",
+    "full_text_url": null,
+    "accessed": "2026-10-15",
+    "reading_status": "selected_sections",
+    "reading_scope": [
+      "abstract",
+      "official_adapter_source"
+    ],
+    "artifact_status": "source_inspected_not_executed",
+    "reproduced": false,
+    "code_url": "https://github.com/gepa-ai/gepa"
+  },
+  {
+    "key": "ace",
+    "arxiv_id": "2510.04618",
+    "version": "2510.04618v1",
+    "title": "Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models",
+    "authors": [
+      "Qizheng Zhang",
+      "Changran Hu",
+      "Shubhangi Upasani",
+      "Boyuan Ma",
+      "Fenglu Hong",
+      "Vamsidhar Kamanuru",
+      "Jay Rainton",
+      "Chen Wu",
+      "Mengmeng Ji",
+      "Hanchen Li",
+      "Urmish Thakker",
+      "James Zou",
+      "Kunle Olukotun"
+    ],
+    "year": 2025,
+    "category": "research_agent",
+    "url": "https://arxiv.org/abs/2510.04618v1",
+    "full_text_url": "https://arxiv.org/html/2510.04618v1",
+    "accessed": "2026-10-15",
+    "reading_status": "selected_sections",
+    "reading_scope": [
+      "abstract",
+      "selected_methods"
+    ],
+    "artifact_status": "not_verified",
+    "reproduced": false
+  },
+  {
+    "key": "darwin_godel_machine",
+    "arxiv_id": "2505.22954",
+    "version": "2505.22954v1",
+    "title": "Darwin Godel Machine: Open-Ended Evolution of Self-Improving Agents",
+    "authors": [
+      "Jenny Zhang",
+      "Shengran Hu",
+      "Cong Lu",
+      "Robert Lange",
+      "Jeff Clune"
+    ],
+    "year": 2025,
+    "category": "research_agent",
+    "url": "https://arxiv.org/abs/2505.22954v1",
+    "full_text_url": "https://arxiv.org/html/2505.22954v1",
+    "accessed": "2026-10-15",
+    "reading_status": "selected_sections",
+    "reading_scope": [
+      "abstract",
+      "selected_methods"
+    ],
+    "artifact_status": "not_verified",
+    "reproduced": false,
+    "code_url": "https://github.com/jennyzzt/dgm"
+  },
+  {
+    "key": "autoscientists",
+    "arxiv_id": "2605.28655",
+    "version": "2605.28655v1",
+    "title": "AutoScientists: Self-Organizing Agent Teams for Long-Running Scientific Experimentation",
+    "authors": [
+      "Shanghua Gao",
+      "Ada Fang",
+      "Marinka Zitnik"
+    ],
+    "year": 2026,
+    "category": "research_agent",
+    "url": "https://arxiv.org/abs/2605.28655v1",
+    "full_text_url": "https://arxiv.org/html/2605.28655v1",
+    "accessed": "2026-10-15",
+    "reading_status": "selected_sections",
+    "reading_scope": [
+      "methods",
+      "gpt_training_evaluation",
+      "noise_aware_validation_appendix"
+    ],
+    "artifact_status": "source_inspected_not_executed",
+    "reproduced": false,
+    "code_url": "https://github.com/mims-harvard/AutoScientists"
+  },
+  {
+    "key": "meta_context_engineering",
+    "arxiv_id": "2601.21557",
+    "version": "2601.21557v1",
+    "title": "Meta Context Engineering via Agentic Skill Evolution",
+    "authors": [
+      "Haoran Ye",
+      "Xuning He",
+      "Vincent Arak",
+      "Haonan Dong",
+      "Guojie Song"
+    ],
+    "year": 2026,
+    "category": "research_agent",
+    "url": "https://arxiv.org/abs/2601.21557v1",
+    "full_text_url": "https://arxiv.org/html/2601.21557v1",
+    "accessed": "2026-10-15",
+    "reading_status": "selected_sections",
+    "reading_scope": [
+      "abstract",
+      "selected_methods"
+    ],
+    "artifact_status": "not_verified",
+    "reproduced": false
+  },
+  {
+    "key": "hyperagents",
+    "arxiv_id": "2603.19461",
+    "version": "2603.19461v1",
+    "title": "Hyperagents",
+    "authors": [
+      "Jenny Zhang",
+      "Bingchen Zhao",
+      "Wannan Yang",
+      "Jakob Foerster",
+      "Jeff Clune",
+      "Minqi Jiang",
+      "Sam Devlin",
+      "Tatiana Shavrina"
+    ],
+    "year": 2026,
+    "category": "research_agent",
+    "url": "https://arxiv.org/abs/2603.19461v1",
+    "full_text_url": "https://arxiv.org/html/2603.19461v1",
+    "accessed": "2026-10-15",
+    "reading_status": "selected_sections",
+    "reading_scope": [
+      "abstract",
+      "introduction"
+    ],
+    "artifact_status": "not_verified",
+    "reproduced": false,
+    "code_url": "https://github.com/facebookresearch/Hyperagents"
+  },
+  {
+    "key": "agentx_model",
+    "arxiv_id": "2609.30001",
+    "version": "2609.30001v1",
+    "title": "Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems",
+    "authors": [
+      "Shuang Yang",
+      "Zijie Zhuang",
+      "Changxin Lao",
+      "Pengbo Xu",
+      "Hanwen Xu",
+      "Yusheng Huang",
+      "Han Gao",
+      "Guanchen Wang",
+      "Tianbao Ma",
+      "Linxun Chen",
+      "Peilin Song",
+      "Xuming Wang",
+      "Chen Li",
+      "Fan Wu",
+      "Tao Wang",
+      "Zibo Zhao",
+      "Xiangyu Wu",
+      "An Liu",
+      "Fei Pan",
+      "Peng Jiang",
+      "Chen Yang",
+      "Zhaojie Liu",
+      "Wenwu Ou"
+    ],
+    "year": 2026,
+    "category": "research_agent",
+    "url": "https://arxiv.org/abs/2609.30001v1",
+    "full_text_url": "https://arxiv.org/html/2609.30001v1",
+    "accessed": "2026-10-15",
+    "reading_status": "selected_sections",
+    "reading_scope": [
+      "system_overview",
+      "long_horizon_research_cycle",
+      "selected_findings"
+    ],
+    "artifact_status": "not_verified",
+    "reproduced": false
+  },
+  {
+    "key": "research_prompt_transfer",
+    "arxiv_id": "2610.12601",
+    "version": "2610.12601v1",
+    "title": "Reflective Prompt Optimization of a Deep-Research Agent: A Topic-Disjoint, Multi-Seed Protocol for Measuring Transferable Gains and Prompt-Level Overfitting",
+    "authors": [
+      "Elias Lumer",
+      "Sahil Sen",
+      "Vamse Kumar Subbiah",
+      "Kevin Paul"
+    ],
+    "year": 2026,
+    "category": "research_agent",
+    "url": "https://arxiv.org/abs/2610.12601v1",
+    "full_text_url": "https://arxiv.org/html/2610.12601v1",
+    "accessed": "2026-10-15",
+    "reading_status": "selected_sections",
+    "reading_scope": [
+      "evaluation_protocol",
+      "verifier_ablation",
+      "limitations"
+    ],
+    "artifact_status": "not_verified",
+    "reproduced": false
   }
 ]

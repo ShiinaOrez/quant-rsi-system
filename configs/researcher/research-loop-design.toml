@@ -1,0 +1,47 @@
+# Design record only. No runtime loader consumes this file yet.
+design_version = "0.1"
+status = "proposal_not_implemented"
+checked_at = "2026-10-15"
+runtime = "deepseek-harness-python-sdk"
+audited_runtime_commit = "571902028a75c64c1d767f4ae5fd099485f0ddf0"
+research_model = "deepseek-v4-pro"
+runtime_upgrade_performed = false
+initial_execution = "serial_researcher"
+experiment_owner = "application"
+candidate_search = "bounded_baseline_then_optional_gepa_adapter"
+
+[proposal]
+required_fields = ["evidence_ids", "hypothesis", "falsification", "parent_revision", "candidate_kind", "change_scope", "control", "ablation", "case_digests", "budget", "confirmation_plan"]
+candidate_kinds = ["prompt", "observation_builder", "dataset_recipe", "training_config", "checkpoint"]
+
+[boundaries]
+benchmark_rules = "immutable"
+test_feedback = "inaccessible"
+reflection_examples = "train_only"
+validation_feedback = "selection_and_allowed_diagnostic_summaries"
+training_launch = "application_controlled"
+promotion = "application_controlled"
+cwd_is_sandbox = false
+dedicated_profile_required = true
+credential_injection = "process_boundary_no_trace"
+
+[budget]
+configured_before_launch = true
+account_for = ["researcher_calls", "input_tokens", "output_tokens", "trader_episodes", "training_jobs", "retries", "wall_time"]
+all_limits_bound = false
+launch_allowed = false
+
+[memory]
+store = "injected_repository_and_artifact_ports"
+record = ["claim_status", "conditions", "supporting_experiments", "counterexamples", "negative_results", "revision"]
+update = "incremental_evidence_linked"
+researcher_memory_is_trader_training_data = false
+
+[evaluation]
+dataset_ready = false
+train_cases_bound = false
+score_mapping_revision = "UNBOUND"
+group_split_manifest = "UNBOUND"
+compare = ["unchanged_baseline", "manual_simple_baseline", "context_only", "weights_only", "context_and_weights"]
+keep_all_attempts = true
+require_independent_final_test = true

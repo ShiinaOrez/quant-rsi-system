@@ -1,0 +1,74 @@
+{
+  "audit_scope": "read-only source audit; no third-party installation or model calls in this survey",
+  "repositories": [
+    {
+      "id": "deepseek-harness",
+      "repository": "https://github.com/deepseek-ai/deepseek-harness",
+      "commit": "571902028a75c64c1d767f4ae5fd099485f0ddf0",
+      "checked_at": "2026-10-15",
+      "license_observed": "MIT",
+      "inspected_files": [
+        "python/sdk/README.md",
+        "python/sdk/src/deepseek_harness/api.py",
+        "packages/bundle/sdk-minimal/cordis.patch.yml",
+        "packages/session/session-log-deepseek/README.md"
+      ],
+      "installed_during_audit": false,
+      "executed_during_audit": false
+    },
+    {
+      "id": "gepa",
+      "repository": "https://github.com/gepa-ai/gepa",
+      "commit": "f1cfdee2856e9dc4b5b4dc5cc2e391d0aa20d819",
+      "checked_at": "2026-10-15",
+      "license_observed": "MIT",
+      "inspected_files": [
+        "README.md",
+        "src/gepa/core/adapter.py",
+        "src/gepa/oa/engine.py"
+      ],
+      "installed_during_audit": false,
+      "executed_during_audit": false
+    },
+    {
+      "id": "rd-agent",
+      "repository": "https://github.com/microsoft/RD-Agent",
+      "commit": "484776c211e4fbbeef03e0ec00d6bbee7362a4f4",
+      "checked_at": "2026-10-15",
+      "license_observed": "MIT",
+      "inspected_files": [
+        "rdagent/app/qlib_rd_loop/quant.py",
+        "rdagent/utils/workflow/loop.py",
+        "LICENSE"
+      ],
+      "installed_during_audit": false,
+      "executed_during_audit": false
+    },
+    {
+      "id": "autoscientists",
+      "repository": "https://github.com/mims-harvard/AutoScientists",
+      "commit": "c71a92343b9a488ed10134be805845b9473ad18f",
+      "checked_at": "2026-10-15",
+      "license_observed": "no_explicit_license_file_found",
+      "inspected_files": [
+        "README.md",
+        "runbook.md"
+      ],
+      "installed_during_audit": false,
+      "executed_during_audit": false
+    },
+    {
+      "id": "autoresearch",
+      "repository": "https://github.com/karpathy/autoresearch",
+      "commit": "228791fb499afffb54b46200aca536f79142f117",
+      "checked_at": "2026-10-15",
+      "license_observed": "README_states_MIT_no_separate_license_file_found",
+      "inspected_files": [
+        "README.md",
+        "program.md"
+      ],
+      "installed_during_audit": false,
+      "executed_during_audit": false
+    }
+  ]
+}
