@@ -1,0 +1,50 @@
+{
+  "schema_version": "pilot_dataset.v1",
+  "benchmark_ready": false,
+  "retrieved_at": "2026-10-14T12:17:08.982545+00:00",
+  "files": [
+    {
+      "path": "yahoo-history.csv",
+      "sha256": "59320e552eefaa1bd0db0c36687477736bdf96e367c7fd545c9394e9215a350b"
+    },
+    {
+      "path": "q1_2024.html",
+      "sha256": "fd36f6fea9982a9746b8a7b15e3f65eefb257b571be567f1ff54c1a2a590cda0"
+    },
+    {
+      "path": "q2_2024.html",
+      "sha256": "9c3864840ace67a8d87fc5ca578876a53e85e7b5091983c0ffedc18cc793116e"
+    },
+    {
+      "path": "dataset.json",
+      "sha256": "b8a123622eca94aca25f236fcdb8ec40c2efb6f5baf6ff27231a8abc8ac5aa68"
+    }
+  ],
+  "coverage": {
+    "prices": [
+      "2023-01-03",
+      "2024-10-04T20:00:00+00:00"
+    ],
+    "sessions": 60,
+    "financial_documents": [
+      "q1_2024",
+      "q2_2024"
+    ]
+  },
+  "limitations": [
+    "not all historical filings; only Q1/Q2 2024 original releases",
+    "Yahoo historical feed is a current download, not archived historical vintages",
+    "no news corpus; no historical knowledge-contamination guarantee",
+    "September 1 dividend credited before September 3 opening, first following trading session"
+  ],
+  "sources": [
+    "https://www.intc.com/news-events/press-releases/detail/1692/intel-reports-first-quarter-2024-financial-results",
+    "https://www.intc.com/news-events/press-releases/detail/1704/intel-reports-second-quarter-2024-financial-results",
+    "https://finance.yahoo.com/quote/INTC/history/"
+  ],
+  "calendar": {
+    "name": "XNAS",
+    "library": "exchange_calendars",
+    "version": "4.13.2"
+  }
+}

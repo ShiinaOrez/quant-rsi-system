@@ -9,5 +9,8 @@ description = "Declarative quant benchmarks and trader post-training"
 requires-python = ">=3.11"
 dependencies = []
 
+[project.optional-dependencies]
+market = ["exchange-calendars==4.13.2", "yfinance==1.7.0", "pandas==3.0.6", "beautifulsoup4==4.15.0"]
+
 [tool.setuptools.packages.find]
 include = ["quant_rsi*", "scripts*"]

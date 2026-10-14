@@ -1,0 +1,14 @@
+{
+  "schema_version": "run_audit.v1",
+  "decisions": 60,
+  "trace_events": 181,
+  "trajectory_sha256": "7ce0e03dd186fb1548ee237c4272f4a2cfb615915421a5d39df55c6bc094dbe2",
+  "normal_completions": 60,
+  "total_prompt_tokens": 188802,
+  "total_output_tokens": 5335,
+  "max_prompt_tokens": 3269,
+  "accounting_replay_verified": true,
+  "unit_tests_passed": 28,
+  "ollama_version": "0.40.4",
+  "source_data_and_full_traces": "local ignored artifacts/; these audit files alone are not the frozen data bundle"
+}

@@ -1,0 +1,20 @@
+# 本地部署记录；CLI 参数与适配器采用下述相同设置。
+config_version = "0.1"
+id = "local-trader-qwen3-8b-q4"
+provider = "ollama"
+endpoint = "http://127.0.0.1:11434"
+model_id = "qwen3:8b"
+huggingface_id = "Qwen/Qwen3-8B"
+starting_checkpoint_kind = "general_posttrained_quantized"
+quantization = "Q4_K_M"
+model_digest = "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41"
+ollama_version = "0.40.4"
+context_tokens = 8192
+max_output_tokens = 192
+thinking = false
+temperature = 0
+seed = 42
+checked_at = "2026-10-14"
+runtime_verified = true
+hardware = "Apple M1 Pro / 32 GB unified memory"
+training_service_equivalence_verified = false

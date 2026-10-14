@@ -4,12 +4,15 @@
 
 项目目标：可扩展、可执行、可复现的量化 Benchmark；可运行的交易系统；可追溯的模型权重与训练流程；可评估和回滚的 RSI 迭代系统。
 
-当前已建立文献调研、Benchmark v0.1 TOML 契约及 DDD 核心领域实现，可运行人工行情的交易 replay。完整历史执行引擎、真实数据绑定和训练尚未就绪，尚未产生模型权重或复现论文收益。
+当前已建立文献调研、Benchmark v0.1 TOML 契约及 DDD 核心领域实现，新增本地 Ollama/Qwen trader、真实历史数据试运行、分红结算和可复放轨迹。完整历史披露档案与训练闭环尚未就绪，尚未产生本项目训练权重或复现论文收益。
 
 - [DDD 领域模型与实现边界](docs/architecture/domain-model.md)
 - [存储端口与可替换 Benchmark](docs/architecture/ports-and-benchmarks.md)：RSI 使用版本化 BenchmarkRunner；存储、工件与导出独立注入。
 - [Researcher 接入与轨迹存储选型](docs/architecture/researcher-and-trajectories.md)：DeepSeek Harness + DeepSeek 官方模型接口；SQLite 权威归档、JSONL 导出和 SHA-256 工件存储。
 - [首个 trader 模型：Qwen3-8B](configs/models/qwen3-8b.toml)：Tinker LoRA 起点，尚未完成在线接口验证；模型已做通用后训练，并非原始预训练 Base。
+- [本地 Qwen 运行与 INTC 60 日试运行](docs/benchmark/local-pilot.md)：真实行情子集，明确保留数据未完整状态。
+- [本地部署与量化版本记录](configs/models/qwen3-8b-local.toml)：模型摘要、运行参数与本机硬件。
+- [Tinker checkpoint 本地部署](docs/research/tinker-local-deployment.md)：LoRA 导出、合并与 Mac 推理路径。
 
 运行领域 demo（人工行情，不是历史回测）：
 

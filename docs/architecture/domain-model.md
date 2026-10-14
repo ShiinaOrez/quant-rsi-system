@@ -45,7 +45,7 @@ PostTrainingPlan 要求轨迹具有配置/数据哈希、policy revision、分�
 
 - MarketHistory：按 symbol 与 decision_time 返回只含可见记录的快照。
 - SessionCalendar：提供精确 horizon 的后续 session。真实适配器必须核对 XNAS 假日、夏令时和起点收盘；ExplicitSessions 只用于 fixture。
-- TraderPolicy：snapshot + account → TargetWeight。LLM 输出解析和错误处理应在模型适配器完成，不允许领域执行自由文本。
+- TraderPolicy：snapshot + account → TargetWeight / HoldPosition。LLM 输出解析和错误处理在模型适配器完成；HoldPosition 用于不再平衡的买入持有基线。
 - EpisodeRepository：持久化交易聚合。后续采用带版本的事务/乐观锁，保证同一个 episode 的命令串行执行。
 - PostTrainingBackend：合法计划 → checkpoint reference。Tinker 的 tokens、logprobs、LoRA 与训练状态不进入交易聚合。
 
@@ -55,7 +55,9 @@ TOML compiler 复用现有 v0.1 校验器，编译为强类型定义，并对题
 
 已实现：TOML → 类型化题目；时点可见性；整数股目标仓位；次日开盘撮合；买卖滑点与手续费；资金不足向下缩量；拒单不顺延；收盘估值与陈旧标记；净收益、回撤、换手、成交次数、目标评分；内存 replay；后训练输入分区约束。
 
-尚未实现：真实日历/数据与指标、财报查询、拆股与分红资格账本、基线对齐和 excess-return、轨迹持久化、模型推理/Tinker、训练闭环及 RSI 晋级。收到企业行动的 session 会在账户更新前明确报错，因此当前 replay 不能用于包含分红/拆股的完整历史 Benchmark。完整 v0.1 引擎仍未就绪，配置校验器的 engine_implemented=false 保持有效。
+新增本地试运行：XNAS 日历与冻结真实行情、历史指标、按发布时间选择财报摘录、分红资格/派息账本、三种基线、Ollama/Qwen 推理，以及通过独立存储端口保存 SQLite 轨迹和工件。分红权益按除息前持仓保存，卖出不丢失权益；无效命令不改变账本。
+
+尚未实现：完整历史披露档案与新闻、通用财报查询、拆股、基线 excess-return 报告、Tinker 训练闭环及 RSI 晋级。未知企业行动仍在账户更新前明确报错。完整 v0.1 引擎仍未就绪，配置校验器的 engine_implemented=false 保持有效；真实行情子集只允许明确的 pilot 运行。
 
 运行（Python 3.11+）：
 
@@ -66,4 +68,4 @@ python3 -m scripts.demo_domain
 
 demo 是人工构造的两日行情，用于演示领域流程；不是 INTC 历史回测，也不是策略效果证据。真实 Benchmark 的 ready 检查不会被 demo 绕过为可发布结果。
 
-下一步优先完成 corporate-action ledger 与冻结数据/日历适配器，将真实 Benchmark 接入确定性账本，再实现 TraderPolicy 的 LLM 适配和 Tinker Env。训练 reward 在后训练上下文单独版本化，不覆盖 Benchmark 的达标规则。
+下一步补齐披露档案与通用企业行动，绑定正式数据清单，再实现 Tinker Env 与训练闭环。训练 reward 在后训练上下文单独版本化，不覆盖 Benchmark 的达标规则。

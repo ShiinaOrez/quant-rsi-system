@@ -3,6 +3,7 @@ from datetime import datetime
 from decimal import Decimal
 
 from .shared import aware, number, require
+from .corporate_actions import DividendEx, DividendPay
 
 
 @dataclass(frozen=True)
@@ -49,7 +50,7 @@ class TradingSession:
     raw_open: Decimal | None
     raw_close: Decimal | None
     tradable: bool = True
-    corporate_actions: tuple[str, ...] = ()
+    corporate_actions: tuple[DividendEx | DividendPay | str, ...] = ()
 
     def __post_init__(self):
         aware(self.opens_at)

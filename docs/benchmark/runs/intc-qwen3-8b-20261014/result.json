@@ -1,0 +1,72 @@
+{
+  "run_id": "intc-qwen3-8b-20261014",
+  "benchmark_status": "diagnostic_pilot_incomplete_archive",
+  "task_id": "intc-2024-07-11-60d",
+  "configuration_digest": "2f3a6c06083c6c394a9dfcee640c91813d7c092251cb040b01bce318fb971280",
+  "data_digest": "4364b51f5a30d9bc02bab45b8064e8743dc253d7a8a9fc971d0e76e67741e9e0",
+  "policy_revision": "ollama:qwen3:8b@500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "model_details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen3",
+    "families": [
+      "qwen3"
+    ],
+    "parameter_size": "8.2B",
+    "quantization_level": "Q4_K_M",
+    "context_length": 40960,
+    "embedding_length": 4096,
+    "runner": "ggml"
+  },
+  "report": {
+    "task_id": "intc-2024-07-11-60d",
+    "configuration_digest": "2f3a6c06083c6c394a9dfcee640c91813d7c092251cb040b01bce318fb971280",
+    "net_return": "-0.22202751062389160642570594",
+    "max_drawdown": "0.2823287240649269641857077576",
+    "turnover": "1.600472945577352106791589516",
+    "trade_count": 60,
+    "stale_sessions": 0,
+    "goal_success": false
+  },
+  "baselines": {
+    "cash": {
+      "task_id": "intc-2024-07-11-60d",
+      "configuration_digest": "2f3a6c06083c6c394a9dfcee640c91813d7c092251cb040b01bce318fb971280",
+      "net_return": "0E-13",
+      "max_drawdown": "0",
+      "turnover": "0",
+      "trade_count": 0,
+      "stale_sessions": 0,
+      "goal_success": false
+    },
+    "buy_and_hold": {
+      "task_id": "intc-2024-07-11-60d",
+      "configuration_digest": "2f3a6c06083c6c394a9dfcee640c91813d7c092251cb040b01bce318fb971280",
+      "net_return": "-0.32800607536979360692093965",
+      "max_drawdown": "0.4553686011638964320573541622",
+      "turnover": "0.9994160718474196832793",
+      "trade_count": 1,
+      "stale_sessions": 0,
+      "goal_success": false
+    },
+    "sma20_60": {
+      "task_id": "intc-2024-07-11-60d",
+      "configuration_digest": "2f3a6c06083c6c394a9dfcee640c91813d7c092251cb040b01bce318fb971280",
+      "net_return": "-0.4234758717483342933882158",
+      "max_drawdown": "0.4313066550995960798870816461",
+      "turnover": "1.999009507921779774897396841",
+      "trade_count": 3,
+      "stale_sessions": 0,
+      "goal_success": false
+    }
+  },
+  "limitations": [
+    "not all historical filings; only Q1/Q2 2024 original releases",
+    "Yahoo historical feed is a current download, not archived historical vintages",
+    "no news corpus; no historical knowledge-contamination guarantee",
+    "September 1 dividend credited before September 3 opening, first following trading session"
+  ],
+  "elapsed_seconds": 482.84,
+  "trajectory_id": "intc-qwen3-8b-20261014-trader",
+  "rl_training_ready": false
+}
