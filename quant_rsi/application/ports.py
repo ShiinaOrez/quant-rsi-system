@@ -1,0 +1,29 @@
+from datetime import datetime
+from typing import Protocol
+
+from quant_rsi.domain.benchmark import BenchmarkTask
+from quant_rsi.domain.market import MarketSnapshot, TradingSession
+from quant_rsi.domain.trading import Account, TargetWeight, TradingEpisode
+from quant_rsi.domain.training import PostTrainingPlan
+
+
+class MarketHistory(Protocol):
+    def snapshot(self, symbol: str, decision_time: datetime) -> MarketSnapshot: ...
+
+
+class SessionCalendar(Protocol):
+    def next_sessions(self, task: BenchmarkTask) -> tuple[TradingSession, ...]: ...
+
+
+class TraderPolicy(Protocol):
+    def decide(self, snapshot: MarketSnapshot, account: Account) -> TargetWeight: ...
+
+
+class EpisodeRepository(Protocol):
+    def save(self, episode: TradingEpisode) -> None: ...
+
+
+class PostTrainingBackend(Protocol):
+    def train(self, plan: PostTrainingPlan) -> str:
+        """Return checkpoint reference; Tinker is one future adapter."""
+        ...

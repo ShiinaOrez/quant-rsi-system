@@ -4,7 +4,15 @@
 
 项目目标：可扩展、可执行、可复现的量化 Benchmark；可运行的交易系统；可追溯的模型权重与训练流程；可评估和回滚的 RSI 迭代系统。
 
-当前已建立文献调研和 Benchmark v0.1 的 TOML 配置契约、草案题目与校验器。远端仓库初始为空；交易执行引擎、真实数据绑定和训练尚未实现，尚未产生模型权重或复现论文收益。
+当前已建立文献调研、Benchmark v0.1 TOML 契约及 DDD 核心领域实现，可运行人工行情的交易 replay。完整历史执行引擎、真实数据绑定和训练尚未就绪，尚未产生模型权重或复现论文收益。
+
+- [DDD 领域模型与实现边界](docs/architecture/domain-model.md)
+
+运行领域 demo（人工行情，不是历史回测）：
+
+```sh
+python3 -m scripts.demo_domain
+```
 
 - [Benchmark 配置契约](docs/benchmark/specification.md)
 - [可复用日频环境](benchmarks/environments/us-equity-daily-v1.toml)
