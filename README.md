@@ -20,6 +20,7 @@ python3 -m unittest discover -s tests
 
 - [第一轮文献调研与方向判断](docs/research/literature-review.md)
 - [实验与系统设计草案](docs/research/research-plan.md)
+- [Tinker 后训练与公开 trader 复用调查](docs/research/tinker-trader-reuse.md)
 - [结构化论文目录](docs/research/papers.json)
 - [BibTeX 引用](docs/research/references.bib)
 

@@ -1,0 +1,63 @@
+checked_at = "2026-10-14"
+training_executed = false
+
+[[candidates]]
+id = "tinker_cookbook"
+url = "https://github.com/thinking-machines-lab/tinker-cookbook"
+commit = "70767c738ba5f523b66210a70e50b0dc14c9fc1a"
+pinned_url = "https://github.com/thinking-machines-lab/tinker-cookbook/tree/70767c738ba5f523b66210a70e50b0dc14c9fc1a"
+code_license = "Apache-2.0"
+audit = "selected_source_inspected"
+runtime_verified = false
+
+[[candidates]]
+id = "tradingagents"
+url = "https://github.com/TauricResearch/TradingAgents"
+commit = "1394a3f72aa4393e1a98f51b382434c4b4c2d972"
+pinned_url = "https://github.com/TauricResearch/TradingAgents/tree/1394a3f72aa4393e1a98f51b382434c4b4c2d972"
+code_license = "Apache-2.0"
+audit = "selected_source_inspected"
+runtime_verified = false
+
+[[candidates]]
+id = "native_prediction_trader"
+url = "https://github.com/Sohailm25/prime-v-tinker-trader"
+commit = "bd9b248f08a3ed5974132cc3bd26962d2cbb82ef"
+pinned_url = "https://github.com/Sohailm25/prime-v-tinker-trader/tree/bd9b248f08a3ed5974132cc3bd26962d2cbb82ef"
+code_license = "MIT_in_README_only"
+audit = "selected_source_inspected"
+runtime_verified = false
+
+[[candidates]]
+id = "finrl_deepseek"
+url = "https://github.com/benstaf/FinRL_DeepSeek"
+commit = "5c21a923214bca6370800efd45f8c6c1ef776ae7"
+pinned_url = "https://github.com/benstaf/FinRL_DeepSeek/tree/5c21a923214bca6370800efd45f8c6c1ef776ae7"
+code_license = "MIT"
+audit = "selected_source_inspected"
+runtime_verified = false
+
+[[candidates]]
+id = "fin_r1"
+url = "https://github.com/SUFE-AIFLM-Lab/Fin-R1"
+commit = "06ead1e61ff77cad71dc409198b1a2575d748ecd"
+pinned_url = "https://github.com/SUFE-AIFLM-Lab/Fin-R1/tree/06ead1e61ff77cad71dc409198b1a2575d748ecd"
+code_license = "not_verified"
+audit = "file_tree_and_model_page_inspected"
+runtime_verified = false
+
+[[candidates]]
+id = "feed"
+url = "https://github.com/feedforagents/feed"
+commit = "c1e4dbc27a37adc69ea04f0547b0c64a263a543b"
+pinned_url = "https://github.com/feedforagents/feed/tree/c1e4dbc27a37adc69ea04f0547b0c64a263a543b"
+code_license = "not_verified"
+audit = "git_tree_and_readme_only"
+runtime_verified = false
+
+[[candidates]]
+id = "trading_r1"
+url = "https://github.com/TauricResearch/Trading-R1"
+audit = "readme_only_coming_soon"
+code_license = "not_verified"
+runtime_verified = false
