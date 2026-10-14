@@ -8,7 +8,7 @@
 
 - [DDD 领域模型与实现边界](docs/architecture/domain-model.md)
 - [存储端口与可替换 Benchmark](docs/architecture/ports-and-benchmarks.md)：RSI 使用版本化 BenchmarkRunner；存储、工件与导出独立注入。
-- [Researcher 接入与轨迹存储选型](docs/architecture/researcher-and-trajectories.md)：DeepSeek Harness + 方舟 Coding Plan 的 DeepSeek 模型；SQLite 权威归档、JSONL 导出和 SHA-256 工件存储。
+- [Researcher 接入与轨迹存储选型](docs/architecture/researcher-and-trajectories.md)：DeepSeek Harness + DeepSeek 官方模型接口；SQLite 权威归档、JSONL 导出和 SHA-256 工件存储。
 - [首个 trader 模型：Qwen3-8B](configs/models/qwen3-8b.toml)：Tinker LoRA 起点，尚未完成在线接口验证；模型已做通用后训练，并非原始预训练 Base。
 
 运行领域 demo（人工行情，不是历史回测）：

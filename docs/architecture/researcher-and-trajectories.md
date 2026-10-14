@@ -8,11 +8,13 @@ DeepSeek Harness 是可配置模型和工具的开源 agent runtime，并保留 
 
 本轮未在 DeepSeek 官方公开价格页找到名为 Coding Plan 的订阅，官方 API 展示按 token 计费。[官方价格](https://api-docs.deepseek.com/quick_start/pricing/)
 
-可核验的套餐路线为**火山方舟 Coding Plan + deepseek-v4-pro**。方舟官方支持列表包含该模型，并提供 DSH 接入入口；兼容 OpenAI 的套餐 Base URL 为 `https://ark.cn-beijing.volces.com/api/coding/v3`。使用固定模型 ID，而非随控制台切换的 `ark-code-latest`。DSH 的 llm-pi-ai 支持配置 OpenAI-compatible custom provider。这里记录的是选型，未购买套餐、未安装到用户环境或测试真实调用。[套餐说明](https://docs.volcengine.com/docs/ark/coding-plan-personal-plan-overview?lang=zh)、[DSH 接入](https://docs.volcengine.com/docs/ark/coding-plan-personal-ai-deepseek-harness?lang=zh)、[端点](https://docs.volcengine.com/docs/ark/coding-plan-personal-get-started?lang=zh)
+默认采用 **DeepSeek 官方 API + deepseek-v4-pro**，使用 DSH 内置 `deepseek-official` provider 与 `https://api.deepseek.com/anthropic`。用户 DSH 桌面应用已从官方安装（0.2.0-rc.2），签名验证通过，key 保存在仓库之外的 DSH 用户凭据存储。余额接口接受凭据，但返回 `is_available=false`，因此尚未验证模型生成。桌面 UI 的最终检查被 Mac 锁屏阻止。[官方 Harness](https://www.deepseek.com/en/harness/)、[官方计费](https://api-docs.deepseek.com/quick_start/pricing/)
 
-项目配置：[deepseek-harness.toml](../../configs/researcher/deepseek-harness.toml)，不是 DSH 原生 settings 文件。后续适配器将其编译为当前 Harness 的配置；密钥只引用环境变量，不写进配置或轨迹。Harness 源码核验 commit 已记录，套餐模型别名可能更新，应在每个 run 记录实际返回的 model 与服务信息。
+火山方舟 Coding Plan 保留为可选供应商路线，未购买、未启用，也未证明比直接使用官方 API 更便宜。
 
-Researcher 读取训练轨迹及允许的验证摘要，产出假设、候选代码 diff、训练参数和实验计划。它不能修改冻结的 Benchmark 规则或访问封存测试反馈。研究活动的代码执行/训练启动由应用控制；配置中的权限字段尚不等价于已部署的 sandbox。Coding Plan 仅用于 researcher 的研发请求，不用于批量 trader rollout；部署前需核验所选套餐对自动化任务、工具及额度的实际支持。
+项目配置：[deepseek-harness.toml](../../configs/researcher/deepseek-harness.toml)，不是 DSH 原生 settings 文件。后续适配器将其编译为当前 Harness 的配置；密钥只引用环境变量，不写进配置或轨迹。Harness 源码核验 commit 已记录，服务模型别名可能更新，应在每个 run 记录实际返回的 model 与服务信息。
+
+Researcher 读取训练轨迹及允许的验证摘要，产出假设、候选代码 diff、训练参数和实验计划。它不能修改冻结的 Benchmark 规则或访问封存测试反馈。研究活动的代码执行/训练启动由应用控制；配置中的权限字段尚不等价于已部署的 sandbox。官方 API 用于 researcher 的研发请求，trader rollout 使用独立推理/训练后端与预算。
 
 ## 存储组件决策
 
