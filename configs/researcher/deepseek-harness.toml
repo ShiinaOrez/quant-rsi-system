@@ -1,0 +1,28 @@
+# Project selection record, not DSH's native settings.yaml.
+config_version = "0.1"
+role = "rsi_researcher"
+harness = "deepseek-harness"
+harness_repository = "https://github.com/deepseek-ai/deepseek-harness"
+harness_audited_commit = "d743267388641bc76f17c45ce8b4c231aed1d32c"
+model_id = "deepseek-v4-pro"
+provider = "volcengine_coding_plan"
+base_url = "https://ark.cn-beijing.volces.com/api/coding/v3"
+protocol = "openai-completions"
+api_key_env = "ARK_API_KEY"
+status = "selected_not_subscribed"
+runtime_verified = false
+checked_at = "2026-10-14"
+fallback_to_pay_as_you_go = false
+
+[scope]
+capabilities = ["inspect_training_traces", "form_hypotheses", "edit_candidate_code", "propose_training_config"]
+benchmark_rules = "read_only"
+sealed_test_feedback = "inaccessible"
+training_launch = "application_controlled"
+researcher_traces_train_trader = false
+
+[sources]
+deepseek_pricing = "https://api-docs.deepseek.com/quick_start/pricing/"
+coding_plan = "https://docs.volcengine.com/docs/ark/coding-plan-personal-plan-overview?lang=zh"
+harness_setup = "https://docs.volcengine.com/docs/ark/coding-plan-personal-ai-deepseek-harness?lang=zh"
+endpoint = "https://docs.volcengine.com/docs/ark/coding-plan-personal-get-started?lang=zh"

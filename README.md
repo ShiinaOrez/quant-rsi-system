@@ -7,6 +7,7 @@
 当前已建立文献调研、Benchmark v0.1 TOML 契约及 DDD 核心领域实现，可运行人工行情的交易 replay。完整历史执行引擎、真实数据绑定和训练尚未就绪，尚未产生模型权重或复现论文收益。
 
 - [DDD 领域模型与实现边界](docs/architecture/domain-model.md)
+- [Researcher 接入与轨迹存储选型](docs/architecture/researcher-and-trajectories.md)：DeepSeek Harness + 方舟 Coding Plan 的 DeepSeek 模型；SQLite 权威归档、JSONL 导出和 SHA-256 工件存储。
 - [首个 trader 模型：Qwen3-8B](configs/models/qwen3-8b.toml)：Tinker LoRA 起点，尚未完成在线接口验证；模型已做通用后训练，并非原始预训练 Base。
 
 运行领域 demo（人工行情，不是历史回测）：
