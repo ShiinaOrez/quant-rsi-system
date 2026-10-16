@@ -1,0 +1,21 @@
+# DSH native Cordis patch; paths are injected by the host, never by the model.
+# Adds our MCP tools. It does not remove DSH's other tools or create an OS sandbox.
+- insert:
+    - id: quant-research-tools
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: quant_research
+        transport: stdio
+        command: !!js process.env.QUANT_RSI_PYTHON
+        args:
+          - '-m'
+          - scripts.research_server
+          - '--mode'
+          - demo
+          - '--root'
+          - !!js process.env.QUANT_RSI_RESEARCH_ROOT
+          - '--campaign-id'
+          - research-demo
+        cwd: !!js process.env.QUANT_RSI_REPO
+        toolCallTimeoutMs: 30000
+        failOnStartupError: true

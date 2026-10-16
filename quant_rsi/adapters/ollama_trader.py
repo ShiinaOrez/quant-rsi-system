@@ -37,7 +37,7 @@ def parse_action(text: str) -> TargetWeight:
 class OllamaTrader:
     def __init__(self, model="qwen3:8b", base_url="http://127.0.0.1:11434", *,
                  seed=42, timeout=180, capture: Callable[[dict], None] | None = None,
-                 mandate: dict | None = None):
+                 mandate: dict | None = None, system_prompt: str = SYSTEM):
         url = urlparse(base_url)
         require(url.scheme == "http" and url.hostname in ("127.0.0.1", "localhost", "::1")
                 and not url.username and not url.password and not url.query and not url.fragment,
@@ -46,6 +46,7 @@ class OllamaTrader:
         self.model, self.base_url, self.seed = model, base_url.rstrip("/"), seed
         self.timeout, self.capture = timeout, capture
         self.mandate = mandate or {}
+        self.system_prompt = system_prompt
         self.decisions = 0
 
     def decide(self, snapshot: MarketSnapshot, account: Account) -> TargetWeight:
@@ -60,7 +61,7 @@ class OllamaTrader:
                        "visible_document_ids": [r["record_id"] for r in documents],
                        "account": {"cash": str(account.cash), "shares": account.shares}, "records": visible}
         # Stable document prefix permits local KV-cache reuse across daily decisions.
-        messages = [{"role": "system", "content": SYSTEM},
+        messages = [{"role": "system", "content": self.system_prompt},
                     {"role": "user", "content": json.dumps({"visible_documents": documents}, ensure_ascii=False)},
                     {"role": "user", "content": json.dumps(observation, ensure_ascii=False)}]
         body = {"model": self.model, "messages": messages, "format": ACTION_SCHEMA,

@@ -14,6 +14,7 @@
 - [本地部署与量化版本记录](configs/models/qwen3-8b-local.toml)：模型摘要、运行参数与本机硬件。
 - [Tinker checkpoint 本地部署](docs/research/tinker-local-deployment.md)：LoRA 导出、合并与 Mac 推理路径。
 - [DeepSeek Harness Researcher 范式与复用调查](docs/research/research-agent-paradigms.md)：近期论文、源码接口和受控实验闭环设计。
+- [Researcher 六个业务工具与 MCP 接入](docs/architecture/research-tools.md)：带运行时校验的 Schema、事务工作流、成对实验和可执行 demo。
 
 运行领域 demo（人工行情，不是历史回测）：
 
@@ -32,6 +33,8 @@ python3 -m scripts.demo_domain
 python3 scripts/validate_benchmark.py benchmarks/tasks/aapl-2023-midyear-60d.toml
 python3 -m unittest discover -s tests
 ```
+
+Researcher 工具与 MCP 测试需先安装可选依赖：`.venv/bin/python -m pip install -e '.[research]'`；未安装时这部分测试跳过。
 
 - [第一轮文献调研与方向判断](docs/research/literature-review.md)
 - [实验与系统设计草案](docs/research/research-plan.md)
