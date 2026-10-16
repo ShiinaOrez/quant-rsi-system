@@ -1,0 +1,25 @@
+# 构建要求，尚未物化；共同规则见 template。
+plan_version = "0.2"
+task_id = "nvda-2022-12-30-60d"
+status = "unmaterialized"
+agent_visible = false
+template = "us-equity-history-v1.toml"
+data_gaps = ["需要采购承诺、库存费用及原始价格与拆股因子记录。", "完整版本化历史披露、行情、公司行动和数据许可尚待绑定。"]
+
+[identity]
+symbol = "NVDA"
+currency = "USD"
+exchange = "NASDAQ"
+
+[construction]
+initial_cutoff = "2022-12-30T16:00:00-05:00"
+forward_sessions = 60
+
+[seed]
+url = "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2023"
+publication_date = "2022-11-16"
+report_label = "FY2023 Q3"
+role = "initial_archive_seed_not_complete_coverage"
+publication_precision = "date_only"
+as_filed_binding = "PENDING"
+license_review = "PENDING"

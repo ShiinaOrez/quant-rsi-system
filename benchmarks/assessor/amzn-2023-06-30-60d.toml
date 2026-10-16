@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "amzn-2023-06-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/amzn-2023-06-30-60d.toml"
+
+[hypothesis]
+title = "现金流改善的构成"
+question = "自由现金流改善来自哪些经营、营运资金和支出变化？遣散费用与 Rivian 估值损失怎样影响对分部经营的判断？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["把遣散费用与分部经营利润并列，核对分配和 GAAP 列报。", "比较相同区间的经营现金流与三种自由现金流，不能拿单季利润解释整个滚动年度。", "分开经营利润变化与 Rivian 等投资估值损益。"]
+point_in_time = ["初始版本使用当时已公开的第一季度及此前披露，后续结果逐步揭示。"]
+execution = ["首个成交日为半日市，日历必须提供实际收盘时间。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2023-04-27"
+url = "https://ir.aboutamazon.com/news-release/news-release-details/2023/Amazon-com-Announces-First-Quarter-Results/"
+report_label = "2023 Q1"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "amzn-2024-06-28-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/amzn-2024-06-28-60d.toml"
+
+[hypothesis]
+title = "利润增长与折旧估计"
+question = "判断 AWS 利润改善时，如何核对截止日前披露的折旧估计和分部信息？资本支出、租赁与投资估值变化分别提供什么现金流证据？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["从截止日前的年报或季度附注核对折旧估计变更，不使用未来年报的全年影响金额。", "即使取得合并层面的估计影响，也不能在缺少分配披露时全部从 AWS 利润中扣除。", "比较三种自由现金流口径，将投资估值损益与经营利润分开。"]
+point_in_time = ["2024 全年估计变更影响不能从次年年报回填到初始观察。"]
+execution = ["记录下一开盘成交与收盘估值，不能用复权价格直接代替账户现金盈亏。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2024-04-30"
+url = "https://ir.aboutamazon.com/news-release/news-release-details/2024/Amazon-com-Announces-First-Quarter-Results-68b9258cd/"
+report_label = "2024 Q1"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

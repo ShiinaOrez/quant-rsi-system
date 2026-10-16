@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "nvda-2023-06-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/nvda-2023-06-30-60d.toml"
+
+[hypothesis]
+title = "收入指引与已实现结果"
+question = "下季收入指引与本季已实现收入应怎样分开使用？库存、应收款和采购承诺能否相互印证经营判断？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["收入指引是已公开的估计，不是已实现收入或未来确定事实。", "对齐应收款、库存和收入的比较区间，区分季末余额与期间流量。", "从当时季度附注核对采购承诺，不从后续实际结果反推起点。"]
+point_in_time = ["后续季度实际结果只能随公开时间揭示，不能被当作指引发布时已知。"]
+execution = ["成交价格与当时每股数据使用拆股前口径；不能混入 2024 年拆股后原始价格。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2023-05-24"
+url = "https://investor.nvidia.com/news/press-release-details/2023/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2024/"
+report_label = "FY2024 Q1"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

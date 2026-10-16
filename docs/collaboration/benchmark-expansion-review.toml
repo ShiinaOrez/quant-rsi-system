@@ -1,0 +1,50 @@
+# 协作回执摘录；不包含账号、认证信息或完整会话日志。
+review_version = "0.1"
+review_date = "2026-10-17"
+status = "reviewed_into_18_draft_cases"
+cli_version = "2.1.299"
+requested_model = "claude-opus-5-5"
+drafting_model = "claude-opus-5-5"
+auxiliary_models = ["claude-haiku-5-5"]
+auxiliary_role = "built_in_web_research_and_extraction"
+fallback_configured = false
+tools = ["WebSearch", "WebFetch"]
+permission_mode = "dontAsk"
+restricted_mode = true
+safe_mode = true
+max_budget_usd = 8.0
+session_persistence = false
+cli_result = "success"
+num_turns = 27
+estimated_cost_usd = 1.1855334
+cost_basis = "cli_estimate_not_invoice_or_subscription_charge"
+raw_artifacts = "artifacts/collaboration/benchmark-expansion"
+raw_artifacts_committed = false
+submitted_brief_sha256 = "f0bc454914a8fc26d34cf0f9d63072045a913685de575eab67c5da6f7193f07f"
+submitted_sources_sha256 = "e9c37fa23cda5f8f353bc21034c52a525fadaf201d4038331204e32ff2b34dc4"
+request_sha256 = "17950797543f3dfd0f26ce93a2f8ac0944e592078428ee0e5beceaf7a548c3bb"
+response_sha256 = "3c6d74b4eb0e7854a32146f94b26d097937ac3829813e1f2434126f2fed32842"
+parsed_draft_sha256 = "e4c56eab02f9d7da6214bcd072bbafb79b42fda0c56303f4d6f4d4bd9b6c4953"
+accepted_new_cases = 18
+complete_data_manifests = 0
+
+[roles]
+Codex = "select_grid_review_official_sources_edit_and_validate"
+Claude = "expand_18_cases_with_accounting_pit_execution_checks_and_data_gaps"
+
+[review]
+source_scope = "all_18_seed_publication_dates_and_selected_accounting_items"
+source_access = "15_direct_official_html_snapshots_and_3_SEC_exhibits_via_web_tool"
+unopened_extra_sources = "not_accepted_as_verified_evidence"
+numbers_policy = "remove_bulk_unneeded_numbers_keep_checks_and_verified_time_boundaries"
+difficulty = "not_measured_new_baselines_not_run"
+private_notes = "assessor_and_data_plans_not_trader_observation"
+
+corrections = [
+  "PayPal transaction and operating margins both use net revenue; cost scope differs.",
+  "Different Microsoft and Meta capital-return amounts require scope reconciliation, not a presumption of inconsistent reporting.",
+  "Amazon consolidated depreciation-estimate effects cannot all be attributed to AWS without segment evidence.",
+  "NVDA split preceded the 2024 episode; do not apply it again or award initial-empty holdings a prior dividend.",
+  "Remove remembered, unverified event/ex-dividend dates and one-size-fits-all next-day publication claims.",
+  "Remove the claim that adjusted prices alone determine portfolio returns; use original-price execution and the cash ledger."
+]

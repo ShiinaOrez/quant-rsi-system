@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "msft-2024-06-28-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/msft-2024-06-28-60d.toml"
+
+[hypothesis]
+title = "并购贡献与资本投入"
+question = "Xbox 业务增长中哪些来自 Activision 并表？经营现金流、设备购置与融资租赁分别支持怎样的资本投入判断？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["区分 Xbox 内容与服务的并购贡献、分部总收入与有机增长。", "租赁新增、租赁现金支付与设备购置分别记录，不能直接相加。", "从当时已公开的并购及无形资产附注核对摊销影响。"]
+point_in_time = ["后续分部重编及并购计量调整不得覆盖初始版本。"]
+execution = ["核对分红结算；交易账户收益按原始价格与现金账本计算。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2024-04-25"
+url = "https://www.microsoft.com/en-us/investor/earnings/fy-2024-q3/press-release-webcast"
+report_label = "FY2024 Q3"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "nvda-2024-06-28-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/nvda-2024-06-28-60d.toml"
+
+[hypothesis]
+title = "拆股后的价格与每股数据"
+question = "截止日前已发生拆股，历史价格、每股收益与股息如何换到一致口径？初始空仓怎样避免领取此前持有人应得的股息？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["2024-06-10 开始按拆股后价格交易，历史新闻稿中的每股收益仍需标明原始口径。", "拆股前每股数据与拆股后价格比较时使用一致单位，不能据价格缩小认定估值骤降。", "应收款、库存、收入和采购承诺继续按各自期间及存量口径核对。"]
+point_in_time = ["起点为 2024-06-28 收盘，首个可成交日为 2024-07-01，拆股已经发生。"]
+execution = ["不得在本题交易期再次拆股；初始空仓不得领取 2024-06-28 支付的既有持有人股息。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2024-05-22"
+url = "https://investor.nvidia.com/news/press-release-details/2024/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2025/"
+report_label = "FY2025 Q1"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

@@ -1,0 +1,25 @@
+# 历史固定网格样本；完整数据档案尚未绑定。
+schema_version = "0.1"
+id = "mu-2022-12-30-60d"
+status = "draft"
+environment = "../environments/us-equity-daily-v1.toml"
+split = "validation"
+
+[instrument]
+symbol = "MU"
+
+[episode]
+as_of = "2022-12-30T16:00:00-05:00"
+start = "next_session"
+horizon_sessions = 60
+initial_cash = 100000.0
+initial_weight = 0.0
+
+[dataset]
+manifest = "UNBOUND"
+sha256 = "UNBOUND"
+
+[goal]
+type = "terminal_return_with_drawdown_limit"
+net_return_gte = 0.05
+max_drawdown_lte = 0.10

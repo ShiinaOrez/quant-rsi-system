@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "meta-2023-06-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/meta-2023-06-30-60d.toml"
+
+[hypothesis]
+title = "重组费用与经营改善"
+question = "剔除重组费用后的利润变化，哪些还需要由广告经营与现金流验证？重组明细中的资产项目负数代表什么？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["逐项勾稽遣散、场所整合及数据中心资产项目，保留负数及对应解释。", "GAAP 利润与剔除重组后的指标并列，不能默认全部重组费用都不再发生。", "将股票薪酬、回购与经营现金流分别记录。"]
+point_in_time = ["各版费用指引保留公开时间，后续季度不能覆盖起点版本。"]
+execution = ["首个成交日为半日市，禁止用全天常规收盘时间替代实际日历。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2023-04-26"
+url = "https://investor.atmeta.com/investor-news/press-release-details/2023/Meta-Reports-First-Quarter-2023-Results/default.aspx"
+report_label = "2023 Q1"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

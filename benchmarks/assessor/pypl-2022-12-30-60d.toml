@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "pypl-2022-12-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/pypl-2022-12-30-60d.toml"
+
+[hypothesis]
+title = "投资收益与支付经营"
+question = "GAAP 每股收益高于 non-GAAP 时，战略投资收益和经营利润各自贡献什么？TPV 增长如何传导至收入、交易费用和信用损失？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["勾稽战略投资损益与 GAAP/non-GAAP 调节表，不能只按每股收益判断主营经营。", "区分 TPV、净收入和交易费用；披露为合计的交易及信用损失不能无依据拆分。", "经营现金流中的股票薪酬加回不等于股东没有稀释成本。"]
+point_in_time = ["保留当时 non-GAAP 定义，不能带入 2024 年才公开的重编序列。"]
+execution = ["不把公司回购作为交易账户现金流，历史成交使用原始开盘价。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2022-11-03"
+url = "https://www.sec.gov/Archives/edgar/data/1633917/000163391722000165/q322paypalearningsreleas.htm"
+report_label = "2022 Q3"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "mu-2023-06-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/mu-2023-06-30-60d.toml"
+
+[hypothesis]
+title = "减记对毛利的两种影响"
+question = "当期存货减记与出售以前减记存货带来的成本降低，分别怎样影响毛利？经营现金流与库存变化是否支持相同的周期判断？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["减记计提与此前减记存货售出后的成本影响分别记录，保留调节表的符号。", "核对单季与累计减记影响，不能互相替代或重复扣减。", "结合库存、经营现金流和资本开支检查周期判断，而不只比较毛利率。"]
+point_in_time = ["后续财报回溯列示的减记数据不能替换初始版本。"]
+execution = ["按实际除息资格和支付日处理股息，不能推算日期后直接入账。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2023-06-28"
+url = "https://investors.micron.com/news/press-release/2023/Micron-Technology-Inc--Reports-Results-for-the-Third-Quarter-of-Fiscal-2023-06-28-2023/default.aspx"
+report_label = "FY2023 Q3"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

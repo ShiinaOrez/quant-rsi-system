@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "mu-2024-06-28-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/mu-2024-06-28-60d.toml"
+
+[hypothesis]
+title = "毛利回升与资金占用"
+question = "毛利回升时，应收款、库存与资本开支怎样改变现金流判断？资本开支总额、净额及补助收款能否勾稽？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["将应收款与库存变化和经营现金流调节表对应。", "资本开支总额、扣除补助后的净额和调整后自由现金流分开记录。", "已收补助现金与尚在申请或初步安排中的补助不能混同。"]
+point_in_time = ["FY2024 Q3 截至 2024-05-30，新闻稿于 2024-06-26 公开，不能按季度名称推断时间。"]
+execution = ["核对窗口内分红的资格与支付日，以及半日市的实际收盘时间。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2024-06-26"
+url = "https://investors.micron.com/news/press-release/2024/Micron-Technology-Inc--Reports-Results-for-the-Third-Quarter-of-Fiscal-2024-06-26-2024/default.aspx"
+report_label = "FY2024 Q3"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

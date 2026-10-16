@@ -26,6 +26,7 @@ python3 -m scripts.demo_domain
 - [可复用日频环境](benchmarks/environments/us-equity-daily-v1.toml)
 - [单标的周期题目](benchmarks/tasks/aapl-2023-midyear-60d.toml)
 - [INTC 财报事件诊断题](benchmarks/tasks/intc-2024-07-11-60d.toml)：沿用相同目标和交易约束，[难点与数据计划](docs/benchmark/intc-challenge.md)。难度尚待基线回测验证。
+- [NASDAQ 20 题诊断集](docs/benchmark/diagnostic-suite.md)：保留两道原题，增加六只股票、三个时点的 18 道 validation 题；含 [TOML 套件索引](benchmarks/suites/nasdaq-diagnostic-v1.toml)、评估者说明和共享数据构建计划。当前仍为 draft，新增题数据未绑定。
 
 配置校验与测试需要 Python 3.11+，无第三方依赖：
 

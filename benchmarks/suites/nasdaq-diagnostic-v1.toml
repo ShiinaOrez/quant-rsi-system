@@ -1,0 +1,152 @@
+# 评估者套件索引；不能作为交易模型的观察或提示词。
+schema_version = "0.1"
+id = "nasdaq-diagnostic-v1"
+status = "draft"
+agent_visible = false
+expected_task_count = 20
+environment = "../environments/us-equity-daily-v1.toml"
+legacy_tasks = ["../tasks/aapl-2023-midyear-60d.toml", "../tasks/intc-2024-07-11-60d.toml"]
+
+[selection]
+policy = "fixed_issuer_time_grid"
+prospective = false
+difficulty_status = "hypothesis_not_measured"
+historical_model_contamination = "not_excluded"
+independent_samples = false
+legacy_aapl_test_label = "not_a_sealed_holdout_claim"
+
+[grid]
+symbols = ["MSFT", "AMZN", "META", "MU", "PYPL", "NVDA"]
+cutoffs = ["2022-12-30", "2023-06-30", "2024-06-28"]
+new_split = "validation"
+
+[goal]
+type = "terminal_return_with_drawdown_limit"
+net_return_gte = 0.05
+max_drawdown_lte = 0.10
+
+[[cases]]
+task = "../tasks/msft-2022-12-30-60d.toml"
+assessor = "../assessor/msft-2022-12-30-60d.toml"
+data_plan = "../data-plans/msft-2022-12-30-60d.toml"
+first_session = "2023-01-03"
+terminal_session = "2023-03-29"
+
+[[cases]]
+task = "../tasks/msft-2023-06-30-60d.toml"
+assessor = "../assessor/msft-2023-06-30-60d.toml"
+data_plan = "../data-plans/msft-2023-06-30-60d.toml"
+first_session = "2023-07-03"
+terminal_session = "2023-09-26"
+
+[[cases]]
+task = "../tasks/msft-2024-06-28-60d.toml"
+assessor = "../assessor/msft-2024-06-28-60d.toml"
+data_plan = "../data-plans/msft-2024-06-28-60d.toml"
+first_session = "2024-07-01"
+terminal_session = "2024-09-24"
+
+[[cases]]
+task = "../tasks/amzn-2022-12-30-60d.toml"
+assessor = "../assessor/amzn-2022-12-30-60d.toml"
+data_plan = "../data-plans/amzn-2022-12-30-60d.toml"
+first_session = "2023-01-03"
+terminal_session = "2023-03-29"
+
+[[cases]]
+task = "../tasks/amzn-2023-06-30-60d.toml"
+assessor = "../assessor/amzn-2023-06-30-60d.toml"
+data_plan = "../data-plans/amzn-2023-06-30-60d.toml"
+first_session = "2023-07-03"
+terminal_session = "2023-09-26"
+
+[[cases]]
+task = "../tasks/amzn-2024-06-28-60d.toml"
+assessor = "../assessor/amzn-2024-06-28-60d.toml"
+data_plan = "../data-plans/amzn-2024-06-28-60d.toml"
+first_session = "2024-07-01"
+terminal_session = "2024-09-24"
+
+[[cases]]
+task = "../tasks/meta-2022-12-30-60d.toml"
+assessor = "../assessor/meta-2022-12-30-60d.toml"
+data_plan = "../data-plans/meta-2022-12-30-60d.toml"
+first_session = "2023-01-03"
+terminal_session = "2023-03-29"
+
+[[cases]]
+task = "../tasks/meta-2023-06-30-60d.toml"
+assessor = "../assessor/meta-2023-06-30-60d.toml"
+data_plan = "../data-plans/meta-2023-06-30-60d.toml"
+first_session = "2023-07-03"
+terminal_session = "2023-09-26"
+
+[[cases]]
+task = "../tasks/meta-2024-06-28-60d.toml"
+assessor = "../assessor/meta-2024-06-28-60d.toml"
+data_plan = "../data-plans/meta-2024-06-28-60d.toml"
+first_session = "2024-07-01"
+terminal_session = "2024-09-24"
+
+[[cases]]
+task = "../tasks/mu-2022-12-30-60d.toml"
+assessor = "../assessor/mu-2022-12-30-60d.toml"
+data_plan = "../data-plans/mu-2022-12-30-60d.toml"
+first_session = "2023-01-03"
+terminal_session = "2023-03-29"
+
+[[cases]]
+task = "../tasks/mu-2023-06-30-60d.toml"
+assessor = "../assessor/mu-2023-06-30-60d.toml"
+data_plan = "../data-plans/mu-2023-06-30-60d.toml"
+first_session = "2023-07-03"
+terminal_session = "2023-09-26"
+
+[[cases]]
+task = "../tasks/mu-2024-06-28-60d.toml"
+assessor = "../assessor/mu-2024-06-28-60d.toml"
+data_plan = "../data-plans/mu-2024-06-28-60d.toml"
+first_session = "2024-07-01"
+terminal_session = "2024-09-24"
+
+[[cases]]
+task = "../tasks/pypl-2022-12-30-60d.toml"
+assessor = "../assessor/pypl-2022-12-30-60d.toml"
+data_plan = "../data-plans/pypl-2022-12-30-60d.toml"
+first_session = "2023-01-03"
+terminal_session = "2023-03-29"
+
+[[cases]]
+task = "../tasks/pypl-2023-06-30-60d.toml"
+assessor = "../assessor/pypl-2023-06-30-60d.toml"
+data_plan = "../data-plans/pypl-2023-06-30-60d.toml"
+first_session = "2023-07-03"
+terminal_session = "2023-09-26"
+
+[[cases]]
+task = "../tasks/pypl-2024-06-28-60d.toml"
+assessor = "../assessor/pypl-2024-06-28-60d.toml"
+data_plan = "../data-plans/pypl-2024-06-28-60d.toml"
+first_session = "2024-07-01"
+terminal_session = "2024-09-24"
+
+[[cases]]
+task = "../tasks/nvda-2022-12-30-60d.toml"
+assessor = "../assessor/nvda-2022-12-30-60d.toml"
+data_plan = "../data-plans/nvda-2022-12-30-60d.toml"
+first_session = "2023-01-03"
+terminal_session = "2023-03-29"
+
+[[cases]]
+task = "../tasks/nvda-2023-06-30-60d.toml"
+assessor = "../assessor/nvda-2023-06-30-60d.toml"
+data_plan = "../data-plans/nvda-2023-06-30-60d.toml"
+first_session = "2023-07-03"
+terminal_session = "2023-09-26"
+
+[[cases]]
+task = "../tasks/nvda-2024-06-28-60d.toml"
+assessor = "../assessor/nvda-2024-06-28-60d.toml"
+data_plan = "../data-plans/nvda-2024-06-28-60d.toml"
+first_session = "2024-07-01"
+terminal_session = "2024-09-24"

@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "msft-2023-06-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/msft-2023-06-30-60d.toml"
+
+[hypothesis]
+title = "云业务与个人计算业务"
+question = "Azure、个人计算业务与整体利润的变化能否相互解释？分开汇率、分部比较口径与现金支出后，仓位依据是否仍成立？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["把 Intelligent Cloud、Microsoft Cloud 与 Azure 指标的范围分开，避免重复相加。", "保留公告中重分类后的比较数及其来源版本。", "核对股东返还说明与现金流量表项目的构成，不能仅凭金额差异断言披露出错。"]
+point_in_time = ["后续年报和分部重编只能从各自公开时间起可见。"]
+execution = ["首个成交日为半日市，核对开盘成交和当天提前收盘的观察时间。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2023-04-25"
+url = "https://www.microsoft.com/en-us/investor/earnings/fy-2023-q3/press-release-webcast"
+report_label = "FY2023 Q3"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

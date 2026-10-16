@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "nvda-2022-12-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/nvda-2022-12-30-60d.toml"
+
+[hypothesis]
+title = "库存与采购承诺"
+question = "数据中心和游戏业务怎样分别影响收入判断？库存、采购承诺与累计收购终止费，哪些属于本季、哪些需要附注确认？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["分开看数据中心和游戏业务，不将一项业务增长推广到全部业务。", "区分存货、现有库存费用和超额采购承诺，金额需要原始季度附注。", "区分单季与前九个月收购终止费，不把累计费用归到本季。"]
+point_in_time = ["不能把 2024 年拆股因子提前用于 2023 年原始开盘成交。"]
+execution = ["还原当时原始开盘价；指标价格只按决策时已生效公司行动调整。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2022-11-16"
+url = "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2023"
+report_label = "FY2023 Q3"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "meta-2024-06-28-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/meta-2024-06-28-60d.toml"
+
+[hypothesis]
+title = "资本支出指引与资本返还"
+question = "资本支出及费用指引上调时，如何结合广告经营和 Reality Labs 判断风险？回购、股息与现金流项目需要怎样对齐？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["指引仍是管理层估计，不能当作已实现资本开支。", "分别检查 Family of Apps 与 Reality Labs 的经营结果。", "核对回购摘要、现金流量表及税款代扣等相关说明，金额差异需先解释构成。"]
+point_in_time = ["未来股息是否已知取决于宣告日，收款仍取决于资格和支付日。"]
+execution = ["逐次核对除息与支付事件，不能仅根据登记日猜除息日。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2024-04-24"
+url = "https://investor.atmeta.com/investor-news/press-release-details/2024/Meta-Reports-First-Quarter-2024-Results/default.aspx"
+report_label = "2024 Q1"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

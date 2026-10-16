@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "pypl-2024-06-28-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/pypl-2024-06-28-60d.toml"
+
+[hypothesis]
+title = "新旧 non-GAAP 口径"
+question = "新旧 non-GAAP 每股收益应怎样对齐比较？BNPL 应收款的时间影响怎样导致自由现金流与调整后自由现金流不同？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["2024 年新方法包含股票薪酬及相关雇主税款影响；旧方法排除这些影响。", "比较新方法重编的历史序列，不将旧方法 2023 EPS 直接接到新方法 2024 EPS。", "分别记录自由现金流和剔除欧洲 BNPL 应收款时间影响的调整后指标。"]
+point_in_time = ["重编历史只有新方法公开后才可见，早期轨迹不得被覆盖。"]
+execution = ["不以调整后公司现金流替代持仓账户收益，成交和估值遵循环境账本。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2024-04-30"
+url = "https://www.sec.gov/Archives/edgar/data/1633917/000119312524123690/d831310dex991.htm"
+report_label = "2024 Q1"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

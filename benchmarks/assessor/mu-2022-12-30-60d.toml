@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "mu-2022-12-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/mu-2022-12-30-60d.toml"
+
+[hypothesis]
+title = "库存、毛利与现金消耗"
+question = "库存上升、毛利指引下降与资本开支共同说明哪些风险？哪些结论需要存货附注，不能由新闻稿没有提及某事项来推断？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["FY2023 Q1 与自然时间分别记录，报告期末不是发布日期。", "从存货附注核对计量和减记，未在新闻稿提及不等于没有发生。", "核对资本开支总额、净额、调整后自由现金流及其调节项。"]
+point_in_time = ["先核实季度 10-Q 提交时间，不能因财季已结束就假定文件已公开。"]
+execution = ["初始空仓不能领取起始日前取得资格的股息，资格按正式公司行动核对。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2022-12-21"
+url = "https://investors.micron.com/news/press-release/2022/Micron-Technology-Inc--Reports-Results-for-the-First-Quarter-of-Fiscal-2023-12-21-2022/default.aspx"
+report_label = "FY2023 Q1"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

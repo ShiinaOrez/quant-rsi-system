@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "meta-2022-12-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/meta-2022-12-30-60d.toml"
+
+[hypothesis]
+title = "广告价格与投资支出"
+question = "广告展示量增长、单价下降与分部利润如何合并判断？办公场所减值与资本投入分别影响利润还是现金？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["分别记录广告展示量与价格变化，不把展示量增长直接当收入增长。", "将 Family of Apps 与 Reality Labs 勾稽到合并利润。", "核对办公场所减值及资本开支定义，区分融资租赁本金与非现金费用。"]
+point_in_time = ["费用指引要按截止日前公告逐次更新，种子新闻稿不保证包含最新版本。"]
+execution = ["回购不作为账户收益入账，成交使用原始开盘价。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2022-10-26"
+url = "https://investor.atmeta.com/investor-news/press-release-details/2022/Meta-Reports-Third-Quarter-2022-Results/default.aspx"
+report_label = "2022 Q3"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

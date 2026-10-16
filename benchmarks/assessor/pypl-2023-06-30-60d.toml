@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "pypl-2023-06-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/pypl-2023-06-30-60d.toml"
+
+[hypothesis]
+title = "两种利润率的背离"
+question = "营业利润率与交易利润率变化不一致时，费用构成能否解释差异？如何核对重组调整、股票薪酬和应收款对现金流的影响？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["交易利润率与营业利润率都以净收入为分母，差别在扣除的成本和费用，不能误称分母不同。", "核对利润表重组及其他费用与 non-GAAP 调整的项目范围。", "股票薪酬费用、相关税款和现金流加回分别勾稽，不只比较总金额。"]
+point_in_time = ["原始第一季度与后续重编分别存储，2024 年定义不能进入 2023 年观察。"]
+execution = ["首个成交日为半日市；窗口内公布的新事实只能影响之后允许提交的动作。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2023-05-08"
+url = "https://www.sec.gov/Archives/edgar/data/1633917/000163391723000070/q123paypalearningsreleas.htm"
+report_label = "2023 Q1"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]

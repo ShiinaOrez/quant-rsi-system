@@ -1,0 +1,25 @@
+# 构建要求，尚未物化；共同规则见 template。
+plan_version = "0.2"
+task_id = "mu-2023-06-30-60d"
+status = "unmaterialized"
+agent_visible = false
+template = "us-equity-history-v1.toml"
+data_gaps = ["需要减记调节、存货计量附注以及完整公司行动表。", "完整版本化历史披露、行情、公司行动和数据许可尚待绑定。"]
+
+[identity]
+symbol = "MU"
+currency = "USD"
+exchange = "NASDAQ"
+
+[construction]
+initial_cutoff = "2023-06-30T16:00:00-04:00"
+forward_sessions = 60
+
+[seed]
+url = "https://investors.micron.com/news/press-release/2023/Micron-Technology-Inc--Reports-Results-for-the-Third-Quarter-of-Fiscal-2023-06-28-2023/default.aspx"
+publication_date = "2023-06-28"
+report_label = "FY2023 Q3"
+role = "initial_archive_seed_not_complete_coverage"
+publication_precision = "date_only"
+as_filed_binding = "PENDING"
+license_review = "PENDING"

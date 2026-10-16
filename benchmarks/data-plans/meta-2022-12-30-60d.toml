@@ -1,0 +1,25 @@
+# 构建要求，尚未物化；共同规则见 template。
+plan_version = "0.2"
+task_id = "meta-2022-12-30-60d"
+status = "unmaterialized"
+agent_visible = false
+template = "us-equity-history-v1.toml"
+data_gaps = ["需要截止日前后续公告、租赁减值和股票薪酬明细。", "完整版本化历史披露、行情、公司行动和数据许可尚待绑定。"]
+
+[identity]
+symbol = "META"
+currency = "USD"
+exchange = "NASDAQ"
+
+[construction]
+initial_cutoff = "2022-12-30T16:00:00-05:00"
+forward_sessions = 60
+
+[seed]
+url = "https://investor.atmeta.com/investor-news/press-release-details/2022/Meta-Reports-Third-Quarter-2022-Results/default.aspx"
+publication_date = "2022-10-26"
+report_label = "2022 Q3"
+role = "initial_archive_seed_not_complete_coverage"
+publication_precision = "date_only"
+as_filed_binding = "PENDING"
+license_review = "PENDING"

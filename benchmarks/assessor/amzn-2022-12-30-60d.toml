@@ -1,0 +1,33 @@
+# 仅供评估者使用，不得进入 trader 观察。
+assessment_version = "0.2"
+task_id = "amzn-2022-12-30-60d"
+agent_visible = false
+selection = "fixed_issuer_time_grid"
+difficulty_status = "hypothesis_not_measured"
+baseline_results = "NOT_RUN"
+data_plan = "../data-plans/amzn-2022-12-30-60d.toml"
+
+[hypothesis]
+title = "分部利润与自由现金流"
+question = "AWS 盈利与零售亏损并存时，合并净利润和三种自由现金流口径分别说明什么？如何避免把 Rivian 估值收益当作经营改善？"
+threshold_policy = "same_fixed_goal_for_all_grid_cases"
+
+[checks]
+accounting = ["把北美、国际和 AWS 营业利润勾稽到合并营业利润。", "Rivian 估值损益属于非营业项目，不能直接视作主营经营变化。", "分别记录自由现金流、扣除融资租赁本金的口径和设备租赁调整口径，注明滚动十二个月区间。"]
+point_in_time = ["2022 全年报不能在其公开前用于解释第四季度实际结果。"]
+execution = ["检查回看期内公司行动的价格因子；成交必须还原为当期原始开盘价。"]
+automation_status = "review_requirements_not_all_implemented_as_scores"
+
+[[evidence]]
+phase = "before_start"
+publication_date = "2022-10-27"
+url = "https://ir.aboutamazon.com/news-release/news-release-details/2022/Amazon-com-Announces-Third-Quarter-Results/"
+report_label = "2022 Q3"
+reviewer = "Codex"
+review_scope = "publication_date_and_selected_accounting_items"
+input_binding = "not_bound_do_not_assume_agent_observed"
+
+[verification]
+run_baselines = ["cash", "buy_and_hold", "sma_20_60"]
+report = ["goal_success", "net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count"]
+do_not = ["retune_goal_after_backtest", "require_foreknowledge", "claim_difficulty_without_baselines", "treat_hindsight_upper_bound_as_attainable_policy"]
