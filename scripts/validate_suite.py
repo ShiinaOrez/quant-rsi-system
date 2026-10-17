@@ -94,6 +94,11 @@ def validate_suite(path: Path, with_calendar: bool = False) -> dict:
                 "environment_private_until_available_at", "future records exposed")
         require(template["availability"]["missing_publication_time"] ==
                 "next_session_open_after_publication_date", "publication fallback differs")
+        require(template["availability"].get("acceptance_equals_availability") is False,
+                "SEC acceptance cannot automatically establish public availability")
+        require({"availability_basis", "availability_estimated"}.issubset(
+                    template["records"]["filing_extra_columns"]),
+                "filing availability evidence and uncertainty must be recorded")
         require(bool(assessor["hypothesis"]["question"].strip()), "missing diagnostic question")
         require(bool(assessor["evidence"]), "missing initial evidence")
         for evidence in assessor["evidence"]:

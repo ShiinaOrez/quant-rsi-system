@@ -1,0 +1,11 @@
+id = "iangow-sec-submissions-2026-09-30"
+version = "2026-09-30"
+creator = "Ian D. Gow"
+license = "CC-BY-4.0"
+release_url = "https://github.com/iangow/sec_submissions_data/releases/tag/2026-09-30"
+manifest_url = "https://github.com/iangow/sec_submissions_data/releases/download/2026-09-30/manifest.json"
+manifest_sha256 = "6f2ba6a08c3c6f34733310b965c829d6148eaccc1c4ae39ec3163aad046b8d59"
+filings_url = "https://github.com/iangow/sec_submissions_data/releases/download/2026-09-30/filings.parquet"
+filings_sha256 = "f2e3c041cb8eb2cb4b251e11eae25f61b5e18fab0bef34544b912611c0fd219e"
+filings_size_bytes = 1235685023
+population_rows = 27272863

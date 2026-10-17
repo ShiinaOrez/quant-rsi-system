@@ -22,12 +22,16 @@ calendar_provider = "UNSELECTED"
 
 [records]
 required_columns = ["record_id", "source_url", "event_time", "available_at", "retrieved_at", "sha256"]
-filing_extra_columns = ["accession", "form", "report_period", "accepted_at", "amends_accession"]
+filing_extra_columns = ["accession", "form", "report_period", "accepted_at", "amends_accession", "availability_basis", "availability_estimated"]
 financial_extra_columns = ["filing_accession", "concept", "unit", "period_start", "period_end", "segment", "reporting_basis"]
 price_extra_columns = ["session", "raw_open", "raw_high", "raw_low", "raw_close", "volume"]
 
 [availability]
-filings = "accepted_at_or_verified_earlier_public_release"
+filings = "verified_public_release_or_explicit_conservative_availability_policy"
+accepted_at_role = "acceptance_metadata_not_automatic_publication"
+acceptance_equals_availability = false
+deferred_dissemination = "check_assigned_filing_date_form_and_contemporaneous_edgar_rules"
+unresolved_availability = "block_record_visibility_until_safe_bound_is_established"
 daily_bars = "session_close"
 financials = "inherit_originating_document_available_at"
 missing_publication_time = "next_session_open_after_publication_date"

@@ -57,6 +57,17 @@ class BenchmarkSuiteTests(unittest.TestCase):
         with self.assertRaisesRegex(ConfigError, "before cutoff"):
             validate_suite(self.suite)
 
+    def test_acceptance_cannot_automatically_expose_a_filing(self):
+        self.change("data-plans/us-equity-history-v1.toml",
+                    "acceptance_equals_availability = false", "acceptance_equals_availability = true")
+        with self.assertRaisesRegex(ConfigError, "acceptance"):
+            validate_suite(self.suite)
+
+    def test_availability_uncertainty_cannot_be_dropped(self):
+        self.change("data-plans/us-equity-history-v1.toml", ', "availability_estimated"', '')
+        with self.assertRaisesRegex(ConfigError, "uncertainty"):
+            validate_suite(self.suite)
+
     def test_diagnostic_notes_cannot_claim_agent_visibility(self):
         self.change("assessor/msft-2022-12-30-60d.toml",
                     "agent_visible = false", "agent_visible = true")
