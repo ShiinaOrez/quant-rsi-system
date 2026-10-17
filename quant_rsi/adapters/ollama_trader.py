@@ -47,6 +47,9 @@ class OllamaTrader:
         self.timeout, self.capture = timeout, capture
         self.mandate = mandate or {}
         self.system_prompt = system_prompt
+        if self.mandate.get("engine_contract") == "single_asset_daily_v2":
+            self.system_prompt += (" NAV includes declared dividend receivables, which cannot be spent "
+                                   "before payment. Cash and dividend_receivable are separate account fields.")
         self.decisions = 0
 
     def decide(self, snapshot: MarketSnapshot, account: Account) -> TargetWeight:
@@ -60,6 +63,8 @@ class OllamaTrader:
                        "remaining_sessions": self.mandate.get("horizon_sessions", 0) - self.decisions,
                        "visible_document_ids": [r["record_id"] for r in documents],
                        "account": {"cash": str(account.cash), "shares": account.shares}, "records": visible}
+        if self.mandate.get("engine_contract") == "single_asset_daily_v2":
+            observation["account"]["dividend_receivable"] = str(account.dividend_receivable)
         # Stable document prefix permits local KV-cache reuse across daily decisions.
         messages = [{"role": "system", "content": self.system_prompt},
                     {"role": "user", "content": json.dumps({"visible_documents": documents}, ensure_ascii=False)},

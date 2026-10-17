@@ -45,7 +45,9 @@ def run(args):
     policy = OllamaTrader(args.model, args.endpoint,
                           mandate={"horizon_sessions": task.horizon_sessions,
                                    "initial_cash": str(task.initial_cash),
-                                   "goal": wire(task.goal), "execution": wire(task.execution)})
+                                   "goal": wire(task.goal), "execution": wire(task.execution),
+                                   **({"engine_contract": task.engine_contract}
+                                      if task.engine_contract == "single_asset_daily_v2" else {})})
     with urlopen(policy.base_url + "/api/tags", timeout=30) as response:
         tags = json.load(response)
     model = next((m for m in tags["models"] if m["name"] == args.model), None)

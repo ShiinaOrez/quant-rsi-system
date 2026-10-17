@@ -35,4 +35,5 @@ def load_definition(path: Path, *, require_ready: bool = False) -> BenchmarkTask
         ProfitGoal(Decimal(goal["net_return_gte"]), Decimal(goal["max_drawdown_lte"])),
         ExecutionRules(Decimal(costs["commission_bps"]), Decimal(costs["slippage_bps"])),
         digest,
+        env["reproducibility"]["engine_contract"],
     )

@@ -1,0 +1,23 @@
+# 完整档案构建要求；不表示数据已取得或题目已就绪。
+plan_version = "0.2"
+task_id = "aapl-2023-midyear-60d"
+status = "unmaterialized"
+agent_visible = false
+template = "us-equity-history-v1.toml"
+data_gaps = ["全量历史申报及附件尚未下载，SEC 直连返回 403。", "版本化三表、原始价格口径、官方公司行动和许可尚待核实。"]
+
+[identity]
+symbol = "AAPL"
+cik = "0000320193"
+currency = "USD"
+exchange = "NASDAQ"
+
+[construction]
+initial_cutoff = "2023-06-30T16:00:00-04:00"
+forward_sessions = 60
+
+[sources]
+sec_submissions = "https://data.sec.gov/submissions/CIK0000320193.json"
+sec_archive = "https://www.sec.gov/edgar/browse/?CIK=320193&owner=exclude"
+as_filed_binding = "PENDING"
+license_review = "PENDING"

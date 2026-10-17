@@ -32,9 +32,11 @@ class HoldPosition:
 class Account:
     cash: Decimal
     shares: int
+    dividend_receivable: Decimal = Decimal(0)
 
     def __post_init__(self):
         number(self.cash)
+        number(self.dividend_receivable)
         require(type(self.shares) is int and self.shares >= 0, "nonnegative integer shares required")
 
 
@@ -58,7 +60,8 @@ class TradingEpisode:
 
     Commands are serialized by the application. A failed command leaves the
     account and clock unchanged. Dividend entitlements are separate from holdings;
-    unsupported actions (including splits) fail explicitly.
+    unsupported actions (including splits) fail explicitly. Contract v2 includes
+    unpaid dividend entitlements in NAV while keeping them unavailable as cash.
     """
 
     def __init__(self, episode_id: str, task: BenchmarkTask):
@@ -115,7 +118,9 @@ class TradingEpisode:
                 paid.add(action.action_id)
             else:
                 require(False, "corporate action ledger not implemented for this action")
-        account = Account(account.cash + dividend_cash, account.shares)
+        receivable = (sum((amount for identity, amount in entitlements.items() if identity not in paid), Decimal(0))
+                      if self.task.engine_contract == "single_asset_daily_v2" else Decimal(0))
+        account = Account(account.cash + dividend_cash, account.shares, receivable)
         delta, fill, fee, turnover, rejection = 0, None, Decimal(0), Decimal(0), None
         if isinstance(target, HoldPosition):
             pass
@@ -123,7 +128,7 @@ class TradingEpisode:
             rejection = "untradable" if not session.tradable else "missing_open"
         else:
             price = session.raw_open
-            equity = account.cash + account.shares * price
+            equity = account.cash + account.shares * price + account.dividend_receivable
             desired = int((equity * target.value / price).to_integral_value(rounding=ROUND_FLOOR))
             delta = desired - account.shares
             slip = self.task.execution.slippage_bps / 10000
@@ -136,11 +141,12 @@ class TradingEpisode:
                 notional = abs(delta) * fill
                 fee = notional * rate
                 turnover = notional / equity
-                account = Account(account.cash - delta * fill - fee, account.shares + delta)
+                account = Account(account.cash - delta * fill - fee, account.shares + delta,
+                                  account.dividend_receivable)
             else:
                 fill = None
         event = SessionSettled(self._id, session.closes_at, delta, fill, fee, turnover,
-                               account, account.cash + account.shares * close,
+                               account, account.cash + account.shares * close + account.dividend_receivable,
                                session.raw_close is None, rejection, dividend_cash)
         self._account = account
         self._last_close = close

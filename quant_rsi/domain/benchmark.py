@@ -39,8 +39,11 @@ class BenchmarkTask:
     goal: ProfitGoal
     execution: ExecutionRules
     configuration_digest: str
+    engine_contract: str = "single_asset_daily_v1"
 
     def __post_init__(self):
+        require(self.engine_contract in ("single_asset_daily_v1", "single_asset_daily_v2"),
+                "unsupported daily execution contract")
         require(bool(self.task_id.strip()) and bool(self.symbol.strip()), "identity required")
         require(self.currency == "USD", "v0.1 supports USD only")
         aware(self.as_of)

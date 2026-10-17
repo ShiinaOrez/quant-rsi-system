@@ -8,6 +8,7 @@ from quant_rsi.domain.benchmark import BenchmarkTask
 from quant_rsi.domain.corporate_actions import DividendEx, DividendPay
 from quant_rsi.domain.market import InformationRecord, TradingSession, snapshot_at
 from quant_rsi.domain.shared import require
+from quant_rsi.application.history import HistoryItem
 
 
 class FrozenPilotMarket:
@@ -55,6 +56,15 @@ class FrozenPilotMarket:
         bars = [r for r in visible.records if r.record_id.startswith("bar-")]
         reports = [r for r in visible.records if not r.record_id.startswith("bar-")]
         return type(visible)(symbol, decision_time, tuple(bars[-1:] + reports[-1:]))
+
+    def scan(self, symbol, available_through):
+        """Expose the pilot's limited history through the same read-only port.
+
+        This does not add missing filings or certify the pilot as complete.
+        """
+        return tuple(HistoryItem(r, "ohlcv" if r.record_id.startswith("bar-") else "filing")
+                     for r in self._records
+                     if r.symbol == symbol and r.available_at <= available_through)
 
     def next_sessions(self, task):
         require(task.symbol == self._sessions[0].symbol and task.horizon_sessions == len(self._sessions),

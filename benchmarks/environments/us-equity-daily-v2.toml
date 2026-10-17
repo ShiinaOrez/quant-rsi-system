@@ -1,0 +1,60 @@
+# v2: declared unpaid dividend entitlements count in NAV but are not spendable cash.
+schema_version = "0.1"
+id = "us-equity-daily-v2"
+
+[market]
+asset_class = "equity"
+exchange = "NASDAQ"
+timezone = "America/New_York"
+currency = "USD"
+calendar = "XNAS"
+
+[observation]
+frequency = "daily"
+decision_time = "after_close"
+visibility = "available_at_lte_decision_time"
+financial_revision = "as_published"
+history_access = "query"
+required_data = ["ohlcv", "filings", "income_statement", "balance_sheet", "cash_flow_statement", "corporate_actions"]
+
+[indicators]
+price_basis = "split_adjusted_as_of"
+sma_windows = [20, 60]
+rsi_window = 14
+rsi_method = "wilder"
+volatility_window = 20
+volatility_ddof = 1
+warmup = "null_until_ready"
+
+[action]
+type = "target_weight"
+min_weight = 0.0
+max_weight = 1.0
+shorting = false
+leverage = false
+
+[execution]
+timing = "next_session_open"
+price_field = "raw_open"
+fractional_shares = false
+rounding = "floor"
+commission_bps = 5.0
+slippage_bps = 5.0
+cash_interest_rate = 0.0
+missing_open = "reject_order"
+untradable = "reject_order"
+dividends = "credit_on_pay_date"
+splits = "adjust_shares_on_effective_date"
+
+[valuation]
+price_field = "raw_close"
+missing_close = "last_known_close"
+terminal = "mark_to_market_including_dividend_receivables"
+
+[evaluation]
+metrics = ["net_return", "max_drawdown", "excess_return_vs_buy_hold", "turnover", "trade_count", "goal_success"]
+baselines = ["cash", "buy_and_hold", "sma_20_60"]
+
+[reproducibility]
+seed = 42
+engine_contract = "single_asset_daily_v2"

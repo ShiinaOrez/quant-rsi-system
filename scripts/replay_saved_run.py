@@ -35,8 +35,11 @@ def verify(run_dir: Path, task_path: Path, manifest_path: Path):
         def decide(self, snapshot, account):
             sample = samples[self.index]
             observation = json.loads(sample["request"]["messages"][-1]["content"])
+            expected_account = {"cash": str(account.cash), "shares": account.shares}
+            if task.engine_contract == "single_asset_daily_v2":
+                expected_account["dividend_receivable"] = str(account.dividend_receivable)
             require(observation["decision_time"] == snapshot.decision_time.isoformat() and
-                    observation["account"] == {"cash": str(account.cash), "shares": account.shares},
+                    observation["account"] == expected_account,
                     "recorded input/account mismatch")
             docs = json.loads(sample["request"]["messages"][1]["content"])["visible_documents"]
             expected = [{"record_id": r.record_id, "available_at": r.available_at.isoformat(),

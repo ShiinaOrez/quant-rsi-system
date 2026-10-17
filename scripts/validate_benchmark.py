@@ -44,9 +44,9 @@ ENV = {
     },
     "valuation": {"price_field": ("raw_close",),
                   "missing_close": ("last_known_close",),
-                  "terminal": ("mark_to_market",)},
+                  "terminal": ("mark_to_market", "mark_to_market_including_dividend_receivables")},
     "evaluation": {"metrics": list, "baselines": list},
-    "reproducibility": {"seed": int, "engine_contract": ("single_asset_daily_v1",)},
+    "reproducibility": {"seed": int, "engine_contract": ("single_asset_daily_v1", "single_asset_daily_v2")},
 }
 TASK = {
     "schema_version": ("0.1",), "id": str, "status": ("draft", "ready"),
@@ -100,6 +100,11 @@ def check_list(values: list, allowed: set, path: str) -> None:
 
 def validate_environment(env: dict) -> None:
     check_fields(env, ENV, "environment")
+    expected_terminal = ("mark_to_market_including_dividend_receivables"
+                         if env["reproducibility"]["engine_contract"] == "single_asset_daily_v2"
+                         else "mark_to_market")
+    require(env["valuation"]["terminal"] == expected_terminal,
+            "valuation and engine contract disagree about dividend receivables")
     check_list(env["observation"]["required_data"], DATA, "required_data")
     check_list(env["evaluation"]["metrics"], METRICS, "metrics")
     check_list(env["evaluation"]["baselines"], BASELINES, "baselines")
