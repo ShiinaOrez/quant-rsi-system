@@ -85,7 +85,7 @@ class UrlTests(unittest.TestCase):
         self.assertEqual(q4.check_cdn_url(ok, "META", ("zip",)), (True, None))
         cases = {
             ok.replace("https", "http", 1): "http_not_upgraded",
-            ok.replace("d18rn0p25nwr6d", "d1lge852tjjqow"): "foreign_host",
+            ok.replace("d18rn0p25nwr6d", "unknown-cdn"): "foreign_host",
             ok.replace("https://", "https://u:p@"): "credentials_in_url",
             ok + "?x=1": "query_or_fragment",
             META_CDN + "../CIK-0001018724/" + UUID + ".zip": "path_shape",
@@ -98,6 +98,12 @@ class UrlTests(unittest.TestCase):
             self.assertEqual(q4.check_cdn_url(url, "META", ("zip",)), (False, reason), url)
         self.assertEqual(q4.check_cdn_url(META_CDN + UUID + ".pdf", "META", ("zip",))[1],
                          "extension_not_allowed_for_type")
+        legacy = ok.replace(q4.CDN_HOST, q4.LEGACY_META_CDN_HOST)
+        self.assertEqual(q4.check_cdn_url(legacy, "META", ("zip",)), (True, None))
+        self.assertEqual(q4.check_cdn_url(legacy.replace("0001326801", "0001018724"),
+                                        "AMZN", ("zip",)), (False, "foreign_host"))
+        self.assertEqual(q4.check_cdn_url(legacy.replace("0001326801", "0001018724"),
+                                        "META", ("zip",)), (False, "cik_mismatch"))
 
     def test_detail_url_rules(self):
         self.assertIsNotNone(q4.detail_url("/financials/sec-filings-details/default.aspx?FilingId=7", "META", 7)[0])

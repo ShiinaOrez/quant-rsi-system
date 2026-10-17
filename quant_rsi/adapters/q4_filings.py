@@ -13,13 +13,18 @@ from datetime import date
 from urllib.parse import parse_qsl, urlsplit
 
 PLAN_FORMS = ("10-K", "10-K/A", "10-Q", "10-Q/A", "8-K", "8-K/A")
+CDN_HOST = "d18rn0p25nwr6d.cloudfront.net"
+# Observed in 17 XBRL links in the saved official META feed; evidence hash in docs.
+# This observation does not admit the same legacy host for other issuers.
+LEGACY_META_CDN_HOST = "d1lge852tjjqow.cloudfront.net"
 ISSUERS = {
     "META": {"cik": 1326801, "origin": "https://investor.atmeta.com",
+             "cdn_hosts": (CDN_HOST, LEGACY_META_CDN_HOST),
              "detail_path": "/financials/sec-filings-details/default.aspx"},
     "AMZN": {"cik": 1018724, "origin": "https://ir.aboutamazon.com",
+             "cdn_hosts": (CDN_HOST,),
              "detail_path": "/sec-filings/sec-filings-details/default.aspx"},
 }
-CDN_HOST = "d18rn0p25nwr6d.cloudfront.net"
 # Q4 DocumentType -> (role, is SEC-original bytes, allowed extensions)
 DOCUMENT_ROLES = {
     "ORIG": ("original_filing", True, ()),
@@ -78,7 +83,7 @@ def check_cdn_url(url, symbol, extensions):
         return False, "scheme"
     if parts.username or parts.password or "@" in parts.netloc:
         return False, "credentials_in_url"
-    if parts.netloc != CDN_HOST:
+    if parts.netloc not in issuer(symbol)["cdn_hosts"]:
         return False, "foreign_host"
     if parts.query or parts.fragment:
         return False, "query_or_fragment"
