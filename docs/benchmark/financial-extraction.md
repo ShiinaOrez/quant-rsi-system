@@ -6,11 +6,14 @@
 
 ```
 .venv/bin/python -I scripts/extract_financials.py --receipts R.json --zip A.zip [--zip B.zip] --out-dir DIR
+.venv/bin/python -I scripts/inventory_mirror_xbrl.py --root ARCHIVE_ROOT --symbol INTC --output INV.json
+.venv/bin/python -I scripts/extract_financials.py --inventory INV.json --select instance --out-dir DIR
 .venv/bin/python -I scripts/extract_financials.py --zip A.zip --accession 0000050863-24-000076 --source-url URL --out-dir DIR
   [--available-at 2024-04-26T16:05:00-04:00 --available-at-basis "SEC acceptance datetime"]
 ```
 
 - accession 和 sourceURL 来自 receipts，按 ZIP 的 sha256 匹配；匹配不到或匹配多条时拒绝该文件。
+- inventory 报告中的损坏和缺失项必须先核对。选择 `instance` 只运行已分类的传统档案，不代表整个档案集完整。
 - 输出文件：
   - `facts-<acc>.json`：全部事实，以及 contexts、units、roles；
   - `issues-<acc>.json`：计数、问题、重复组、被拒成员；
@@ -37,8 +40,9 @@
 - 支持的转换：
   - TR4（2020-02-12）的 `num-dot-decimal`：逗号、空格或不换行空格作千分位，点作小数点，不接受符号和指数；
   - TR4 的 `fixed-zero`：任意输入得 0；
+  - TR3（2015-02-26）的 `numdotdecimal`、`zerodash`：分别按三位整数分组规则解析数值，或将规范列出的单个破折号转为零；不复用 TR4 较宽松的分组规则。规则来源：[XBRL Registry 3，含 2019-04-17 勘误](https://www.xbrl.org/Specification/inlineXBRL-transformationRegistry/REC-2015-02-26%2Berrata-2019-04-17/inlineXBRL-transformationRegistry-REC-2015-02-26%2Bcorrected-errata-2019-04-17.html)。
   - `ixt-sec:numwordsen`：只接受 `no` 和 `none`，得 0。EDGAR Filer Manual Vol. II 的示例中，这两个词都输出 0。
-- 其余 format 记为 `unsupported_format`，其余英文数词记为 `unsupported_transform_input`，都保留原文。TR1–TR3 的旧名（如 `numdotdecimal`、`zerodash`）目前也属于不支持。
+- 其余 format 记为 `unsupported_format`，其余英文数词记为 `unsupported_transform_input`，都保留原文。同名转换必须匹配 namespace，未验证的 TR1/TR2 不自动作为别名接受。
 - QName 必须带前缀。前缀未绑定，或者被重新绑定到与根元素不同的 namespace，都记为错误。
 - 缺失或无效的 context/unit、重复的资源 ID 都是错误。ix:fraction 和 ix:tuple 记为不支持。
 - nonNumeric 按 continuation 链拼接文本，并剔除 `ix:exclude`。带 format 的 nonNumeric（日期、布尔值等）不做转换：状态为 `raw_only`，值为 null。
@@ -101,7 +105,7 @@
 
 - 没有处理 1994–2010 年的纯文本和 HTML 财报，也没有声称它们已经被抽取。XBRL zip 最早一份是 2011 年。
 - 传统 instance：tuple、fraction、float/double 词法都没有支持；不加载 taxonomy schema，所以无法校验 item 类型、period type 或 balance；计算/维度校验也没有做。
-- TR1–TR3 的 inline 转换没有实现。2026-10-17 批量检查已缓存 inline 档案时，有 6,889 条事实报告 `unsupported_format`，这些事实不能计为已取得可用数值。传统 instance 的数字不使用这些转换。
+- TR3 仅支持上述两项数值转换，TR1/TR2 未实现。2026-10-17 对 103 份 inline ZIP 的检查中，102 份可解析，合计 25,950 条事实；新增转换将 `unsupported_format` 从 6,889 条降为 8 条。余下 15 条数词转换仍不支持。一份 2020 年 10-K 的 ZIP 成员偏移损坏，镜像主 HTML 也无法完整解析，均保留为缺口；不修改原件来凑出成功结果。所有事实仍未绑定公开时间。
 - 非零英文数词、nonNumeric 的转换、calculation/definition linkbase、三表勾稽都没有做。只做了一项检查：每份申报中，无维度的 Assets 与 LiabilitiesAndStockholdersEquity 是否相等。
 - context 的比较是字符串级别的，日期格式不做归一化。
 - 镜像字节没有与 EDGAR 原件比对。accepted_at 未知。

@@ -91,6 +91,24 @@ class Base(unittest.TestCase):
 
 
 class Numbers(Base):
+    def test_registry_three_number_and_dash_boundaries(self):
+        # Different namespace and grouping rules must not reuse the looser TR4 parser.
+        for raw, expected in (("77,988", "77988"), ("1234.50", "1234.50"),
+                              ("1\u00a0234.25", "1234.25"), ("1 234 567", "1234567")):
+            self.assertEqual(ix._tr3_numdotdecimal(raw), ix.Decimal(expected))
+        for raw in ("12,34", "1,", "1.2 3", "-1", "+1", "1e3", ".5", ""):
+            with self.assertRaises(ix.TransformError):
+                ix._tr3_numdotdecimal(raw)
+        for dash in "-\u058a\u05be\u2010\u2011\u2012\u2013\u2014\u2015\ufe58\ufe63\uff0d":
+            self.assertEqual(ix._tr3_zerodash(" " + dash + "\t"), 0)
+        for raw in ("", "--", "0", "\u2212"):
+            with self.assertRaises(ix.TransformError):
+                ix._tr3_zerodash(raw)
+        body = nf("tr3", text="77,988", extra='decimals="-6" scale="6" sign="-" format="ixt:numdotdecimal"')
+        path = self.make_zip({"t.htm": page(body).replace(ix.TR4.encode(), ix.TR3.encode())})
+        result = ix.extract_zip(path, accession=ACC)
+        self.assertEqual(result["documents"][0]["facts"][0]["value"], "-77988000000")
+
     def test_million_scale_sign_and_decimals(self):
         self.run_body(
             nf("f1", "us-gaap:NetIncomeLoss", "1,069", "c-d",

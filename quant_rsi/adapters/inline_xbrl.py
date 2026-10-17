@@ -6,8 +6,8 @@ denominator), fact ID and source location (member, line, column, element path), 
 accession and the sha256 of the ZIP and the member. Numbers are exact Decimals. Anything this
 module cannot convert under a cited rule keeps its raw text and an error instead of a value:
 
-* transformations: only ixt:num-dot-decimal and ixt:fixed-zero (XBRL Transformation Registry 4,
-  REC 2020-02-12) and ixt-sec:numwordsen inputs "no"/"none" (EDGAR Filer Manual Vol. II lists
+* transformations: ixt:num-dot-decimal and ixt:fixed-zero (XBRL Transformation Registry 4,
+  REC 2020-02-12), Registry 3 numdotdecimal/zerodash, and ixt-sec:numwordsen inputs "no"/"none" (EDGAR Filer Manual Vol. II lists
   both as producing 0). Other number words and every other format are reported as unsupported;
 * value = transform(text) * 10**scale, negated when sign="-" (Inline XBRL 1.1, 10.1/10.2.3).
   A nonFraction holds exactly one text node or one nested nonFraction; markup inside it (for
@@ -43,6 +43,7 @@ XSI = "http://www.w3.org/2001/XMLSchema-instance"
 XS = "http://www.w3.org/2001/XMLSchema"
 XML_NS = "http://www.w3.org/XML/1998/namespace"
 TR4 = "http://www.xbrl.org/inlineXBRL/transformation/2020-02-12"
+TR3 = "http://www.xbrl.org/inlineXBRL/transformation/2015-02-26"
 SEC_TR = "http://www.sec.gov/inlineXBRL/transformation/2015-08-31"
 PRESENTATION_REF = "http://www.xbrl.org/2003/role/presentationLinkbaseRef"
 # Numeric fact kinds: inline ix:nonFraction and traditional instance items (xbrl_instance.py).
@@ -238,6 +239,23 @@ def _fixed_zero(_raw):
     return Decimal(0)
 
 
+def _tr3_numdotdecimal(raw):
+    # Registry 3 numdotdecimalType requires groups of three; it is stricter
+    # than Registry 4. Match the entire input, including its fractional part.
+    text = _collapse(raw)
+    if not re.fullmatch(r"[0-9]{1,3}([, \u00a0]?[0-9]{3})*(\.[0-9]+)?", text):
+        raise TransformError("invalid_transform_input", raw)
+    return Decimal(re.sub("[, \u00a0]", "", text))
+
+
+def _tr3_zerodash(raw):
+    # Exact Registry 3 zerodashType enumeration, after XML whitespace collapse.
+    text = _collapse(raw)
+    if len(text) != 1 or text not in "-\u058a\u05be\u2010\u2011\u2012\u2013\u2014\u2015\ufe58\ufe63\uff0d":
+        raise TransformError("invalid_transform_input", raw)
+    return Decimal(0)
+
+
 def _numwords_zero(raw):
     # Only the Filer Manual's zero examples; real number words are not implemented.
     if _collapse(raw).casefold() in ("no", "none"):
@@ -246,6 +264,7 @@ def _numwords_zero(raw):
 
 
 TRANSFORMS = {(TR4, "num-dot-decimal"): _num_dot_decimal, (TR4, "fixed-zero"): _fixed_zero,
+              (TR3, "numdotdecimal"): _tr3_numdotdecimal, (TR3, "zerodash"): _tr3_zerodash,
               (SEC_TR, "numwordsen"): _numwords_zero}
 
 

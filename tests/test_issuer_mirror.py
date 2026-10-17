@@ -244,6 +244,24 @@ class PlanTests(unittest.TestCase):
 
 
 class FetchTests(unittest.TestCase):
+    def test_truncated_html_and_negative_zip_offset_are_reported(self):
+        item = {"filename": "report.htm"}
+        self.assertEqual(mirror.check_payload(item, b"<html><body>cut off</bo", "text/html")[0],
+                         ["html_end_tag_missing_possible_truncation"])
+        self.assertEqual(mirror.check_payload(item, b"<html>complete</html>", "text/html")[0], [])
+        import io
+        import struct
+        import zipfile
+        buffer = io.BytesIO()
+        with zipfile.ZipFile(buffer, "w") as archive:
+            archive.writestr("report.xml", b"<xml/>")
+        data = bytearray(buffer.getvalue())
+        end = data.rfind(b"PK\x05\x06")
+        offset = struct.unpack_from("<I", data, end + 16)[0]
+        struct.pack_into("<I", data, end + 16, offset + 45)
+        self.assertIn("zip_invalid_member_offset",
+                      mirror.check_payload({"filename": "filing.zip"}, bytes(data), "application/zip")[0])
+
     def setUp(self):
         self.routes = base_routes()
         acc, base = "0000050863-24-000124", "https://www.intc.com/filings-reports/all-sec-filings/content/"

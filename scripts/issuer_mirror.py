@@ -500,6 +500,8 @@ def check_payload(item, data, content_type):
             try:
                 with zipfile.ZipFile(io.BytesIO(data)) as zf:
                     members = zf.namelist()
+                    if any(i.header_offset < 0 or i.header_offset >= len(data) for i in zf.infolist()):
+                        problems.append("zip_invalid_member_offset")
                 info["zip_members"] = len(members)
                 info["zip_has_sgml_header"] = any(m.endswith(".txt") for m in members)
             except zipfile.BadZipFile:
@@ -509,6 +511,9 @@ def check_payload(item, data, content_type):
             problems.append(f"unexpected_content_type:{content_type}")
         if b"spr-ir-sec-filings" in data:
             problems.append("index_page_returned_instead_of_document")
+        if name.endswith((".htm", ".html")):
+            if re.search(rb"<html(?:\s|>)", data, re.I) and not re.search(rb"</html\s*>", data, re.I):
+                problems.append("html_end_tag_missing_possible_truncation")
     elif name.endswith(".pdf") and not data.startswith(b"%PDF"):
         problems.append("pdf_magic_missing")
     return problems, info
