@@ -14,4 +14,13 @@
 .venv/bin/python -m scripts.check_history_trader --require-evidence --output artifacts/benchmark-quality/history-tool-check.json
 ```
 
-该命令会保留完整请求、响应、查询和错误；输出路径必须尚不存在。旧 `OllamaTrader` 及其单次调用重放流程保持独立。完整档案编译器、套件 runner 与多轮工具重放仍需接入，不能把一次诊断描述为正式 20 题运行。
+该命令会保留完整请求、响应、查询和错误；输出路径必须尚不存在。旧 `OllamaTrader` 及其单次调用重放流程保持独立。
+
+现有 pilot runner 可通过 `--history-tools` 启用多轮查询，另加 `--require-history-evidence` 才要求先查后读。运行结果保存查询配置，策略 revision 区分工具配置；采样与查询事件写入同一份轨迹。
+
+```sh
+.venv/bin/python -m scripts.run_local_benchmark --pilot --history-tools --require-history-evidence --run-id history-pilot-check
+.venv/bin/python -m scripts.replay_saved_run artifacts/runs/history-pilot-check
+```
+
+离线重放使用保存的模型响应，重新执行每次查询，逐次比较完整模型请求和工具记录，再核对交易报告；不用网络，也不再次调用模型。改变查询结果会导致重放失败。它仍使用不完整的 pilot 数据；完整档案编译器和 20 题套件 runner 尚未接入，不能把流程验证描述为正式成绩。

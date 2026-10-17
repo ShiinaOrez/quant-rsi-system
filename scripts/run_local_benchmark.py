@@ -4,12 +4,14 @@ from pathlib import Path
 from datetime import datetime, timezone
 from decimal import Decimal
 import json
+import hashlib
 import time
 from urllib.request import urlopen
 
 from quant_rsi.adapters.toml_benchmark import load_definition
 from quant_rsi.adapters.frozen_pilot import FrozenPilotMarket
 from quant_rsi.adapters.ollama_trader import OllamaTrader
+from quant_rsi.adapters.ollama_history_trader import OllamaHistoryTrader
 from quant_rsi.adapters.in_memory import ConstantWeightPolicy
 from quant_rsi.adapters.trajectory_store import SQLiteTrajectoryStore, LocalArtifactStore
 from quant_rsi.application.recording import ReplayRecorder, wire
@@ -42,7 +44,13 @@ def run(args):
     require(args.pilot, "incomplete financial archive: explicit --pilot required")
     task = load_definition(args.task)
     market = FrozenPilotMarket(task, args.manifest)
-    policy = OllamaTrader(args.model, args.endpoint,
+    history_enabled = getattr(args, "history_tools", False)
+    require(not getattr(args, "require_history_evidence", False) or history_enabled,
+            "--require-history-evidence requires --history-tools")
+    policy_factory = (lambda *a, **kw: OllamaHistoryTrader(
+        market, *a, require_history_evidence=getattr(args, "require_history_evidence", False), **kw)
+                      if history_enabled else OllamaTrader(*a, **kw))
+    policy = policy_factory(args.model, args.endpoint,
                           mandate={"horizon_sessions": task.horizon_sessions,
                                    "initial_cash": str(task.initial_cash),
                                    "goal": wire(task.goal), "execution": wire(task.execution),
@@ -57,9 +65,17 @@ def run(args):
     output.mkdir(parents=True, exist_ok=False)
     repository = SQLiteTrajectoryStore(args.output / "trajectories.sqlite3")
     artifacts = LocalArtifactStore(args.output / "blobs")
+    history_policy = ({"protocol_revision": policy.protocol_revision,
+                       "max_tool_calls": policy.max_tool_calls,
+                       "max_message_bytes": policy.max_message_bytes,
+                       "require_history_evidence": policy.require_history_evidence}
+                      if history_enabled else None)
+    policy_revision = "ollama:" + args.model + "@" + model["digest"]
+    if history_policy:
+        policy_revision += "/" + hashlib.sha256(json.dumps(history_policy, sort_keys=True).encode()).hexdigest()
     ref = TrajectoryReference(run_id + "-trader", task.task_id, task.split,
                               task.configuration_digest, market.data_digest,
-                              "ollama:" + args.model + "@" + model["digest"])
+                              policy_revision)
 
     def progress(step, event):
         print(json.dumps({"step": step, "total": task.horizon_sessions,
@@ -67,6 +83,8 @@ def run(args):
 
     recorder = ReplayRecorder(ref, run_id, artifacts, progress)
     policy.capture = recorder.sampled
+    if history_enabled:
+        policy.tool_capture = lambda event: recorder.add("history_tool", event)
     started = time.monotonic()
     try:
         report = replay(task, run_id, policy, market, market, observer=recorder)
@@ -93,6 +111,8 @@ def run(args):
               "baselines": wire(baselines), "limitations": market.manifest["limitations"],
               "elapsed_seconds": round(elapsed, 2), "trajectory_id": ref.trajectory_id,
               "rl_training_ready": False}
+    if history_policy:
+        result["history_policy"] = history_policy
     (output / "result.json").write_text(json.dumps(result, indent=2) + "\n")
     artifacts.put((output / "result.json").read_bytes())
     print(json.dumps({"result": str(output / "result.json"), "report": wire(report),
@@ -108,4 +128,6 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, default=Path("artifacts/runs"))
     parser.add_argument("--run-id")
     parser.add_argument("--pilot", action="store_true")
+    parser.add_argument("--history-tools", action="store_true")
+    parser.add_argument("--require-history-evidence", action="store_true")
     run(parser.parse_args())
