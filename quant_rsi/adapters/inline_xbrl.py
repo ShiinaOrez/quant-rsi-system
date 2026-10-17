@@ -198,10 +198,22 @@ def _collapse(text):
     return " ".join(re.split(r"[ \t\r\n]+", text)).strip()
 
 
-def resolve_qname(text, node, root_ns):
-    """Return (qname dict, error code or None). Unprefixed and rebound prefixes are errors."""
+def resolve_qname(text, node, root_ns, *, allow_default=False):
+    """Resolve a QName; unit measures may use the declared default namespace.
+
+    XBRL 2.1 section 4.8.2 uses xsd:QName, including unprefixed names. No namespace
+    is guessed from the word 'shares' or 'pure'. Other call sites remain conservative.
+    """
     value = _collapse(text or "")
     prefix, sep, local = value.partition(":")
+    if not sep and allow_default and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_.-]*", value):
+        uri = node.ns.get("") or None
+        qname = {"qname": value, "namespace": uri, "local_name": value}
+        if uri is None:
+            return qname, "unbound_default_namespace"
+        if root_ns.get("") != uri:
+            return qname, "namespace_default_rebound"
+        return qname, None
     if not sep or not prefix or not local or ":" in local:
         return {"qname": value, "namespace": None, "local_name": None}, "unprefixed_or_malformed_qname"
     uri = node.ns.get(prefix)
@@ -349,8 +361,8 @@ def _issue(code, severity, **fields):
 
 # ---------------------------------------------------------------- contexts, units, roles
 
-def _qn_entry(text, node, root_ns, errors):
-    qname, error = resolve_qname(text, node, root_ns)
+def _qn_entry(text, node, root_ns, errors, *, allow_default=False):
+    qname, error = resolve_qname(text, node, root_ns, allow_default=allow_default)
     if error:
         errors.append({"code": error, "value": qname["qname"], "line": node.line})
     return qname
@@ -404,7 +416,7 @@ def parse_unit(node, root_ns):
     errors = []
 
     def measures(parent):
-        return [_qn_entry(m.text(), m, root_ns, errors) for m in parent.children
+        return [_qn_entry(m.text(), m, root_ns, errors, allow_default=True) for m in parent.children
                 if m.tag == f"{{{XBRLI}}}measure"] if parent is not None else []
 
     divide = node.find(f"{{{XBRLI}}}divide")

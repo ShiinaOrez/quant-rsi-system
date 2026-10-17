@@ -13,6 +13,9 @@
 | 版本化全量索引 | Ian D. Gow 的 2026-09-30 发布已通过完整哈希、大小、行数与 schema 核验；8 家公司截止套件终点共 21,758 行、六类目标表单 2,792 份，比现有存档补充 14,294 行 | 目标表单中 278 份时间戳仍未解决；其余保留上游依据，尚不等于逐份独立验证；需要取得正文与附件 |
 | 申报页面解析 | Claude 完成离线 index 解析器，34 项测试通过；AAPL 真实页面的 Accepted 与新索引换算到 UTC 后一致 | 只核对一份真实新版页面；旧版页面、多发行人申报和 SGML 交叉核验仍需扩展 |
 | 二手语料主文档 | 取得 MSFT 2022 年 10-K 的完整 content 字段，6,215,854 字节，与其文档描述长度一致；抽取 1,819 条事实，1,549 条数值及空值独立核算无差异 | 尚未与 SEC 原始字节核验；metadata_documents 仅列一份主文档，不能认定全部附件齐全；公开时间未绑定 |
+| 批量年报主文档 | 两份完整本地 Parquet 校验后，导出 AAPL 10 份主文档（16,530,888 字节）、AMZN 11 份（25,033,689 字节）；其中 10 份 inline 文档抽取 13,431 条事实 | 其余 11 份旧格式待抽取；60 条数词转换和 2 条 nocontent 转换未支持；传输来源是公开镜像，其指针尚未独立与上游核对；附件和可见时间仍缺 |
+| 官方 IR 财报接口 | Meta 170 行、Amazon 360 行与全量参考索引无单侧缺失，7 行同日歧义保留；199 份可抓取历史 ZIP 已全部取得（META 86、AMZN 113），共 83,215 条事实，数值解析错误为 0；CIK、表单、报告期均与候选参考行一致 | feed 的原始提交 URL 均为空；51 份传统 XML 无法按文件名核对主 HTML；旧 CDN、全部附件、独立 accession 绑定与公开时间仍缺 |
+| 分红证据 | 11 项事件的金额、登记日和支付日均取得保存的发行人原文，补齐 META；正常现金分红的条件规则日期均与供应商匹配 | 推导除息日仍不等于已取得逐项交易所公告；只有日期的发布按既定保守策略处理 |
 | Trader 历史工具 | 本地 Qwen 完成搜索、阅读、决策；pilot runner 可记录多次推理，离线重放重新执行查询并核对完整输入、结果和账务 | 完整档案编译器与正式 20 题套件运行 |
 
 原始字节、请求记录、哈希、失败原因和 Claude 批次保存在被 Git 忽略的 `artifacts/benchmark-quality/`。API key 和原始数据没有放入提交。
@@ -27,6 +30,6 @@
 
 ## 继续补齐的入口
 
-SEC 直连和官方 bulk 在本机返回 403。新的公开版本化索引已补上历史清单来源；公开网页存档和发行人镜像继续用于交叉核对。正在筛选 TeraflopAI 的公开原文库，Dataset Viewer 的截断预览不能作为完整财报。若后续重试 SEC 直连，仍需使用用户明确允许提供给 SEC 的联系邮箱。Supabase 工作仍暂停。
+SEC 直连和官方 bulk 在本机返回 403。新的公开版本化索引已补上历史清单来源；公开网页存档和发行人镜像继续用于交叉核对。已从 TeraflopAI 的公开语料镜像取得两份完整分片，Dataset Viewer 的截断预览不能作为完整财报。Meta、Amazon 的官方 IR feed 已恢复可访问，本轮补齐当前白名单内的全部 199 份 XBRL ZIP。其余五家官方页面复查仍为 403；Claude 第 12 批到达预设轮数上限后退出，仅保留网页存档线索，不记为数据补齐成功。若后续重试 SEC 直连，仍需使用用户明确允许提供给 SEC 的联系邮箱。Supabase 工作仍暂停。
 
-相关实现与操作见 [归档构建](archive-materialization.md)、[公开存档索引](archival-replay.md)、[版本化全量索引](submissions-reference.md)、[页面解析](edgar-index.md)、[财务抽取](financial-extraction.md)、[历史工具](history-trader.md) 和 [三轮迭代协议](quality-iteration.md)。
+相关实现与操作见 [归档构建](archive-materialization.md)、[公开存档索引](archival-replay.md)、[版本化全量索引](submissions-reference.md)、[页面解析](edgar-index.md)、[IR 财报接口](q4-filings.md)、[财务抽取](financial-extraction.md)、[历史工具](history-trader.md) 和 [三轮迭代协议](quality-iteration.md)。

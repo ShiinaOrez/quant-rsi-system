@@ -35,6 +35,7 @@ METADATA_COLUMNS = ("metadata_accession-number", "metadata_filing-date", "metada
                     "metadata_period", "metadata_filer")
 CONTENT_COLUMNS = ("content",) + METADATA_COLUMNS
 DEFAULT_MAX_ROW_GROUP_BYTES = 100_000_000
+MAX_GROUP_TARGETS = 20
 
 _ACCESSION = re.compile(r"[0-9]{10}-[0-9]{2}-[0-9]{6}")
 _PATH = re.compile(r"[A-Za-z0-9][A-Za-z0-9-]{0,31}/[A-Za-z0-9][A-Za-z0-9._-]{0,200}\.parquet")
@@ -208,17 +209,8 @@ def unique_match(rows, reference):
     return hits[0], check_metadata(hits[0], reference)
 
 
-def plan_row_group(footer, file_row_number, columns, max_bytes):
-    """Find the row group holding the row; refuse if its requested chunks exceed max_bytes.
-
-    ``footer`` rows: row_group_id, row_group_num_rows, path_in_schema, total_compressed_size
-    (DuckDB parquet_metadata). Sizes are compressed column-chunk bytes, which DuckDB reads in full
-    for any selected row in that group; HTTP overhead and footer reads are not counted.
-    """
-    if type(max_bytes) is not int or max_bytes <= 0:
-        raise HfEdgarError("bad_max_bytes")
-    if type(file_row_number) is not int or file_row_number < 0:
-        raise HfEdgarError("bad_row_number")
+def _footer_groups(footer):
+    """Validate DuckDB parquet_metadata rows; return [(row_group_id, first_row, rows, sizes)]."""
     groups = {}
     for row_group_id, num_rows, column, size in footer:
         if (type(row_group_id) is not int or row_group_id < 0 or
@@ -229,24 +221,132 @@ def plan_row_group(footer, file_row_number, columns, max_bytes):
         if group["rows"] != num_rows or column in group["columns"]:
             raise HfEdgarError(f"footer_inconsistent:{row_group_id}")
         group["columns"][column] = size
-    start = 0
+    result, start = [], 0
     for row_group_id in sorted(groups):
-        group = groups[row_group_id]
-        if start <= file_row_number < start + group["rows"]:
-            missing = [c for c in columns if c not in group["columns"]]
-            if missing:
-                raise HfEdgarError(f"footer_missing_columns:{missing}")
-            sizes = {c: group["columns"][c] for c in columns}
-            plan = {"row_group_id": row_group_id, "row_group_first_row": start,
-                    "row_group_rows": group["rows"], "compressed_bytes": sizes,
-                    "total_compressed_bytes": sum(sizes.values()), "max_bytes": max_bytes,
-                    "limit_kind": "preflight_column_chunk_estimate_not_network_cap"}
-            if plan["total_compressed_bytes"] > max_bytes:
-                raise HfEdgarError(f"row_group_too_large:{plan['total_compressed_bytes']}"
-                                   f">{max_bytes}")
-            return plan
-        start += group["rows"]
-    raise HfEdgarError(f"row_out_of_range:{file_row_number}>={start}")
+        result.append((row_group_id, start, groups[row_group_id]["rows"],
+                       groups[row_group_id]["columns"]))
+        start += groups[row_group_id]["rows"]
+    return result
+
+
+def _group_plan(group, columns, max_bytes):
+    row_group_id, start, rows, sizes = group
+    missing = [c for c in columns if c not in sizes]
+    if missing:
+        raise HfEdgarError(f"footer_missing_columns:{missing}")
+    chosen = {c: sizes[c] for c in columns}
+    plan = {"row_group_id": row_group_id, "row_group_first_row": start,
+            "row_group_rows": rows, "compressed_bytes": chosen,
+            "total_compressed_bytes": sum(chosen.values()), "max_bytes": max_bytes,
+            "limit_kind": "preflight_column_chunk_estimate_not_network_cap"}
+    if plan["total_compressed_bytes"] > max_bytes:
+        raise HfEdgarError(f"row_group_too_large:{row_group_id}:"
+                           f"{plan['total_compressed_bytes']}>{max_bytes}")
+    return plan
+
+
+def _find_group(groups, file_row_number):
+    if type(file_row_number) is not int or file_row_number < 0:
+        raise HfEdgarError("bad_row_number")
+    for group in groups:
+        if group[1] <= file_row_number < group[1] + group[2]:
+            return group
+    total = groups[-1][1] + groups[-1][2] if groups else 0
+    raise HfEdgarError(f"row_out_of_range:{file_row_number}>={total}")
+
+
+def plan_row_group(footer, file_row_number, columns, max_bytes):
+    """Find the row group holding the row; refuse if its requested chunks exceed max_bytes.
+
+    ``footer`` rows: row_group_id, row_group_num_rows, path_in_schema, total_compressed_size
+    (DuckDB parquet_metadata). Sizes are compressed column-chunk bytes, which DuckDB reads in full
+    for any selected row in that group; HTTP overhead and footer reads are not counted.
+    """
+    if type(max_bytes) is not int or max_bytes <= 0:
+        raise HfEdgarError("bad_max_bytes")
+    return _group_plan(_find_group(_footer_groups(footer), file_row_number), columns, max_bytes)
+
+
+def plan_row_groups(footer, file_row_numbers, columns, max_group_bytes, max_total_bytes):
+    """Plan one read of several rows: each distinct row group is counted once, groups are summed.
+
+    Every group must fit max_group_bytes and the sum must fit max_total_bytes. Like
+    plan_row_group this is a preflight estimate of column chunks, not a network cap.
+    """
+    for value in (max_group_bytes, max_total_bytes):
+        if type(value) is not int or value <= 0:
+            raise HfEdgarError("bad_max_bytes")
+    if not file_row_numbers or len(set(file_row_numbers)) != len(file_row_numbers):
+        raise HfEdgarError("row_numbers_empty_or_duplicate")
+    groups = _footer_groups(footer)
+    by_id, rows = {}, {}
+    for number in file_row_numbers:
+        group = _find_group(groups, number)
+        if group[0] not in by_id:
+            by_id[group[0]] = _group_plan(group, columns, max_group_bytes)
+        rows[number] = group[0]
+    total = sum(plan["total_compressed_bytes"] for plan in by_id.values())
+    if total > max_total_bytes:
+        raise HfEdgarError(f"row_groups_too_large:{total}>{max_total_bytes}")
+    return {"row_groups": [by_id[k] for k in sorted(by_id)], "row_to_group": rows,
+            "total_compressed_bytes": total, "max_group_bytes": max_group_bytes,
+            "max_total_bytes": max_total_bytes,
+            "limit_kind": "preflight_column_chunk_estimate_not_network_cap"}
+
+
+def group_targets(targets, reference_rows):
+    """Validate an explicit target list (<= MAX_GROUP_TARGETS) against the reference rows.
+
+    Each target is {accession, cik, file_row_number}; repeated accessions or row numbers and
+    unknown keys are refused. Returns [(target, reference, primary_document)].
+    """
+    if not isinstance(targets, list) or not 1 <= len(targets) <= MAX_GROUP_TARGETS:
+        raise HfEdgarError(f"targets_count:1..{MAX_GROUP_TARGETS}")
+    result = []
+    for target in targets:
+        if not isinstance(target, dict) or set(target) != {"accession", "cik", "file_row_number"}:
+            raise HfEdgarError(f"bad_target:{target!r}")
+        if type(target["file_row_number"]) is not int or target["file_row_number"] < 0:
+            raise HfEdgarError(f"bad_row_number:{target!r}")
+        reference = reference_from_rows(reference_rows, target["accession"], target["cik"])
+        primary = next(row for row in reference_rows
+                       if row.get("accessionNumber") == target["accession"]
+                       and row.get("cik") == target["cik"]).get("primaryDocument")
+        result.append((target, reference, primary))
+    for key in ("accession", "file_row_number"):
+        values = [t[key] for t, _, _ in result]
+        if len(set(values)) != len(values):
+            raise HfEdgarError(f"duplicate_target_{key}")
+    return result
+
+
+def check_primary_document(documents, primary_document, data):
+    """Compare metadata_documents with the reference primaryDocument and exported length.
+
+    Only a single metadata entry whose filename equals primaryDocument is comparable; its
+    secsgml_size_bytes must equal the exported byte length. This is dataset-internal
+    consistency, not an independent SEC check and says nothing about other attachments.
+    """
+    if not documents.get("present") or not documents.get("json"):
+        return {"status": "not_comparable", "reason": "metadata_documents_absent_or_not_json"}
+    items = [i for i in (documents["parsed"] if isinstance(documents["parsed"], list)
+                         else [documents["parsed"]]) if isinstance(i, dict)]
+    if not isinstance(primary_document, str) or not primary_document:
+        return {"status": "not_comparable", "reason": "reference_primary_document_missing"}
+    hits = [i for i in items if i.get("filename") == primary_document]
+    names = [i.get("filename") for i in items]
+    if len(hits) != 1:
+        raise HfEdgarError(f"primary_document_not_unique_in_metadata:{primary_document!r}:{names}")
+    size = hits[0].get("secsgml_size_bytes")
+    if type(size) is not int:
+        return {"status": "not_comparable", "reason": f"secsgml_size_bytes:{size!r}",
+                "filename": primary_document}
+    if size != len(data):
+        raise HfEdgarError(f"primary_document_size_mismatch:{size}!={len(data)}")
+    return {"status": "consistent_within_dataset", "filename": primary_document,
+            "secsgml_size_bytes": size, "exported_bytes": len(data), "other_metadata_files": len(items) - 1,
+            "scope": "dataset metadata vs reference primaryDocument and exported length; "
+                     "not independent SEC verification; attachments not claimed"}
 
 
 def _write_new(path, data):
@@ -255,8 +355,7 @@ def _write_new(path, data):
         stream.write(data)
 
 
-def export_content(out_dir, origin, reference, row, plan):
-    """Write the content field verbatim as UTF-8 plus a provenance record; never overwrite."""
+def _prepare_export(out_dir, origin, reference, row, plan):
     checked = check_metadata(row, reference)
     if row.get("file_row_number") != origin["file_row_number"]:
         raise HfEdgarError(f"row_number_mismatch:{row.get('file_row_number')!r}")
@@ -278,9 +377,51 @@ def export_content(out_dir, origin, reference, row, plan):
         "text": "not_read; text is a derived field and never substitutes content",
         "accepted_at": None, "ready": False, "agent_visible": False,
         "exported_at": datetime.now(timezone.utc).isoformat()}
+    return target, record, data, provenance
+
+
+def _write_export(target, record, data, provenance):
     _write_new(target, data)
     _write_new(record, (json.dumps(provenance, indent=2, sort_keys=True) + "\n").encode())
-    return provenance
+
+
+def export_content(out_dir, origin, reference, row, plan):
+    """Write the content field verbatim as UTF-8 plus a provenance record; never overwrite."""
+    prepared = _prepare_export(out_dir, origin, reference, row, plan)
+    _write_export(*prepared)
+    return prepared[3]
+
+
+def export_group(out_dir, origins, checked_targets, rows, plan):
+    """Export several rows of one shard; every row is validated before any byte is written.
+
+    ``checked_targets`` comes from group_targets, ``origins`` maps row number to source and
+    ``rows`` is the single content query result. Missing, extra or repeated rows, identity
+    mismatches, primary-document inconsistencies and existing outputs all refuse the whole
+    group. Files are written afterwards; a write error can still leave a partial directory,
+    which is why the CLI writes its group receipt last.
+    """
+    numbers = [row.get("file_row_number") for row in rows]
+    if any(type(number) is not int for number in numbers):
+        raise HfEdgarError(f"content_rows_bad_number:{numbers!r}")
+    wanted = [target["file_row_number"] for target, _, _ in checked_targets]
+    if len(set(numbers)) != len(numbers) or sorted(numbers) != sorted(wanted):
+        raise HfEdgarError(f"content_rows_mismatch:got={sorted(numbers)}"
+                           f",want={sorted(wanted)}")
+    by_number = {row["file_row_number"]: row for row in rows}
+    prepared = []
+    for target, reference, primary in checked_targets:
+        number = target["file_row_number"]
+        group_plan = next(g for g in plan["row_groups"]
+                          if g["row_group_id"] == plan["row_to_group"][number])
+        item = _prepare_export(out_dir, origins[number], reference, by_number[number],
+                               {**group_plan, "shared_group_read": True})
+        item[3]["primary_document_check"] = check_primary_document(
+            item[3]["metadata"]["parsed"]["documents"], primary, item[2])
+        prepared.append(item)
+    for item in prepared:
+        _write_export(*item)
+    return [item[3] for item in prepared]
 
 
 def write_failure(out_dir, name, detail):
@@ -343,6 +484,16 @@ class DuckDBReader:
         if not row_numbers:
             return []
         cols = ", ".join(f'"{c}"' for c in METADATA_COLUMNS)
+        cursor = self.connection.execute(
+            f"SELECT {cols}, file_row_number FROM read_parquet(?, file_row_number=true) "
+            "WHERE list_contains(?, file_row_number) ORDER BY file_row_number",
+            [self._check(url), list(row_numbers)])
+        names = [d[0] for d in cursor.description]
+        return [dict(zip(names, values)) for values in cursor.fetchall()]
+
+    def full_rows(self, url, row_numbers):
+        """One parameterised query for the listed rows' content and metadata (never text)."""
+        cols = ", ".join(f'"{c}"' for c in CONTENT_COLUMNS)
         cursor = self.connection.execute(
             f"SELECT {cols}, file_row_number FROM read_parquet(?, file_row_number=true) "
             "WHERE list_contains(?, file_row_number) ORDER BY file_row_number",

@@ -172,6 +172,36 @@ class Attributes(Base):
 
 
 class Structure(Base):
+    def test_unprefixed_unit_uses_declared_default_namespace(self):
+        resources = RESOURCES.replace('>xbrli:shares<', '>shares<')
+        body = num('1.25', unit='usdPerShare')
+        for namespace in (ix.XBRLI, 'urn:custom:units'):
+            with self.subTest(namespace=namespace):
+                raw = instance(body, resources=resources).replace(
+                    b'<xbrli:xbrl ', f'<xbrli:xbrl xmlns="{namespace}" '.encode(), 1)
+                result = self.run_zip({'t-20121229.xml': raw})
+                fact = result['documents'][0]['facts'][0]
+                self.assertEqual((fact['status'], fact['value']), ('ok', '1.25'))
+                measure = fact['unit']['denominator'][0]
+                self.assertEqual((measure['namespace'], measure['local_name']), (namespace, 'shares'))
+
+    def test_unprefixed_unit_without_binding_stays_error(self):
+        resources = RESOURCES.replace('>xbrli:shares<', '>shares<')
+        facts, result = self.facts(num('1.25', unit='usdPerShare'), resources=resources)
+        self.assertEqual((facts['f1']['status'], facts['f1']['value']), ('error', None))
+        self.assertEqual(facts['f1']['raw_text'], '1.25')
+        self.assertIn('unbound_default_namespace', str(result['documents'][0]['units']['usdPerShare']['errors']))
+
+    def test_local_default_rebinding_stays_conservative(self):
+        resources = RESOURCES.replace('<xbrli:measure>xbrli:shares',
+                                     '<xbrli:measure xmlns="urn:local">shares')
+        raw = instance(num('1.25', unit='usdPerShare'), resources=resources).replace(
+            b'<xbrli:xbrl ', f'<xbrli:xbrl xmlns="{ix.XBRLI}" '.encode(), 1)
+        result = self.run_zip({'t-20121229.xml': raw})
+        fact = result['documents'][0]['facts'][0]
+        self.assertEqual(fact['status'], 'error')
+        self.assertIn('namespace_default_rebound', str(result['documents'][0]['units']['usdPerShare']['errors']))
+
     def test_dimensions_units_periods(self):
         body = (num("10", fid="seg", ctx_ref="c-seg") + num("1.25", fid="eps", concept="us-gaap:EarningsPerShareBasic",
                                                             ctx_ref="c-d", unit="usdPerShare", extra='decimals="2"'))

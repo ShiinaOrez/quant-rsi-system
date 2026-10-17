@@ -271,5 +271,161 @@ class CliTests(unittest.TestCase):
                                    "--form", "10-K"]), 0)
 
 
+GPATH = "10-K/g-1.parquet"
+GROUP_ACCS = [f"0001018724-2{i}-00000{i}" for i in range(5)]
+GROUP_REFS = [{"accessionNumber": a, "cik": 1018724, "form": "10-K",
+               "filingDate": f"202{i}-02-0{i + 1}", "primaryDocument": f"amzn-202{i}.htm"}
+              for i, a in enumerate(GROUP_ACCS)]
+GROUP_FOOTER = [(g, 100, c, 1000 if c != "content" else size)
+                for g, size in ((0, 50_000), (1, 70_000)) for c in hf.CONTENT_COLUMNS]
+
+
+def group_row(i, number=None, content=None, **changes):
+    filer = {"company-data": {"cik": "0001018724"}, "filing-values": {"form-type": "10-K"}}
+    body = content if content is not None else f"<html>AMZN {i}\r\n caf\u00e9</html>"
+    docs = [{"filename": f"amzn-202{i}.htm", "secsgml_size_bytes": len(body.encode()),
+             "type": "10-K", "sequence": "1", "description": "10-K"}]
+    row = {"metadata_accession-number": GROUP_ACCS[i], "metadata_filing-date": f"202{i}020{i + 1}",
+           "metadata_documents": json.dumps(docs), "metadata_period": None,
+           "metadata_filer": json.dumps(filer), "file_row_number": 126 + i if number is None else number,
+           "content": body}
+    row.update(changes)
+    return row
+
+
+class GroupReader:
+    def __init__(self, rows):
+        self.rows, self.calls = rows, []
+
+    def metadata(self, url, numbers):
+        self.calls.append(("metadata", tuple(numbers)))
+        return [{k: v for k, v in r.items() if k != "content"} for r in self.rows
+                if r["file_row_number"] in numbers]
+
+    def footer(self, url):
+        self.calls.append(("footer", None))
+        return GROUP_FOOTER
+
+    def full_rows(self, url, numbers):
+        self.calls.append(("full_rows", tuple(numbers)))
+        return [r for r in self.rows if r["file_row_number"] in numbers]
+
+
+class GroupPlanTests(unittest.TestCase):
+    def test_same_group_counted_once_groups_summed(self):
+        plan = hf.plan_row_groups(GROUP_FOOTER, [10, 20, 30], hf.CONTENT_COLUMNS, 60_000, 60_000)
+        self.assertEqual(plan["total_compressed_bytes"], 55_000)
+        self.assertEqual([g["row_group_id"] for g in plan["row_groups"]], [0])
+        plan = hf.plan_row_groups(GROUP_FOOTER, [10, 150], hf.CONTENT_COLUMNS, 80_000, 200_000)
+        self.assertEqual(plan["total_compressed_bytes"], 55_000 + 75_000)
+        with self.assertRaisesRegex(hf.HfEdgarError, "row_groups_too_large"):
+            hf.plan_row_groups(GROUP_FOOTER, [10, 150], hf.CONTENT_COLUMNS, 80_000, 129_999)
+        with self.assertRaisesRegex(hf.HfEdgarError, "row_group_too_large"):
+            hf.plan_row_groups(GROUP_FOOTER, [150], hf.CONTENT_COLUMNS, 60_000, 10 ** 9)
+        for rows in ([], [1, 1], [200]):
+            with self.assertRaises(hf.HfEdgarError):
+                hf.plan_row_groups(GROUP_FOOTER, rows, hf.CONTENT_COLUMNS, 10 ** 9, 10 ** 9)
+
+    def test_targets_validated_and_duplicates_refused(self):
+        targets = [{"accession": a, "cik": 1018724, "file_row_number": 126 + i}
+                   for i, a in enumerate(GROUP_ACCS)]
+        self.assertEqual(len(hf.group_targets(targets, GROUP_REFS)), 5)
+        bad = {"dup_acc": targets + [{**targets[0], "file_row_number": 1}],
+               "dup_row": targets[:2] + [{**targets[2], "file_row_number": 126}],
+               "wrong_cik": [{**targets[0], "cik": 320193}],
+               "extra_key": [{**targets[0], "form": "10-K"}],
+               "too_many": targets * 5, "empty": []}
+        for name, value in bad.items():
+            with self.subTest(name), self.assertRaises(hf.HfEdgarError):
+                hf.group_targets(value, GROUP_REFS)
+
+    def test_primary_document_check(self):
+        docs = hf.describe_documents(json.dumps([{"filename": "a.htm", "secsgml_size_bytes": 3}]))
+        self.assertEqual(hf.check_primary_document(docs, "a.htm", b"abc")["status"],
+                         "consistent_within_dataset")
+        for name, data in (("b.htm", b"abc"), ("a.htm", b"abcd")):
+            with self.assertRaises(hf.HfEdgarError):
+                hf.check_primary_document(docs, name, data)
+        self.assertEqual(hf.check_primary_document({"present": False}, "a.htm", b"")["status"],
+                         "not_comparable")
+
+
+class GroupCliTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self.tmp.name)
+        self.manifest = self.dir / "manifest.json"
+        self.manifest.write_bytes(manifest_bytes(paths=(PATH, GPATH)))
+        self.reference = self.dir / "all.jsonl"
+        self.reference.write_text("".join(json.dumps(r) + "\n" for r in GROUP_REFS))
+        self.targets = [{"accession": a, "cik": 1018724, "file_row_number": 126 + i}
+                        for i, a in enumerate(GROUP_ACCS)]
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def run_group(self, reader, out, targets=None, total="200000"):
+        path = self.dir / f"targets-{len(list(self.dir.glob('targets-*')))}.json"
+        path.write_text(json.dumps(self.targets if targets is None else targets))
+        return cli.main(["extract-group", "--manifest", str(self.manifest), "--path", GPATH,
+                         "--reference", str(self.reference), "--targets", str(path),
+                         "--out", str(out), "--max-total-bytes", total],
+                        reader_factory=lambda t, r: reader)
+
+    def test_five_rows_one_group_one_content_query_verbatim(self):
+        rows = [group_row(i) for i in range(5)]
+        reader, out = GroupReader(rows), self.dir / "out"
+        self.assertEqual(self.run_group(reader, out), 0)
+        self.assertEqual([c[0] for c in reader.calls], ["metadata", "footer", "full_rows"])
+        for i, row in enumerate(rows):
+            data = (out / f"{GROUP_ACCS[i]}.content").read_bytes()
+            self.assertEqual(data, row["content"].encode("utf-8"))
+            record = json.loads((out / f"{GROUP_ACCS[i]}.content.provenance.json").read_bytes())
+            self.assertEqual(record["metadata"]["raw"]["metadata_filer"], row["metadata_filer"])
+            self.assertEqual(record["primary_document_check"]["status"], "consistent_within_dataset")
+            self.assertEqual(record["row_group_plan"]["row_group_id"], 1)
+        receipt = json.loads(next(out.glob("group-*.json")).read_bytes())
+        self.assertEqual((receipt["status"], receipt["content_queries"]), ("ok", 1))
+        self.assertEqual(receipt["plan"]["total_compressed_bytes"], 75_000)
+        # second run refuses to overwrite before any network read
+        again = GroupReader(rows)
+        self.assertEqual(self.run_group(again, out), 1)
+        self.assertEqual(again.calls, [])
+
+    def test_failures_write_nothing(self):
+        cases = {
+            "missing_row": ([group_row(i) for i in range(4)], None, "metadata"),
+            "wrong_cik": ([group_row(i) for i in range(4)] + [group_row(4, metadata_filer=json.dumps(
+                {"company-data": {"cik": "0000320193"}, "filing-values": {"form-type": "10-K"}}))],
+                None, "metadata"),
+            "wrong_form": ([group_row(i) for i in range(4)] + [group_row(4, metadata_filer=json.dumps(
+                {"company-data": {"cik": "0001018724"}, "filing-values": {"form-type": "10-K/A"}}))],
+                None, "metadata"),
+            "bad_date": ([group_row(i) for i in range(4)] + [group_row(
+                4, **{"metadata_filing-date": "20240206"})], None, "metadata"),
+            "size_mismatch": ([group_row(i) for i in range(4)] + [group_row(
+                4, metadata_documents=json.dumps([{"filename": "amzn-2024.htm",
+                                                   "secsgml_size_bytes": 1}]))], None, "full_rows"),
+            "over_budget": ([group_row(i) for i in range(5)], "74999", "footer"),
+        }
+        for name, (rows, total, last) in cases.items():
+            with self.subTest(name):
+                reader, out = GroupReader(rows), self.dir / name
+                self.assertEqual(self.run_group(reader, out, total=total or "200000"), 1)
+                self.assertEqual(reader.calls[-1][0], last)
+                self.assertEqual(list(out.glob("*.content")), [])
+                self.assertEqual(list(out.glob("group-*.json")), [])
+                self.assertEqual(len(list(out.glob("failure-group-*.json"))), 1)
+                failure = json.loads(next(out.glob("failure-group-*.json")).read_bytes())
+                self.assertFalse(failure["content_written"])
+                self.assertEqual(failure["content_files_present"], [])
+
+    def test_duplicate_targets_refused_offline(self):
+        reader = GroupReader([group_row(i) for i in range(5)])
+        dup = self.targets + [dict(self.targets[0])]
+        self.assertEqual(self.run_group(reader, self.dir / "d", targets=dup), 1)
+        self.assertEqual(reader.calls, [])
+
+
 if __name__ == "__main__":
     unittest.main()

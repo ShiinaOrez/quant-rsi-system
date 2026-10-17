@@ -43,7 +43,7 @@
   - TR3（2015-02-26）的 `numdotdecimal`、`zerodash`：分别按三位整数分组规则解析数值，或将规范列出的单个破折号转为零；不复用 TR4 较宽松的分组规则。规则来源：[XBRL Registry 3，含 2019-04-17 勘误](https://www.xbrl.org/Specification/inlineXBRL-transformationRegistry/REC-2015-02-26%2Berrata-2019-04-17/inlineXBRL-transformationRegistry-REC-2015-02-26%2Bcorrected-errata-2019-04-17.html)。
   - `ixt-sec:numwordsen`：只接受 `no` 和 `none`，得 0。EDGAR Filer Manual Vol. II 的示例中，这两个词都输出 0。
 - 其余 format 记为 `unsupported_format`，其余英文数词记为 `unsupported_transform_input`，都保留原文。同名转换必须匹配 namespace，未验证的 TR1/TR2 不自动作为别名接受。
-- QName 必须带前缀。前缀未绑定，或者被重新绑定到与根元素不同的 namespace，都记为错误。
+- concept、format 和维度的 QName 目前要求带前缀；前缀未绑定或在局部重新绑定都记为错误。unit measure 另按下述规则支持默认命名空间。
 - 缺失或无效的 context/unit、重复的资源 ID 都是错误。ix:fraction 和 ix:tuple 记为不支持。
 - nonNumeric 按 continuation 链拼接文本，并剔除 `ix:exclude`。带 format 的 nonNumeric（日期、布尔值等）不做转换：状态为 `raw_only`，值为 null。
 
@@ -100,6 +100,14 @@
 - `inline_xbrl.py` 只做了几处小改：增加 `NUMERIC_KINDS`，让重复组和跨申报比较也认 `numericItem`；跨申报 `us_gaap_local_name` 口径和 `extract_financials.py` 增加识别 `http://fasb.org/us-gaap/YYYY-01-31`（2011–2018）和 `http://xbrl.us/us-gaap/2009-01-31`。
 - 重复组里的 inconsistent 也包括只差舍入的情况，例如同一事实的 4482000000（decimals=-6）和 4500000000（decimals=-8）。按 §4.6.6 这类值在精度范围内可能一致，但这里不判断，只报告。
 - Intel 2013-07 到 2019-02 的 instance 用 `NetCashProvidedByUsedInOperatingActivitiesContinuingOperations` 报经营现金流。summary 把它作为独立 concept 列出，不与 `NetCashProvidedByUsedInOperatingActivities` 合并。
+
+## unit measure 的默认命名空间
+
+XBRL 2.1 §4.8.2 把 measure 定义为 `xsd:QName`。[XML Schema §3.15.3](https://www.w3.org/TR/xmlschema-1/#src-qname) 规定无前缀的 QName 使用作用域内的默认命名空间。因此根元素声明 `xmlns="http://www.xbrl.org/2003/instance"` 时，`<measure>shares</measure>` 与带 `xbrli:` 前缀的写法可指向同一单位。
+
+解析器只使用实际声明，不从 `shares` 或 `pure` 猜命名空间；缺少默认绑定仍记错误，局部重绑定仍按既有保守策略拒绝。默认绑定为其他 URI 时保留该 URI，不冒充 XBRL 单位；taxonomy 合法性尚未校验。此修复用于共享 unit 解析，不放宽其他 QName 调用点。
+
+2026-10-17 重跑 Meta、Amazon 的 6 份官方 IR ZIP 样本，数值错误从 700 条降为 0。另用 ElementTree 和 Decimal 独立核算 5,729 条数值事实及 5,873 个单位组成，无差异；6 份的 CIK、表单、报告期和主文档名均与候选索引一致。修复前后的产物分别保留在 `artifacts/benchmark-quality/claude/batch-11/q4/` 和 `q4-parent-unitfix-v1/`；accession 仍为候选，公开时间仍为空。
 
 ## 已知缺口
 

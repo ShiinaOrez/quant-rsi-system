@@ -5,7 +5,9 @@ Subcommands (none starts a full-corpus job):
   scan         serial metadata scan of at most --max-shards shards, one receipt per shard,
                >=1 s between network shards, stops at the first error;
   locate       find one accession in one shard and check it against the reference row;
-  extract      footer preflight, then read one explicitly located row's content and save it.
+  extract      footer preflight, then read one explicitly located row's content and save it;
+  extract-group  read up to 20 explicitly located rows of one shard with one content query,
+               after checking all identities and the summed per-row-group preflight.
 
 Output never overwrites existing files. Network/read failures leave failure-*.json;
 validation failures are reported on stderr. Both exit 1.
@@ -179,6 +181,68 @@ def cmd_extract(args, reader_factory):
     return 0
 
 
+def cmd_extract_group(args, reader_factory):
+    manifest = _manifest(args.manifest)
+    rows, ref_info = _references(args.reference)
+    targets_data = Path(args.targets).read_bytes()
+    checked = hf.group_targets(json.loads(targets_data), rows)
+    numbers = [target["file_row_number"] for target, _, _ in checked]
+    origins = {n: dict(hf.source(manifest, args.path, n), reference_file=ref_info) for n in numbers}
+    url = hf.resolve_url(manifest, args.path)
+    out = _own_dir(args.out)
+    if bool(args.local_parquet) != bool(args.transfer_receipt):
+        raise hf.HfEdgarError("local_parquet_and_transfer_receipt_required_together")
+    for _, reference, _ in checked:
+        for name in (f"{reference['accession']}.content",
+                     f"{reference['accession']}.content.provenance.json"):
+            if (out / name).exists():
+                raise hf.HfEdgarError(f"output_exists:{out / name}")
+    stage, started, plan = "metadata", time.monotonic(), None
+    try:
+        if args.local_parquet:
+            from quant_rsi.adapters.local_parquet import LocalParquetReader
+            reader = LocalParquetReader(args.local_parquet, args.transfer_receipt, args.path)
+            origins = {n: dict(origin, transport=reader.transport_evidence)
+                       for n, origin in origins.items()}
+        else:
+            reader = reader_factory(args.timeout, args.retries)
+        meta = reader.metadata(url, numbers)
+        if sorted(r.get("file_row_number") for r in meta) != sorted(numbers):
+            raise hf.HfEdgarError(f"metadata_rows_mismatch:{[r.get('file_row_number') for r in meta]}")
+        by_number = {r["file_row_number"]: r for r in meta}
+        for target, reference, _ in checked:
+            hf.check_metadata(by_number[target["file_row_number"]], reference)
+        stage = "footer"
+        plan = hf.plan_row_groups(reader.footer(url), numbers, hf.CONTENT_COLUMNS,
+                                  args.max_row_group_bytes, args.max_total_bytes)
+        stage = "content"
+        content_rows = reader.full_rows(url, numbers)
+        stage = "export"
+        records = hf.export_group(out, origins, checked, content_rows, plan)
+    except Exception as error:
+        present = [f"{reference['accession']}.content" for _, reference, _ in checked
+                   if (out / f"{reference['accession']}.content").exists()]
+        hf.write_failure(out, f"group-{Path(args.path).stem}", {
+            "stage": stage, "path": args.path, "url": url, "targets_sha256": hf.sha256(targets_data),
+            "row_numbers": numbers, "plan": plan, "error": repr(error),
+            "elapsed": time.monotonic() - started, "content_written": bool(present),
+            "content_files_present": present, "export_stage_entered": stage == "export"})
+        raise
+    stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
+    summary = [{"accession": r["reference"]["accession"], "file_row_number":
+                r["source"]["file_row_number"], "file": r["content"]["file"],
+                "bytes": r["content"]["bytes"], "sha256": r["content"]["sha256"],
+                "primary_document_check": r["primary_document_check"]["status"]} for r in records]
+    _emit(out / f"group-{Path(args.path).stem}-{stamp}.json", {
+        "schema": hf.SCHEMA, "status": "ok", "revision": hf.REVISION, "path": args.path,
+        "url": url, "manifest_sha256": manifest["manifest_sha256"], "reference": ref_info,
+        "targets": {"file": str(args.targets), "sha256": hf.sha256(targets_data)},
+        "plan": plan, "content_queries": 1, "exported": summary,
+        "elapsed": time.monotonic() - started, "accepted_at": None, "ready": False})
+    print(json.dumps({"status": "ok", "exported": summary}, indent=2))
+    return 0
+
+
 def _duckdb_reader(timeout, retries):
     return hf.DuckDBReader(timeout=timeout, retries=retries)
 
@@ -218,6 +282,19 @@ def parser():
         network(command)
         if name == "extract":
             command.add_argument("--row-number", type=int, required=True)
+    group = sub.add_parser("extract-group")
+    group.add_argument("--manifest", required=True)
+    group.add_argument("--path", required=True)
+    group.add_argument("--reference", required=True)
+    group.add_argument("--targets", required=True,
+                       help="JSON list of {accession, cik, file_row_number}, at most 20")
+    group.add_argument("--out", required=True)
+    group.add_argument("--local-parquet", help="explicit complete local Parquet; no network reads")
+    group.add_argument("--transfer-receipt", help="binds local bytes, mirror URL, SHA-256 and size")
+    group.add_argument("--max-row-group-bytes", type=int, default=hf.DEFAULT_MAX_ROW_GROUP_BYTES)
+    group.add_argument("--max-total-bytes", type=int, required=True,
+                       help="sum over distinct row groups; preflight estimate, not a network cap")
+    network(group)
     return root
 
 
@@ -226,8 +303,8 @@ def main(argv=None, reader_factory=_duckdb_reader):
     try:
         if args.command == "list-shards":
             return cmd_list(args)
-        return {"scan": cmd_scan, "locate": cmd_locate,
-                "extract": cmd_extract}[args.command](args, reader_factory)
+        return {"scan": cmd_scan, "locate": cmd_locate, "extract": cmd_extract,
+                "extract-group": cmd_extract_group}[args.command](args, reader_factory)
     except Exception as error:
         print(json.dumps({"status": "error", "error": repr(error)}), file=sys.stderr)
         return 1
