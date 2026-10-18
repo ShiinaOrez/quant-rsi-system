@@ -153,3 +153,11 @@ FY2023 的较早捕获完整下载后只有 1,048,576 字节，虽与其 CDX dig
 FY2022、FY2024 与此前公开存档的完整实例逐条核对 fact ID、concept QName、contextRef、期间、发行人、显式维度、单位和 Decimal，合计 2,896 条非空数值及四条 nil 相符。跨来源有 321 条显式维度排列差异、400 条单位 QName 显示前缀差异，二者有重叠；原始结果保留。比较时只对同一 segment/scenario 内无重复轴的显式成员集合忽略排列顺序，单位按已解析的命名空间和本地名比较；不改写事实，也不推断默认成员或 typed dimension 等价性。该范围依据 [XBRL Dimensions REC §3.2](https://xbrl.org/specification/dimensions/rec-2012-01-25/dimensions-rec-2006-09-18%2Bcorrected-errata-2012-01-25-clean.html) 和 [XBRL 2.1 §4.8.2](https://www.xbrl.org/Specification/XBRL-2.1/REC-2003-12-31/XBRL-2.1-REC-2003-12-31+corrected-errata-2013-02-20.html)。这只是声明范围内的跨实例对照，不是完整 c-equal 校验。
 
 父进程的源与事实报告在 `claude/batch-19/parent-review/`；FY2020、FY2021、FY2023 尚无独立实例对照，所有公开时间仍为空。FY2024 继续按先前限制排除在当前 MU 题目窗口之外。
+
+## NVIDIA 数值子集复核（2026-10-19）
+
+第 20 批的 21 份正文中，五份 inline 财报共抽取 6,671 条事实；5,891 条数值事实中 5,880 条 ok、9 条 nil、2 条 error。两条错误均在 FY2020，格式为 TR3 `nocontent`，保留空原文与错误，不替换为零。16 份旧格式未进行结构化抽取。申报日期已正确读取 `reference.filing_date`，所有可见时间仍为空。
+
+Claude 用独立的 ElementTree 命名空间作用域跟踪和 Decimal 计算核对明确子集：唯一 fact ID、无子元素、非嵌套、非 exclude、非 nil 的 nonFraction，格式限于未指定、TR4 num-dot-decimal/fixed-zero 和 TR3 numdotdecimal/zerodash，再按 scale/sign 计算。父进程审阅该函数，并隔离其输出写入主程序后对实际原文和事实文件复跑，5,756 条数值无差异。其余按原始 nil 属性跳过 11 条（其中两条因不支持格式在生产解析中为 error）、数词转换 18 条、带子元素 55 条、嵌套子事实 51 条，未声称这些均通过独立数值校验。
+
+同一独立核对还在相同发行人、同一无维度时点、相同 us-gaap namespace、单一 USD 单位下比较 Assets 与 LiabilitiesAndStockholdersEquity，十项均相等；不等同于三表或 taxonomy 校验。原始与复跑结果分别位于 `claude/batch-20/parsed/`、`parent-review/`，来源清单见 [NVIDIA 主文档](../../configs/data-sources/nvda-hf-annual-20261019.toml)。
