@@ -94,3 +94,9 @@ AAPL 分片也已取得：686,530,700 字节，SHA-256 `d7385e1240db300741261a94
 ## 公开镜像的后续定位（2026-10-19）
 
 固定 revision 的公开镜像可以按列投影读取 accession。第一批加试读共检查 17 个此前未成功保存的分片、26,583 行，命中参考索引中的 25 份年报候选（MSFT 7、MU 3、AAPL 3、META 12）。结果保存在 `mirror-metadata-pilot-v1/`、`mirror-metadata-scan-v1/` 和 `mirror-locator-summary-v1.json`。这里只核对 accession 列，尚未重读 filer/form/date 或取得正文；不计为新增财报覆盖，也没有放宽生产适配器的源白名单。后续批次另存回执，不覆盖这些结果。
+
+后续串行扫描已覆盖全部 149 个 10-K 分片，也补查了早先主站失败的两份分片。参考索引截止 2024-10-04 的八家发行人共 187 份年报，定位到 186 份，无重复 accession 位置；唯一未定位者为 MSFT 的 `0000891020-95-000433`（1995-09-25 提交、报告期 1995-06-30）。这只说明该 accession 未出现在此次扫描的 accession 列，不据此认定申报不存在或别的来源也不可得。
+
+[固定行号清单](../../configs/data-sources/hf-annual-locators-20261019.toml)记录全部 186 个位置及逐发行人覆盖。61 个旧缓存位置的 CIK、表单和申报日期已重新与参考索引比对；另外读回 NVDA 的 22 个镜像元数据行，同样全部匹配，因此身份核对总计 83 份，包含 NVDA 的全部 23 份。其余位置仍只有 accession 匹配，提取时必须重新校验元数据，不能跳过既有 adapter 的身份与正文长度检查。
+
+完整定位回执在 `mirror-metadata-scan-v2/` 至 `mirror-metadata-scan-v4/`，NVDA 元数据原文在 `nvda-mirror-identity-v1/`，合并覆盖表在 `annual-locator-coverage-v1.json`。后续分片没有因此被标为已经完整下载，新增正文覆盖仍仅按成功导出的实际文件计数。

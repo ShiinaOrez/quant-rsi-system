@@ -133,3 +133,15 @@ XBRL 2.1 §4.8.2 把 measure 定义为 `xsd:QName`。[XML Schema §3.15.3](https
 源版本与哈希见 [Micron 实例清单](../../configs/data-sources/mu-archived-instance-20261019.toml)。下载、分段校验与抽取产物在 `artifacts/benchmark-quality/mu-archive-instance-retry-v1/`。存档捕获时间晚于财报申报时间，不用它补写历史 `available_at`；正式题目仍不开放这些事实。
 
 Claude 第 17 批还取得该申报的 schema 和 definition linkbase，父进程复核摘要与安全 XML 根元素通过。标为 PRE 的链接却返回与 schema 完全相同的字节；CAL 链接的截断内容为 label linkbase，不能按链接文字当作对应文件。错误映射与超时均保留，未据此绑定展示角色或声称三表结构齐全。
+
+该份年报申报于 2024-10-04，晚于现有三道 MU 题目的交易窗口，因此仅作归档与解析验证，不能用于填充那些窗口的可见信息。后续优先补 FY2022/FY2023 历史申报；本条来源覆盖不增加题目 ready 数。
+
+## Micron FY2022 与 FY2023（2026-10-19）
+
+第 18 批优先补历史窗口相关的两年年报。FY2022 实例通过一段 200 GET 与一段严格核对 Content-Range 的 206 响应取得；完整 2,791,127 字节与 CDX digest 一致。父进程重新校验每段、拼接结果和整体摘要后，用安全 XML 解析器得到 1,628 条事实；数值为 1,449 条 ok、2 条 nil、0 条 error。另用 ElementTree 与 Decimal 独立核算全部 1,449 条非空数值，无差异。全部 405 个 context 的 CIK 一致，DEI 表单与报告期也与参考记录相符。保存一条未加载 schema 的提示，不声称 taxonomy 或三表角色校验已完成。
+
+[固定来源清单](../../configs/data-sources/mu-fy2022-archived-instance-20261019.toml)保留实际捕获地址和字节摘要；原始分段、组装回执及父进程抽取在 `artifacts/benchmark-quality/claude/batch-18/`。捕获时间晚于原申报，`available_at` 仍为空。
+
+FY2023 的较早捕获完整下载后只有 1,048,576 字节，虽与其 CDX digest 相符，但 XML 在正文中间结束，不能当完整财报。较晚捕获最初取得 1,671,168 字节后超时；随后原捕获与 revisit 捕获之间出现 302 循环，父进程复查也未恢复。两份前缀的前 1 MiB 一致，只作为错误证据，不输出正式事实。来源截断与传输截断分开记录，存档哈希一致不替代文档完整性校验。
+
+另对已取得的 FY2022、FY2024 实例各核对两个无维度时点的 Assets 与 LiabilitiesAndStockholdersEquity，四项均相等；key facts 与上下文保留在各自父进程目录的 `key-facts-review.json`。这只是单项恒等式检查，不代替三表、维度或 taxonomy 校验。

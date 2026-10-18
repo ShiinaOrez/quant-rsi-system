@@ -1,0 +1,1735 @@
+schema = "annual-corpus-locators.v1"
+dataset = "TeraflopAI/SEC-EDGAR"
+revision = "43de32c4c3cd4a56c26757345a4ec6db04fccda0"
+form = "10-K"
+reference_index_release = "2026-09-30"
+reference_cutoff = "2024-10-04"
+total_corpus_shards = 149
+successful_shards_scanned = 149
+reference_annuals = 187
+located_unique_accessions = 186
+scope = "row locators; does not establish financial body, attachments, SEC byte identity or publication"
+metadata_identity_check_required_on_extract = true
+ready = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000320193-17-000070"
+filing_date = "2017-11-03"
+parquet_path = "10-K/5cf888c1-f237-4e9d-9cf0-34ef9d7c3780-79.parquet"
+file_row_number = 358
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000320193-18-000145"
+filing_date = "2018-11-05"
+parquet_path = "10-K/5cf888c1-f237-4e9d-9cf0-34ef9d7c3780-79.parquet"
+file_row_number = 359
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000320193-19-000119"
+filing_date = "2019-10-31"
+parquet_path = "10-K/5cf888c1-f237-4e9d-9cf0-34ef9d7c3780-79.parquet"
+file_row_number = 360
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000320193-20-000096"
+filing_date = "2020-10-30"
+parquet_path = "10-K/5cf888c1-f237-4e9d-9cf0-34ef9d7c3780-79.parquet"
+file_row_number = 361
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000320193-21-000105"
+filing_date = "2021-10-29"
+parquet_path = "10-K/5cf888c1-f237-4e9d-9cf0-34ef9d7c3780-79.parquet"
+file_row_number = 362
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000320193-22-000108"
+filing_date = "2022-10-28"
+parquet_path = "10-K/5cf888c1-f237-4e9d-9cf0-34ef9d7c3780-79.parquet"
+file_row_number = 363
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000320193-23-000106"
+filing_date = "2023-11-03"
+parquet_path = "10-K/5cf888c1-f237-4e9d-9cf0-34ef9d7c3780-79.parquet"
+file_row_number = 364
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000320193-94-000016"
+filing_date = "1994-12-13"
+parquet_path = "10-K/5cf888c1-f237-4e9d-9cf0-34ef9d7c3780-79.parquet"
+file_row_number = 366
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000320193-95-000016"
+filing_date = "1995-12-19"
+parquet_path = "10-K/5cf888c1-f237-4e9d-9cf0-34ef9d7c3780-79.parquet"
+file_row_number = 367
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000320193-96-000023"
+filing_date = "1996-12-19"
+parquet_path = "10-K/5cf888c1-f237-4e9d-9cf0-34ef9d7c3780-79.parquet"
+file_row_number = 368
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000912057-00-053623"
+filing_date = "2000-12-14"
+parquet_path = "10-K/da5202b6-603e-4fea-8360-2ae221b1f03e-74.parquet"
+file_row_number = 703
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0000912057-99-010244"
+filing_date = "1999-12-22"
+parquet_path = "10-K/ba09b170-1cb1-4108-abcd-7c12ba3ab2b9-95.parquet"
+file_row_number = 1226
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001047469-02-007674"
+filing_date = "2002-12-19"
+parquet_path = "10-K/520e7ad1-e287-436f-8c8a-730502ee9b06-43.parquet"
+file_row_number = 1201
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001047469-03-041604"
+filing_date = "2003-12-19"
+parquet_path = "10-K/7b6726f0-607d-4b88-8c89-39dfeae2e962-48.parquet"
+file_row_number = 731
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001047469-04-035975"
+filing_date = "2004-12-03"
+parquet_path = "10-K/967d2f8a-fb72-4309-9aea-7affcd9147df-100.parquet"
+file_row_number = 1608
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001047469-07-009340"
+filing_date = "2007-11-15"
+parquet_path = "10-K/53bc4a3d-ccca-4fbb-8df0-3697100322f7-94.parquet"
+file_row_number = 277
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001047469-97-006960"
+filing_date = "1997-12-05"
+parquet_path = "10-K/d2c896dd-4548-4900-843f-fd0b86174b71-21.parquet"
+file_row_number = 70
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001104659-05-058421"
+filing_date = "2005-12-01"
+parquet_path = "10-K/ddbc28bc-2957-4fd7-b8fe-cd966b941083-126.parquet"
+file_row_number = 476
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001104659-06-084288"
+filing_date = "2006-12-29"
+parquet_path = "10-K/04105537-e466-46cf-b307-7ed127311cfa-60.parquet"
+file_row_number = 875
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001193125-08-224958"
+filing_date = "2008-11-05"
+parquet_path = "10-K/cb6d70ee-9431-4901-8cb7-0c6cc13790bd-112.parquet"
+file_row_number = 114
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001193125-09-214859"
+filing_date = "2009-10-27"
+parquet_path = "10-K/bc44a4a5-2bba-4012-9f14-0ac4fdb8c0f3-12.parquet"
+file_row_number = 743
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001193125-10-238044"
+filing_date = "2010-10-27"
+parquet_path = "10-K/100dc249-8312-4f7c-93ea-7a3669bdbfdd-114.parquet"
+file_row_number = 66
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001193125-11-282113"
+filing_date = "2011-10-26"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 602
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001193125-12-444068"
+filing_date = "2012-10-31"
+parquet_path = "10-K/5d128941-4796-4d43-bc1e-1ad52d614f17-37.parquet"
+file_row_number = 1508
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001193125-13-416534"
+filing_date = "2013-10-30"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 615
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001193125-14-383437"
+filing_date = "2014-10-27"
+parquet_path = "10-K/12f0c80f-9385-4a40-ba44-cc3a07d457b9-63.parquet"
+file_row_number = 118
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001193125-15-356351"
+filing_date = "2015-10-28"
+parquet_path = "10-K/8ca6c55b-683e-4325-a661-f62589d9868f-139.parquet"
+file_row_number = 516
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AAPL"
+cik = 320193
+accession = "0001628280-16-020309"
+filing_date = "2016-10-26"
+parquet_path = "10-K/220cf34c-84a7-4045-8b79-46fdd3a3f91d-26.parquet"
+file_row_number = 79
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0000891020-00-000622"
+filing_date = "2000-03-29"
+parquet_path = "10-K/f03f4e26-2349-423c-baaf-1a2226b6b27a-131.parquet"
+file_row_number = 1266
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0000891020-99-000375"
+filing_date = "1999-03-05"
+parquet_path = "10-K/f211709b-2942-448c-8ced-5c5099c465cd-132.parquet"
+file_row_number = 498
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0000950149-03-000355"
+filing_date = "2003-02-19"
+parquet_path = "10-K/306ee6b8-eace-4e1c-ab0a-896a22355c01-55.parquet"
+file_row_number = 1815
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-14-000006"
+filing_date = "2014-01-31"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 120
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-15-000006"
+filing_date = "2015-01-30"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 121
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-16-000172"
+filing_date = "2016-01-29"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 122
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-17-000011"
+filing_date = "2017-02-10"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 123
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-18-000005"
+filing_date = "2018-02-02"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 124
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-19-000004"
+filing_date = "2019-02-01"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 125
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-20-000004"
+filing_date = "2020-01-31"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 126
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-21-000004"
+filing_date = "2021-02-03"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 127
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-22-000005"
+filing_date = "2022-02-04"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 128
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-23-000004"
+filing_date = "2023-02-03"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 129
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001018724-24-000008"
+filing_date = "2024-02-02"
+parquet_path = "10-K/1bb7360a-7d70-4cde-8719-8b3bccab989a-96.parquet"
+file_row_number = 130
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001193125-04-029488"
+filing_date = "2004-02-25"
+parquet_path = "10-K/f380550f-8540-4d17-9c92-6deea067ba0d-103.parquet"
+file_row_number = 56
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001193125-05-047032"
+filing_date = "2005-03-11"
+parquet_path = "10-K/a040964b-bb9a-4baa-ab65-6c32bb4499bd-8.parquet"
+file_row_number = 185
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001193125-06-034166"
+filing_date = "2006-02-17"
+parquet_path = "10-K/4b8ec51f-f038-4919-8658-1616e27da633-20.parquet"
+file_row_number = 486
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001193125-07-034081"
+filing_date = "2007-02-16"
+parquet_path = "10-K/5161a7f9-bc8e-4fa2-961e-d4dad7930e40-72.parquet"
+file_row_number = 700
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001193125-08-024707"
+filing_date = "2008-02-11"
+parquet_path = "10-K/ef48b21a-a3b9-4144-84d9-5a831d9538cb-86.parquet"
+file_row_number = 606
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001193125-09-014406"
+filing_date = "2009-01-30"
+parquet_path = "10-K/cb6d70ee-9431-4901-8cb7-0c6cc13790bd-112.parquet"
+file_row_number = 233
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001193125-10-016098"
+filing_date = "2010-01-29"
+parquet_path = "10-K/bc44a4a5-2bba-4012-9f14-0ac4fdb8c0f3-12.parquet"
+file_row_number = 859
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001193125-11-016253"
+filing_date = "2011-01-28"
+parquet_path = "10-K/9e55439c-de55-400d-b8a2-d98880a75b92-25.parquet"
+file_row_number = 260
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001193125-12-032846"
+filing_date = "2012-02-01"
+parquet_path = "10-K/39f42240-34bb-40f9-9084-e27fd597c9d4-58.parquet"
+file_row_number = 25
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "AMZN"
+cik = 1018724
+accession = "0001193125-13-028520"
+filing_date = "2013-01-30"
+parquet_path = "10-K/e4503021-56bc-4005-a954-6ccdc2578e3b-38.parquet"
+file_row_number = 50
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-14-000020"
+filing_date = "2014-02-14"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 771
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-15-000015"
+filing_date = "2015-02-13"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 772
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-16-000105"
+filing_date = "2016-02-12"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 773
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-17-000012"
+filing_date = "2017-02-17"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 774
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-18-000007"
+filing_date = "2018-02-16"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 775
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-19-000007"
+filing_date = "2019-02-01"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 776
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-20-000011"
+filing_date = "2020-01-24"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 777
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-21-000010"
+filing_date = "2021-01-22"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 778
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-22-000007"
+filing_date = "2022-01-27"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 779
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-23-000006"
+filing_date = "2023-01-27"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 780
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-24-000010"
+filing_date = "2024-01-26"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 781
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-95-000004"
+filing_date = "1995-03-28"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 783
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-96-000002"
+filing_date = "1996-03-29"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 784
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-97-000020"
+filing_date = "1997-03-28"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 785
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000050863-98-000031"
+filing_date = "1998-03-27"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 786
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000891618-06-000089"
+filing_date = "2006-02-27"
+parquet_path = "10-K/bd34202e-9c8a-4501-ad12-cbb49477a116-89.parquet"
+file_row_number = 1667
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000891618-07-000111"
+filing_date = "2007-02-26"
+parquet_path = "10-K/bd34202e-9c8a-4501-ad12-cbb49477a116-89.parquet"
+file_row_number = 1693
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000891618-08-000106"
+filing_date = "2008-02-20"
+parquet_path = "10-K/bd34202e-9c8a-4501-ad12-cbb49477a116-89.parquet"
+file_row_number = 1723
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000891618-09-000047"
+filing_date = "2009-02-23"
+parquet_path = "10-K/bd34202e-9c8a-4501-ad12-cbb49477a116-89.parquet"
+file_row_number = 1750
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000891618-94-000087"
+filing_date = "1994-03-25"
+parquet_path = "10-K/bd34202e-9c8a-4501-ad12-cbb49477a116-89.parquet"
+file_row_number = 1768
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000912057-01-503434"
+filing_date = "2001-03-13"
+parquet_path = "10-K/6b10cec1-3698-41ea-8252-2d947873a0e8-110.parquet"
+file_row_number = 1125
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000912057-02-009698"
+filing_date = "2002-03-13"
+parquet_path = "10-K/9d7cd337-9a0a-44da-9ebb-d283f0dbc127-76.parquet"
+file_row_number = 1465
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000950123-10-015237"
+filing_date = "2010-02-22"
+parquet_path = "10-K/fbdddb63-a829-44ee-919d-20b9a1594945-56.parquet"
+file_row_number = 1730
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0000950123-11-015783"
+filing_date = "2011-02-18"
+parquet_path = "10-K/a138f98f-c703-49ca-8874-d69acabfd8f2-78.parquet"
+file_row_number = 1463
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0001012870-00-001562"
+filing_date = "2000-03-23"
+parquet_path = "10-K/39f42240-34bb-40f9-9084-e27fd597c9d4-58.parquet"
+file_row_number = 1491
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0001047469-03-008257"
+filing_date = "2003-03-11"
+parquet_path = "10-K/c337486b-a58d-4bfd-9c2a-a97a2c11fb68-45.parquet"
+file_row_number = 328
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0001047469-99-011450"
+filing_date = "1999-03-26"
+parquet_path = "10-K/64df1a51-753d-4f56-9365-032c31a51f7a-105.parquet"
+file_row_number = 1837
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0001193125-04-027430"
+filing_date = "2004-02-23"
+parquet_path = "10-K/f380550f-8540-4d17-9c92-6deea067ba0d-103.parquet"
+file_row_number = 37
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0001193125-05-033162"
+filing_date = "2005-02-22"
+parquet_path = "10-K/c4eb4433-181a-40c7-aeff-9a862cddef51-124.parquet"
+file_row_number = 423
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0001193125-12-075534"
+filing_date = "2012-02-23"
+parquet_path = "10-K/3012785f-5b81-4537-8047-5c4fde0e87f3-106.parquet"
+file_row_number = 145
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "INTC"
+cik = 50863
+accession = "0001193125-13-065416"
+filing_date = "2013-02-19"
+parquet_path = "10-K/23ee47fd-fea1-416a-8432-1ac02dcb7d68-92.parquet"
+file_row_number = 292
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-13-000003"
+filing_date = "2013-02-01"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 843
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-14-000007"
+filing_date = "2014-01-31"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 844
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-15-000006"
+filing_date = "2015-01-29"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 845
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-16-000043"
+filing_date = "2016-01-28"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 846
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-17-000007"
+filing_date = "2017-02-03"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 847
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-18-000009"
+filing_date = "2018-02-01"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 848
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-19-000009"
+filing_date = "2019-01-31"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 849
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-20-000013"
+filing_date = "2020-01-30"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 850
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-21-000014"
+filing_date = "2021-01-28"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 851
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-22-000018"
+filing_date = "2022-02-03"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 852
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-23-000013"
+filing_date = "2023-02-02"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 853
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "META"
+cik = 1326801
+accession = "0001326801-24-000012"
+filing_date = "2024-02-02"
+parquet_path = "10-K/7d68b14d-9df8-4ccf-8b2b-8d83f71fa4e1-117.parquet"
+file_row_number = 854
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0000891020-94-000175"
+filing_date = "1994-09-27"
+parquet_path = "10-K/f211709b-2942-448c-8ced-5c5099c465cd-132.parquet"
+file_row_number = 37
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0000891020-96-001130"
+filing_date = "1996-09-27"
+parquet_path = "10-K/f211709b-2942-448c-8ced-5c5099c465cd-132.parquet"
+file_row_number = 63
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0000950170-23-035122"
+filing_date = "2023-07-27"
+parquet_path = "10-K/9e55439c-de55-400d-b8a2-d98880a75b92-25.parquet"
+file_row_number = 53
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0000950170-24-087843"
+filing_date = "2024-07-30"
+parquet_path = "10-K/03ad7d5f-931c-4ad4-873e-f3726fd8223b-128.parquet"
+file_row_number = 1743
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001017062-97-001764"
+filing_date = "1997-09-29"
+parquet_path = "10-K/e4503021-56bc-4005-a954-6ccdc2578e3b-38.parquet"
+file_row_number = 1348
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001032210-00-001961"
+filing_date = "2000-09-28"
+parquet_path = "10-K/7b6726f0-607d-4b88-8c89-39dfeae2e962-48.parquet"
+file_row_number = 491
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001032210-01-501099"
+filing_date = "2001-09-18"
+parquet_path = "10-K/7b6726f0-607d-4b88-8c89-39dfeae2e962-48.parquet"
+file_row_number = 518
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001032210-02-001351"
+filing_date = "2002-09-06"
+parquet_path = "10-K/7b6726f0-607d-4b88-8c89-39dfeae2e962-48.parquet"
+file_row_number = 542
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001032210-98-001067"
+filing_date = "1998-09-25"
+parquet_path = "10-K/7b6726f0-607d-4b88-8c89-39dfeae2e962-48.parquet"
+file_row_number = 597
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001032210-99-001375"
+filing_date = "1999-09-28"
+parquet_path = "10-K/7b6726f0-607d-4b88-8c89-39dfeae2e962-48.parquet"
+file_row_number = 623
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-03-045632"
+filing_date = "2003-09-05"
+parquet_path = "10-K/6b10cec1-3698-41ea-8252-2d947873a0e8-110.parquet"
+file_row_number = 587
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-04-150689"
+filing_date = "2004-09-01"
+parquet_path = "10-K/8fcf42d9-b3ec-44ab-b6e5-96200602464f-88.parquet"
+file_row_number = 355
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-05-174825"
+filing_date = "2005-08-26"
+parquet_path = "10-K/4b8ec51f-f038-4919-8658-1616e27da633-20.parquet"
+file_row_number = 248
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-06-180008"
+filing_date = "2006-08-25"
+parquet_path = "10-K/5161a7f9-bc8e-4fa2-961e-d4dad7930e40-72.parquet"
+file_row_number = 475
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-07-170817"
+filing_date = "2007-08-03"
+parquet_path = "10-K/ef48b21a-a3b9-4144-84d9-5a831d9538cb-86.parquet"
+file_row_number = 382
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-08-162768"
+filing_date = "2008-07-31"
+parquet_path = "10-K/cb6d70ee-9431-4901-8cb7-0c6cc13790bd-112.parquet"
+file_row_number = 2
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-09-158735"
+filing_date = "2009-07-30"
+parquet_path = "10-K/bc44a4a5-2bba-4012-9f14-0ac4fdb8c0f3-12.parquet"
+file_row_number = 639
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-10-171791"
+filing_date = "2010-07-30"
+parquet_path = "10-K/6c624fad-aa58-41cb-8a34-4b943b989b4a-113.parquet"
+file_row_number = 1057
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-11-200680"
+filing_date = "2011-07-28"
+parquet_path = "10-K/3012785f-5b81-4537-8047-5c4fde0e87f3-106.parquet"
+file_row_number = 2963
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-12-316848"
+filing_date = "2012-07-26"
+parquet_path = "10-K/bc44a4a5-2bba-4012-9f14-0ac4fdb8c0f3-12.parquet"
+file_row_number = 108
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-13-310206"
+filing_date = "2013-07-30"
+parquet_path = "10-K/fc827140-64a8-4ab8-adc4-ddf12921993e-98.parquet"
+file_row_number = 539
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-14-289961"
+filing_date = "2014-07-31"
+parquet_path = "10-K/12f0c80f-9385-4a40-ba44-cc3a07d457b9-63.parquet"
+file_row_number = 65
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-15-272806"
+filing_date = "2015-07-31"
+parquet_path = "10-K/8ca6c55b-683e-4325-a661-f62589d9868f-139.parquet"
+file_row_number = 474
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001193125-16-662209"
+filing_date = "2016-07-28"
+parquet_path = "10-K/1b313af8-ca56-444b-9221-ad2907bb5faa-67.parquet"
+file_row_number = 819
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001564590-17-014900"
+filing_date = "2017-08-02"
+parquet_path = "10-K/a1b228fc-6544-4151-8007-955e23ddab83-27.parquet"
+file_row_number = 314
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001564590-18-019062"
+filing_date = "2018-08-03"
+parquet_path = "10-K/291a64a3-19fc-4500-864f-d513a884d29a-109.parquet"
+file_row_number = 1401
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001564590-19-027952"
+filing_date = "2019-08-01"
+parquet_path = "10-K/bb962213-3e46-4c0a-8a43-3fa196035eb8-84.parquet"
+file_row_number = 174
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001564590-20-034944"
+filing_date = "2020-07-30"
+parquet_path = "10-K/f03f4e26-2349-423c-baaf-1a2226b6b27a-131.parquet"
+file_row_number = 1150
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001564590-21-039151"
+filing_date = "2021-07-29"
+parquet_path = "10-K/6b10cec1-3698-41ea-8252-2d947873a0e8-110.parquet"
+file_row_number = 885
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MSFT"
+cik = 789019
+accession = "0001564590-22-026876"
+filing_date = "2022-07-28"
+parquet_path = "10-K/015a22bc-640f-4e63-9274-710902d39f96-129.parquet"
+file_row_number = 1214
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-07-000108"
+filing_date = "2007-10-26"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 411
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-08-000111"
+filing_date = "2008-10-27"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 412
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-09-000128"
+filing_date = "2009-10-28"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 413
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-10-000174"
+filing_date = "2010-10-26"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 414
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-11-000189"
+filing_date = "2011-10-25"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 415
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-12-000156"
+filing_date = "2012-10-29"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 416
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-13-000228"
+filing_date = "2013-10-28"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 417
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-14-000195"
+filing_date = "2014-10-27"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 418
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-15-000112"
+filing_date = "2015-10-27"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 419
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-16-000269"
+filing_date = "2016-10-28"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 420
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-17-000131"
+filing_date = "2017-10-26"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 421
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-18-000092"
+filing_date = "2018-10-15"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 422
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-19-000094"
+filing_date = "2019-10-17"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 423
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-20-000082"
+filing_date = "2020-10-19"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 424
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-21-000065"
+filing_date = "2021-10-08"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 425
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-22-000048"
+filing_date = "2022-10-07"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 426
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-23-000054"
+filing_date = "2023-10-06"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 427
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-24-000027"
+filing_date = "2024-10-04"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 428
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-94-000020"
+filing_date = "1994-09-23"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 429
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000723125-95-000016"
+filing_date = "1995-10-10"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+file_row_number = 430
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000912057-00-045119"
+filing_date = "2000-10-18"
+parquet_path = "10-K/da5202b6-603e-4fea-8360-2ae221b1f03e-74.parquet"
+file_row_number = 683
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000912057-01-535432"
+filing_date = "2001-10-15"
+parquet_path = "10-K/97a6a303-1177-4c18-804f-2b094fed640b-111.parquet"
+file_row_number = 219
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000912057-02-038669"
+filing_date = "2002-10-15"
+parquet_path = "10-K/520e7ad1-e287-436f-8c8a-730502ee9b06-43.parquet"
+file_row_number = 554
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0000950109-96-006513"
+filing_date = "1996-10-04"
+parquet_path = "10-K/a0c9167e-8b86-4cbe-a62a-00474bf79bde-39.parquet"
+file_row_number = 625
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0001012870-98-002758"
+filing_date = "1998-11-02"
+parquet_path = "10-K/edcb4338-6ae9-4875-87f6-9ba71e24edcf-145.parquet"
+file_row_number = 1122
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0001047469-03-033422"
+filing_date = "2003-10-15"
+parquet_path = "10-K/7b6726f0-607d-4b88-8c89-39dfeae2e962-48.parquet"
+file_row_number = 709
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0001104659-04-030617"
+filing_date = "2004-10-15"
+parquet_path = "10-K/34ecb680-5828-4650-b6bd-c51b82bf8e56-91.parquet"
+file_row_number = 1364
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0001104659-05-052716"
+filing_date = "2005-11-04"
+parquet_path = "10-K/ddbc28bc-2957-4fd7-b8fe-cd966b941083-126.parquet"
+file_row_number = 464
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "MU"
+cik = 723125
+accession = "0001104659-06-072331"
+filing_date = "2006-11-08"
+parquet_path = "10-K/81033d05-a9dd-429d-b72c-a4c7a0321e16-3.parquet"
+file_row_number = 579
+cached_metadata_identity_checked = false
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001012870-02-002262"
+filing_date = "2002-05-14"
+parquet_path = "10-K/edcb4338-6ae9-4875-87f6-9ba71e24edcf-145.parquet"
+file_row_number = 953
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-04-000007"
+filing_date = "2004-03-29"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 999
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-05-000008"
+filing_date = "2005-03-22"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1000
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-06-000014"
+filing_date = "2006-03-16"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1001
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-07-000008"
+filing_date = "2007-03-16"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1002
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-08-000011"
+filing_date = "2008-03-21"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1003
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-09-000013"
+filing_date = "2009-03-13"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1004
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-10-000006"
+filing_date = "2010-03-18"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1005
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-11-000015"
+filing_date = "2011-03-16"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1006
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-12-000013"
+filing_date = "2012-03-13"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1007
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-13-000008"
+filing_date = "2013-03-12"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1008
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-14-000030"
+filing_date = "2014-03-13"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1009
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-15-000036"
+filing_date = "2015-03-12"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1010
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-16-000205"
+filing_date = "2016-03-17"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1011
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-17-000027"
+filing_date = "2017-03-01"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1012
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-18-000010"
+filing_date = "2018-02-28"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1013
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-19-000023"
+filing_date = "2019-02-21"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1014
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-20-000010"
+filing_date = "2020-02-20"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1015
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-21-000010"
+filing_date = "2021-02-26"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1016
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-22-000036"
+filing_date = "2022-03-18"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1017
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-23-000017"
+filing_date = "2023-02-24"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1018
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045810-24-000029"
+filing_date = "2024-02-21"
+parquet_path = "10-K/f8e807a3-3f4a-4045-8ba5-939e4d119534-57.parquet"
+file_row_number = 1019
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "NVDA"
+cik = 1045810
+accession = "0001045969-03-001196"
+filing_date = "2003-04-25"
+parquet_path = "10-K/520e7ad1-e287-436f-8c8a-730502ee9b06-43.parquet"
+file_row_number = 960
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "PYPL"
+cik = 1633917
+accession = "0001633917-16-000113"
+filing_date = "2016-02-11"
+parquet_path = "10-K/26bd5c47-f67f-47a4-967c-e761d08b6a0d-54.parquet"
+file_row_number = 612
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "PYPL"
+cik = 1633917
+accession = "0001633917-17-000027"
+filing_date = "2017-02-08"
+parquet_path = "10-K/26bd5c47-f67f-47a4-967c-e761d08b6a0d-54.parquet"
+file_row_number = 613
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "PYPL"
+cik = 1633917
+accession = "0001633917-18-000029"
+filing_date = "2018-02-07"
+parquet_path = "10-K/26bd5c47-f67f-47a4-967c-e761d08b6a0d-54.parquet"
+file_row_number = 614
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "PYPL"
+cik = 1633917
+accession = "0001633917-19-000043"
+filing_date = "2019-02-07"
+parquet_path = "10-K/26bd5c47-f67f-47a4-967c-e761d08b6a0d-54.parquet"
+file_row_number = 615
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "PYPL"
+cik = 1633917
+accession = "0001633917-20-000028"
+filing_date = "2020-02-06"
+parquet_path = "10-K/26bd5c47-f67f-47a4-967c-e761d08b6a0d-54.parquet"
+file_row_number = 616
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "PYPL"
+cik = 1633917
+accession = "0001633917-21-000018"
+filing_date = "2021-02-05"
+parquet_path = "10-K/26bd5c47-f67f-47a4-967c-e761d08b6a0d-54.parquet"
+file_row_number = 617
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "PYPL"
+cik = 1633917
+accession = "0001633917-22-000027"
+filing_date = "2022-02-03"
+parquet_path = "10-K/26bd5c47-f67f-47a4-967c-e761d08b6a0d-54.parquet"
+file_row_number = 618
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "PYPL"
+cik = 1633917
+accession = "0001633917-23-000033"
+filing_date = "2023-02-10"
+parquet_path = "10-K/26bd5c47-f67f-47a4-967c-e761d08b6a0d-54.parquet"
+file_row_number = 619
+cached_metadata_identity_checked = true
+
+[[locations]]
+symbol = "PYPL"
+cik = 1633917
+accession = "0001633917-24-000024"
+filing_date = "2024-02-08"
+parquet_path = "10-K/26bd5c47-f67f-47a4-967c-e761d08b6a0d-54.parquet"
+file_row_number = 620
+cached_metadata_identity_checked = true
+
+[[coverage]]
+symbol = "AAPL"
+reference_annuals = 28
+located = 28
+not_located_in_scanned_shards = []
+
+[[coverage]]
+symbol = "AMZN"
+reference_annuals = 24
+located = 24
+not_located_in_scanned_shards = []
+
+[[coverage]]
+symbol = "INTC"
+reference_annuals = 31
+located = 31
+not_located_in_scanned_shards = []
+
+[[coverage]]
+symbol = "META"
+reference_annuals = 12
+located = 12
+not_located_in_scanned_shards = []
+
+[[coverage]]
+symbol = "MSFT"
+reference_annuals = 31
+located = 30
+not_located_in_scanned_shards = ["0000891020-95-000433"]
+
+[[coverage]]
+symbol = "MU"
+reference_annuals = 29
+located = 29
+not_located_in_scanned_shards = []
+
+[[coverage]]
+symbol = "NVDA"
+reference_annuals = 23
+located = 23
+not_located_in_scanned_shards = []
+
+[[coverage]]
+symbol = "PYPL"
+reference_annuals = 9
+located = 9
+not_located_in_scanned_shards = []

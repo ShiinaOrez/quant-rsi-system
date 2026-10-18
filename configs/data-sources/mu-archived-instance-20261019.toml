@@ -21,3 +21,8 @@ sec_original_bytes_verified = false
 publication_time_verified = false
 attachments_complete = false
 ready = false
+
+[benchmark_visibility]
+policy = "filing outside all current MU episode windows; extraction validation only"
+current_mu_episode_eligible = false
+reason = "Filed 2024-10-04, after the 60-session MU episodes starting 2022-12-30, 2023-06-30, and 2024-06-28."
