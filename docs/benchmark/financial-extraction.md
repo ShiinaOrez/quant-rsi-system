@@ -145,3 +145,11 @@ Claude 第 17 批还取得该申报的 schema 和 definition linkbase，父进�
 FY2023 的较早捕获完整下载后只有 1,048,576 字节，虽与其 CDX digest 相符，但 XML 在正文中间结束，不能当完整财报。较晚捕获最初取得 1,671,168 字节后超时；随后原捕获与 revisit 捕获之间出现 302 循环，父进程复查也未恢复。两份前缀的前 1 MiB 一致，只作为错误证据，不输出正式事实。来源截断与传输截断分开记录，存档哈希一致不替代文档完整性校验。
 
 另对已取得的 FY2022、FY2024 实例各核对两个无维度时点的 Assets 与 LiabilitiesAndStockholdersEquity，四项均相等；key facts 与上下文保留在各自父进程目录的 `key-facts-review.json`。这只是单项恒等式检查，不代替三表、维度或 taxonomy 校验。
+
+## Micron 主文档与实例交叉核对（2026-10-19）
+
+第 19 批取得 20 份语料主文档，包括完整 FY2023 正文。五份 inline 财报抽取 8,386 条事实、7,466 条数值事实，数值错误为 0；十五份旧格式只保留正文。父进程另外核算实际源文件大小、摘要、索引身份和整组导出回执；Claude 派生汇总中的 `filing_date` 因字段名误用而为空，父进程报告与固定清单使用已核对的 `reference.filing_date`，保留原汇总供审计，不把申报日期当成公开时间。
+
+FY2022、FY2024 与此前公开存档的完整实例逐条核对 fact ID、concept QName、contextRef、期间、发行人、显式维度、单位和 Decimal，合计 2,896 条非空数值及四条 nil 相符。跨来源有 321 条显式维度排列差异、400 条单位 QName 显示前缀差异，二者有重叠；原始结果保留。比较时只对同一 segment/scenario 内无重复轴的显式成员集合忽略排列顺序，单位按已解析的命名空间和本地名比较；不改写事实，也不推断默认成员或 typed dimension 等价性。该范围依据 [XBRL Dimensions REC §3.2](https://xbrl.org/specification/dimensions/rec-2012-01-25/dimensions-rec-2006-09-18%2Bcorrected-errata-2012-01-25-clean.html) 和 [XBRL 2.1 §4.8.2](https://www.xbrl.org/Specification/XBRL-2.1/REC-2003-12-31/XBRL-2.1-REC-2003-12-31+corrected-errata-2013-02-20.html)。这只是声明范围内的跨实例对照，不是完整 c-equal 校验。
+
+父进程的源与事实报告在 `claude/batch-19/parent-review/`；FY2020、FY2021、FY2023 尚无独立实例对照，所有公开时间仍为空。FY2024 继续按先前限制排除在当前 MU 题目窗口之外。

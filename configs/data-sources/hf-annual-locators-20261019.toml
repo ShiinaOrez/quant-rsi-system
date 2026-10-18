@@ -1144,7 +1144,7 @@ accession = "0000723125-07-000108"
 filing_date = "2007-10-26"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 411
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1153,7 +1153,7 @@ accession = "0000723125-08-000111"
 filing_date = "2008-10-27"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 412
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1162,7 +1162,7 @@ accession = "0000723125-09-000128"
 filing_date = "2009-10-28"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 413
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1171,7 +1171,7 @@ accession = "0000723125-10-000174"
 filing_date = "2010-10-26"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 414
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1180,7 +1180,7 @@ accession = "0000723125-11-000189"
 filing_date = "2011-10-25"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 415
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1189,7 +1189,7 @@ accession = "0000723125-12-000156"
 filing_date = "2012-10-29"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 416
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1198,7 +1198,7 @@ accession = "0000723125-13-000228"
 filing_date = "2013-10-28"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 417
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1207,7 +1207,7 @@ accession = "0000723125-14-000195"
 filing_date = "2014-10-27"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 418
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1216,7 +1216,7 @@ accession = "0000723125-15-000112"
 filing_date = "2015-10-27"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 419
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1225,7 +1225,7 @@ accession = "0000723125-16-000269"
 filing_date = "2016-10-28"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 420
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1234,7 +1234,7 @@ accession = "0000723125-17-000131"
 filing_date = "2017-10-26"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 421
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1243,7 +1243,7 @@ accession = "0000723125-18-000092"
 filing_date = "2018-10-15"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 422
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1252,7 +1252,7 @@ accession = "0000723125-19-000094"
 filing_date = "2019-10-17"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 423
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1261,7 +1261,7 @@ accession = "0000723125-20-000082"
 filing_date = "2020-10-19"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 424
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1270,7 +1270,7 @@ accession = "0000723125-21-000065"
 filing_date = "2021-10-08"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 425
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1279,7 +1279,7 @@ accession = "0000723125-22-000048"
 filing_date = "2022-10-07"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 426
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1288,7 +1288,7 @@ accession = "0000723125-23-000054"
 filing_date = "2023-10-06"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 427
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1297,7 +1297,7 @@ accession = "0000723125-24-000027"
 filing_date = "2024-10-04"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 428
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1306,7 +1306,7 @@ accession = "0000723125-94-000020"
 filing_date = "1994-09-23"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 429
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"
@@ -1315,7 +1315,7 @@ accession = "0000723125-95-000016"
 filing_date = "1995-10-10"
 parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
 file_row_number = 430
-cached_metadata_identity_checked = false
+cached_metadata_identity_checked = true
 
 [[locations]]
 symbol = "MU"

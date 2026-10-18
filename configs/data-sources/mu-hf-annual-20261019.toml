@@ -1,0 +1,178 @@
+schema = "public-corpus-primary-subset.v1"
+issuer = "MU"
+cik = 723125
+form = "10-K"
+reference_cutoff = "2024-10-04"
+reference_annuals = 29
+exported_primary_documents = 20
+dataset = "TeraflopAI/SEC-EDGAR"
+revision = "43de32c4c3cd4a56c26757345a4ec6db04fccda0"
+parquet_path = "10-K/fd211a91-c2e0-4909-84c0-11c4566bf693-68.parquet"
+parquet_bytes = 603832439
+parquet_sha256 = "06468c956ddeeb9bfcce1bfc16b5095ecb973cc92cab27166cebe7ac816a0503"
+hash_basis = "public_mirror_lfs_pointer_not_independently_verified_upstream"
+upstream_pointer_independently_verified = false
+sec_original_bytes_verified = false
+publication_time_verified = false
+attachments_complete = false
+ready = false
+
+[[documents]]
+accession = "0000723125-07-000108"
+filing_date = "2007-10-26"
+file_row_number = 411
+content_bytes = 1999530
+content_sha256 = "b79c113026249dc78eaca0eab2cf0c6ab65af9800166161302f2c877a639057d"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-08-000111"
+filing_date = "2008-10-27"
+file_row_number = 412
+content_bytes = 1976716
+content_sha256 = "aa727452bcb88851400dbe60498424a6b1a276f0d0b22d2adb0791101cc1b16b"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-09-000128"
+filing_date = "2009-10-28"
+file_row_number = 413
+content_bytes = 2298330
+content_sha256 = "4116c8df2ea81fd3e61ed038ff9d9a768be44b0abe7cd3d334f7497f55aab429"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-10-000174"
+filing_date = "2010-10-26"
+file_row_number = 414
+content_bytes = 3037957
+content_sha256 = "facb6f6cf7af9d237d5df41dcc5c4501ecbe5dc86e56d77ea6eb10926a70709f"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-11-000189"
+filing_date = "2011-10-25"
+file_row_number = 415
+content_bytes = 2778976
+content_sha256 = "c7588c96fe7d1233739f9b4673d48360cc88e221e911bb5fa910cdcbff6f5e8d"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-12-000156"
+filing_date = "2012-10-29"
+file_row_number = 416
+content_bytes = 2920490
+content_sha256 = "0dff0296c5f6df3c6aa989633789027417ed76fcd2a2b20f08b7976205107dc0"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-13-000228"
+filing_date = "2013-10-28"
+file_row_number = 417
+content_bytes = 3587336
+content_sha256 = "29c4b2379023bcc4d6f77d7980ddec11907295fc150214a00b25a3406108468f"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-14-000195"
+filing_date = "2014-10-27"
+file_row_number = 418
+content_bytes = 3812975
+content_sha256 = "b8f8494b14803f17e6b3f60b92f126e374e5a14d5ba8b4ac44b45637e58bb118"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-15-000112"
+filing_date = "2015-10-27"
+file_row_number = 419
+content_bytes = 3725107
+content_sha256 = "6cd6bf7c3f81adf9ee8e5d78abcc830a7553022944f76e3800aca58303445e52"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-16-000269"
+filing_date = "2016-10-28"
+file_row_number = 420
+content_bytes = 3601555
+content_sha256 = "a6323602111939f6c71fcf8ecc2f131ef06c6d0ad56eeaa3778b0c3d32d9e830"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-17-000131"
+filing_date = "2017-10-26"
+file_row_number = 421
+content_bytes = 3460825
+content_sha256 = "932eec893c4b5689cb3ac535f17b418274c121ad16aed2a88bae15b104b18707"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-18-000092"
+filing_date = "2018-10-15"
+file_row_number = 422
+content_bytes = 3020788
+content_sha256 = "f76d082f8ebff9c3e441b11e5c0a8ec1d9d2cc216da34dabdc23e10c815039db"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-19-000094"
+filing_date = "2019-10-17"
+file_row_number = 423
+content_bytes = 2928133
+content_sha256 = "4733b62916421e955a2cda280d03f18ffcfa8bdda6e976c216fc3b86f1f223df"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-20-000082"
+filing_date = "2020-10-19"
+file_row_number = 424
+content_bytes = 3505179
+content_sha256 = "901a03fb5911fb18d3fcb6151921f6d8c75b7ee4b28cf766659d85c929ef856c"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-21-000065"
+filing_date = "2021-10-08"
+file_row_number = 425
+content_bytes = 2829214
+content_sha256 = "32f835b6ae3913b1785eaf87375db976ac1282ad2571e2ab8954870ed21289fa"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-22-000048"
+filing_date = "2022-10-07"
+file_row_number = 426
+content_bytes = 2851204
+content_sha256 = "a8093c88e4db354131022d26ae81627b51ecdcdfa84665d62408a98ef9588d04"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-23-000054"
+filing_date = "2023-10-06"
+file_row_number = 427
+content_bytes = 2227692
+content_sha256 = "c00b3eb2c636a7b42ba125f224ebf62b7d6760d643a116c0b5eb48f1deede2ff"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-24-000027"
+filing_date = "2024-10-04"
+file_row_number = 428
+content_bytes = 2202346
+content_sha256 = "5210685dd89a6125a52da40b518d4b1642581f8bbc25ffe933eb8ef2ff1ee343"
+primary_document_check = "consistent_within_dataset"
+
+[[documents]]
+accession = "0000723125-94-000020"
+filing_date = "1994-09-23"
+file_row_number = 429
+content_bytes = 131522
+content_sha256 = "4e76be05a86d6778548019c66db7ffafbac271a3a53247950b74b9ca24672f1e"
+primary_document_check = "not_comparable"
+
+[[documents]]
+accession = "0000723125-95-000016"
+filing_date = "1995-10-10"
+file_row_number = 430
+content_bytes = 131210
+content_sha256 = "8b542a11521b7a3ed88a63889ad7efec136cd922aa49de54207b792bddadcd29"
+primary_document_check = "not_comparable"
