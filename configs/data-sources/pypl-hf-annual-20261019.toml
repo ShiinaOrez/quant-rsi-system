@@ -1,0 +1,79 @@
+schema = "public-corpus-primary-subset.v1"
+issuer = "PYPL"
+cik = 1633917
+form = "10-K"
+reference_cutoff = "2024-10-04"
+dataset = "TeraflopAI/SEC-EDGAR"
+revision = "43de32c4c3cd4a56c26757345a4ec6db04fccda0"
+parquet_path = "10-K/26bd5c47-f67f-47a4-967c-e761d08b6a0d-54.parquet"
+parquet_bytes = 608452138
+parquet_sha256 = "2e2374839f48d3aa7880144c2285e3c43219d116752e9135b4f7dbd64e7deb74"
+hash_basis = "public_mirror_lfs_pointer_not_independently_verified_upstream"
+upstream_pointer_independently_verified = false
+sec_original_bytes_verified = false
+publication_time_verified = false
+attachments_complete = false
+ready = false
+
+[[documents]]
+accession = "0001633917-16-000113"
+filing_date = "2016-02-11"
+file_row_number = 612
+content_bytes = 2316866
+content_sha256 = "5a2930272f1c5ee4f78349279bbf854b74fc2817a10710bd4d3eb615d4738a77"
+
+[[documents]]
+accession = "0001633917-17-000027"
+filing_date = "2017-02-08"
+file_row_number = 613
+content_bytes = 2758696
+content_sha256 = "ef661e02937504701e2a2d108a0440896da07f56ee6220517d7078c5b48f98dc"
+
+[[documents]]
+accession = "0001633917-18-000029"
+filing_date = "2018-02-07"
+file_row_number = 614
+content_bytes = 2840661
+content_sha256 = "80118e762c1409659f09de15951669ccbf8d6f3cae0f125f11b3c55d3bfe5530"
+
+[[documents]]
+accession = "0001633917-19-000043"
+filing_date = "2019-02-07"
+file_row_number = 615
+content_bytes = 2840515
+content_sha256 = "4e1bb8091eb6bba3a4e239def888356a5ad72e9bd314dedc5db819310bbf25b7"
+
+[[documents]]
+accession = "0001633917-20-000028"
+filing_date = "2020-02-06"
+file_row_number = 616
+content_bytes = 3986482
+content_sha256 = "544f8e054266a6a9c2db33fe6bfe4e1b62a84d90902887855f64cae0c929041a"
+
+[[documents]]
+accession = "0001633917-21-000018"
+filing_date = "2021-02-05"
+file_row_number = 617
+content_bytes = 3929793
+content_sha256 = "7f50438828251e2555bb98b8ae92986635de4319350f117e3553bb46a62d9b25"
+
+[[documents]]
+accession = "0001633917-22-000027"
+filing_date = "2022-02-03"
+file_row_number = 618
+content_bytes = 4029861
+content_sha256 = "a436f53b0e4b4f5138d402ea81c7419d0674fbabcb06a237baeaf0311cfbd9b8"
+
+[[documents]]
+accession = "0001633917-23-000033"
+filing_date = "2023-02-10"
+file_row_number = 619
+content_bytes = 4344829
+content_sha256 = "fa96ef2e8d568ffc04da044da670dc8daa3cb9cc5f5d9025d44c72a724c410bb"
+
+[[documents]]
+accession = "0001633917-24-000024"
+filing_date = "2024-02-08"
+file_row_number = 620
+content_bytes = 3479911
+content_sha256 = "55d4ebe629d5f96a0f9370e277d25bcdd3216fc00c112b734f3302a75f701b64"

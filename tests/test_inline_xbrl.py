@@ -153,7 +153,7 @@ class Numbers(Base):
     def test_unsupported_transforms_keep_raw_text_and_error(self):
         result = self.run_body(
             nf("u1", text="1.069,5", extra='decimals="0" format="ixt:num-comma-decimal"')
-            + nf("u2", "us-gaap:LineOfCredit", "five", "c-d", extra='decimals="-6" format="ixt-sec:numwordsen"')
+            + nf("u2", "us-gaap:LineOfCredit", "five hundred", "c-d", extra='decimals="-6" format="ixt-sec:numwordsen"')
             + nf("u3", "us-gaap:CommercialPaper", "None", "c-d", extra='decimals="-6" format="ixt-sec:numwordsen"')
             + nf("u4", "us-gaap:Z", "7", "c-d", extra='decimals="0" format="foo:bar"'))
         self.assertEqual((self.facts["u1"]["errors"], self.facts["u1"]["raw_text"]), (["unsupported_format"], "1.069,5"))
@@ -162,6 +162,30 @@ class Numbers(Base):
         self.assertEqual(self.facts["u4"]["errors"], ["format_unbound_prefix"])
         self.assertLessEqual({"unsupported_format", "unsupported_transform_input", "format_unbound_prefix"},
                              self.codes(result))
+
+    def test_atomic_number_words_apply_scale_sign_and_keep_source_text(self):
+        self.run_body(nf("word", "us-gaap:LineOfCredit", "  TwO\n", "c-d",
+                         extra='decimals="0" scale="3" sign="-" format="ixt-sec:numwordsen"')
+                      + nf("tens", "us-gaap:Other", "FORTY", "c-i",
+                           extra='decimals="0" format="ixt-sec:numwordsen"')
+                      + nf("teen", "us-gaap:Count", "nineteen", "c-i",
+                           extra='decimals="0" format="ixt-sec:numwordsen"'))
+        self.assertEqual((self.facts["word"]["status"], self.facts["word"]["value"]), ("ok", "-2000"))
+        self.assertEqual(self.facts["word"]["raw_text"], "  TwO\n")
+        self.assertEqual(self.facts["tens"]["value"], "40")
+        self.assertEqual(self.facts["teen"]["value"], "19")
+
+    def test_number_word_subset_does_not_guess_compounds_or_other_formats(self):
+        words = ["twenty-one", "one hundred", "two and", "fourty", "2", "cinq", "one,", "two dollars"]
+        self.run_body("".join(nf(f"bad{i}", f"us-gaap:Word{i}", word, "c-i",
+                                extra='decimals="0" format="ixt-sec:numwordsen"')
+                              for i, word in enumerate(words))
+                      + nf("plainword", "us-gaap:Plain", "two", "c-i", extra='decimals="0"'))
+        for i, word in enumerate(words):
+            fact = self.facts[f"bad{i}"]
+            self.assertEqual((fact["value"], fact["errors"], fact["raw_text"]),
+                             (None, ["unsupported_transform_input"], word))
+        self.assertEqual(self.facts["plainword"]["errors"], ["invalid_number_without_format"])
 
     def test_nested_nonfraction_yields_two_facts(self):
         inner = nf("in", "us-gaap:LineOfCredit", "no", "c-i", extra='decimals="-6" format="ixt-sec:numwordsen"')

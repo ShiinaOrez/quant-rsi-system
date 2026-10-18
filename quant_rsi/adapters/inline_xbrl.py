@@ -7,8 +7,9 @@ accession and the sha256 of the ZIP and the member. Numbers are exact Decimals. 
 module cannot convert under a cited rule keeps its raw text and an error instead of a value:
 
 * transformations: ixt:num-dot-decimal and ixt:fixed-zero (XBRL Transformation Registry 4,
-  REC 2020-02-12), Registry 3 numdotdecimal/zerodash, and ixt-sec:numwordsen inputs "no"/"none" (EDGAR Filer Manual Vol. II lists
-  both as producing 0). Other number words and every other format are reported as unsupported;
+  REC 2020-02-12), Registry 3 numdotdecimal/zerodash, and a bounded SEC numwordsen
+  subset: no/none, zero through nineteen, and the single tens twenty through ninety.
+  Compound number words and every other format remain unsupported;
 * value = transform(text) * 10**scale, negated when sign="-" (Inline XBRL 1.1, 10.1/10.2.3).
   A nonFraction holds exactly one text node or one nested nonFraction; markup inside it (for
   example a footnote marker or ix:exclude) is an error, never stripped into a number;
@@ -268,16 +269,25 @@ def _tr3_zerodash(raw):
     return Decimal(0)
 
 
-def _numwords_zero(raw):
-    # Only the Filer Manual's zero examples; real number words are not implemented.
-    if _collapse(raw).casefold() in ("no", "none"):
-        return Decimal(0)
+# The subset is explicit; no approximate conversion or token dropping is allowed.
+_ATOMIC_NUMBER_WORDS = {word: value for value, word in enumerate(
+    "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen "
+    "fifteen sixteen seventeen eighteen nineteen".split())}
+_ATOMIC_NUMBER_WORDS.update({"no": 0, "none": 0, "twenty": 20, "thirty": 30, "forty": 40,
+                             "fifty": 50, "sixty": 60, "seventy": 70, "eighty": 80, "ninety": 90})
+
+
+def _numwords_atomic(raw):
+    # Deliberately bounded subset of SEC numwordsen, not its compound-word grammar.
+    text = _collapse(raw).casefold()
+    if text in _ATOMIC_NUMBER_WORDS:
+        return Decimal(_ATOMIC_NUMBER_WORDS[text])
     raise TransformError("unsupported_transform_input", raw)
 
 
 TRANSFORMS = {(TR4, "num-dot-decimal"): _num_dot_decimal, (TR4, "fixed-zero"): _fixed_zero,
               (TR3, "numdotdecimal"): _tr3_numdotdecimal, (TR3, "zerodash"): _tr3_zerodash,
-              (SEC_TR, "numwordsen"): _numwords_zero}
+              (SEC_TR, "numwordsen"): _numwords_atomic}
 
 
 def plain(value):

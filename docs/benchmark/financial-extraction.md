@@ -41,7 +41,7 @@
   - TR4（2020-02-12）的 `num-dot-decimal`：逗号、空格或不换行空格作千分位，点作小数点，不接受符号和指数；
   - TR4 的 `fixed-zero`：任意输入得 0；
   - TR3（2015-02-26）的 `numdotdecimal`、`zerodash`：分别按三位整数分组规则解析数值，或将规范列出的单个破折号转为零；不复用 TR4 较宽松的分组规则。规则来源：[XBRL Registry 3，含 2019-04-17 勘误](https://www.xbrl.org/Specification/inlineXBRL-transformationRegistry/REC-2015-02-26%2Berrata-2019-04-17/inlineXBRL-transformationRegistry-REC-2015-02-26%2Bcorrected-errata-2019-04-17.html)。
-  - `ixt-sec:numwordsen`：只接受 `no` 和 `none`，得 0。EDGAR Filer Manual Vol. II 的示例中，这两个词都输出 0。
+  - `ixt-sec:numwordsen`：支持明确列出的单词子集：`no`/`none`、`zero` 至 `nineteen`、整十词 `twenty` 至 `ninety`；忽略大小写并 collapse XML 空白，再按既有规则应用 scale/sign。复合数词、标点及错误拼写保留原文和错误，不猜测。依据 [SEC Filer Manual v45 §5.2.5.12](https://www.sec.gov/files/edgar/filermanual/archive/efmvol2-v45.pdf)；只实现该规则的子集。
 - 其余 format 记为 `unsupported_format`，其余英文数词记为 `unsupported_transform_input`，都保留原文。同名转换必须匹配 namespace，未验证的 TR1/TR2 不自动作为别名接受。
 - concept、format 和维度的 QName 目前要求带前缀；前缀未绑定或在局部重新绑定都记为错误。unit measure 另按下述规则支持默认命名空间。
 - 缺失或无效的 context/unit、重复的资源 ID 都是错误。ix:fraction 和 ix:tuple 记为不支持。
@@ -113,7 +113,13 @@ XBRL 2.1 §4.8.2 把 measure 定义为 `xsd:QName`。[XML Schema §3.15.3](https
 
 - 没有处理 1994–2010 年的纯文本和 HTML 财报，也没有声称它们已经被抽取。XBRL zip 最早一份是 2011 年。
 - 传统 instance：tuple、fraction、float/double 词法都没有支持；不加载 taxonomy schema，所以无法校验 item 类型、period type 或 balance；计算/维度校验也没有做。
-- TR3 仅支持上述两项数值转换，TR1/TR2 未实现。2026-10-17 对 103 份 inline ZIP 的检查中，102 份可解析，合计 25,950 条事实；新增转换将 `unsupported_format` 从 6,889 条降为 8 条。余下 15 条数词转换仍不支持。一份 2020 年 10-K 的 ZIP 成员偏移损坏，镜像主 HTML 也无法完整解析，均保留为缺口；不修改原件来凑出成功结果。所有事实仍未绑定公开时间。
-- 非零英文数词、nonNumeric 的转换、calculation/definition linkbase、三表勾稽都没有做。只做了一项检查：每份申报中，无维度的 Assets 与 LiabilitiesAndStockholdersEquity 是否相等。
+- TR3 仅支持上述两项数值转换，TR1/TR2 未实现。2026-10-17 对 103 份 inline ZIP 的检查中，102 份可解析，合计 25,950 条事实；新增转换将 `unsupported_format` 从 6,889 条降为 8 条。2026-10-19 在经过校验的 102 份清单上重跑，新增单词子集解决另外 15 条数词错误；现余 8 条 `unsupported_format`，数值状态为 22,466 条 ok、37 条 nil、8 条 error。一份 2020 年 10-K 的 ZIP 成员偏移损坏，镜像主 HTML 也无法完整解析，均保留为缺口；不修改原件来凑出成功结果。所有事实仍未绑定公开时间。
+- 复合英文数词、nonNumeric 的转换、calculation/definition linkbase、三表勾稽都没有做。只做了一项检查：每份申报中，无维度的 Assets 与 LiabilitiesAndStockholdersEquity 是否相等。
 - context 的比较是字符串级别的，日期格式不做归一化。
 - 镜像字节没有与 EDGAR 原件比对。accepted_at 未知。
+
+## 单个英文数词的真实数据核对（2026-10-19）
+
+对 AAPL、AMZN、PYPL 的 30 份本地主文档重新检查，其中 15 份带 inline namespace，共 24,433 条事实。新增单词子集分别恢复 41、17、47 条数值，共 105 条；仍有 6 条 `ixt:nocontent` 错误，未给它们补数值。其余 15 份旧格式正文不计入解析成功。此前把 AAPL/AMZN 的 62 条错误写成 60 条数词加 2 条 nocontent 是分类错误，实际为 58 加 4，现已更正。
+
+其中 45 条数词事实可与另一来源的传统 XBRL instance 按候选 accession、fact ID、concept QName、contextRef 及 Decimal 值比较，全部一致；包括 26 条新增非零转换和 19 条原有零值对照。该核对不等于完整 context/unit/维度、SEC 原件或公开时间核验。产物在 `artifacts/benchmark-quality/numeric-words-v1/`，所有新增事实仍不可向正式 benchmark 开放。
