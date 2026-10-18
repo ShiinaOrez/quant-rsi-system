@@ -90,3 +90,7 @@ AAPL 分片也已取得：686,530,700 字节，SHA-256 `d7385e1240db300741261a94
 可复查的行号、源版本与正文哈希固定在 [PayPal 子集清单](../../configs/data-sources/pypl-hf-annual-20261019.toml)。产物位于 `hf-edgar/parent-pypl-all-local/`，存在整组成功回执。五份现代 inline 文档抽取 11,002 条事实，数值状态 9,895 条 ok、8 条 nil、2 条 nocontent error；四份旧格式保留正文。
 
 新的单个英文数词支持同时重跑 AAPL、AMZN、PYPL，结果见 [财务抽取核对](financial-extraction.md#单个英文数词的真实数据核对2026-10-19)。九份年报并不代表 PayPal 全部表单或附件齐全；数据来源仍为二手语料，公开时间仍未绑定。
+
+## 公开镜像的后续定位（2026-10-19）
+
+固定 revision 的公开镜像可以按列投影读取 accession。第一批加试读共检查 17 个此前未成功保存的分片、26,583 行，命中参考索引中的 25 份年报候选（MSFT 7、MU 3、AAPL 3、META 12）。结果保存在 `mirror-metadata-pilot-v1/`、`mirror-metadata-scan-v1/` 和 `mirror-locator-summary-v1.json`。这里只核对 accession 列，尚未重读 filer/form/date 或取得正文；不计为新增财报覆盖，也没有放宽生产适配器的源白名单。后续批次另存回执，不覆盖这些结果。

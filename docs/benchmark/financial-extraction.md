@@ -123,3 +123,13 @@ XBRL 2.1 §4.8.2 把 measure 定义为 `xsd:QName`。[XML Schema §3.15.3](https
 对 AAPL、AMZN、PYPL 的 30 份本地主文档重新检查，其中 15 份带 inline namespace，共 24,433 条事实。新增单词子集分别恢复 41、17、47 条数值，共 105 条；仍有 6 条 `ixt:nocontent` 错误，未给它们补数值。其余 15 份旧格式正文不计入解析成功。此前把 AAPL/AMZN 的 62 条错误写成 60 条数词加 2 条 nocontent 是分类错误，实际为 58 加 4，现已更正。
 
 其中 45 条数词事实可与另一来源的传统 XBRL instance 按候选 accession、fact ID、concept QName、contextRef 及 Decimal 值比较，全部一致；包括 26 条新增非零转换和 19 条原有零值对照。该核对不等于完整 context/unit/维度、SEC 原件或公开时间核验。产物在 `artifacts/benchmark-quality/numeric-words-v1/`，所有新增事实仍不可向正式 benchmark 开放。
+
+## Micron 存档实例（2026-10-19）
+
+从已通过 CDX digest 核对的官方历史详情页，沿原页面直接列出的静态文件链接，取得 accession 候选 `0000723125-24-000027` 的 XBRL instance。Claude 的首取因 25 秒超时截断，不计成功；父进程重新下载在 90 秒时仍差 38,042 字节，随后用标准 HTTP Range 补取，核对 206 Content-Range 后拼接。完整的 2,097,820 字节与先前取得的 CDX SHA1 digest 一致，原始分段、响应头和错误日志全部保留。
+
+使用现有安全 XML 解析器得到 1,646 条事实，其中数值 1,447 条 ok、2 条 nil、0 条 error；另用 ElementTree 与 Decimal 核算全部 1,447 条非空数值，无差异。DEI CIK、表单和报告期与参考记录一致，全部 context 的发行人标识也均为 723125。未加载外部 taxonomy 或创建声称来自发行人的 ZIP；独立 instance 缺少展示角色绑定，保留 `schema_ref_not_followed` 提示。
+
+源版本与哈希见 [Micron 实例清单](../../configs/data-sources/mu-archived-instance-20261019.toml)。下载、分段校验与抽取产物在 `artifacts/benchmark-quality/mu-archive-instance-retry-v1/`。存档捕获时间晚于财报申报时间，不用它补写历史 `available_at`；正式题目仍不开放这些事实。
+
+Claude 第 17 批还取得该申报的 schema 和 definition linkbase，父进程复核摘要与安全 XML 根元素通过。标为 PRE 的链接却返回与 schema 完全相同的字节；CAL 链接的截断内容为 label linkbase，不能按链接文字当作对应文件。错误映射与超时均保留，未据此绑定展示角色或声称三表结构齐全。
