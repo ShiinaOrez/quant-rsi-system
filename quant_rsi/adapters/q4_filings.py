@@ -14,10 +14,13 @@ from urllib.parse import parse_qsl, urlsplit
 
 PLAN_FORMS = ("10-K", "10-K/A", "10-Q", "10-Q/A", "8-K", "8-K/A")
 CDN_HOST = "d18rn0p25nwr6d.cloudfront.net"
-# Observed in 17 XBRL links in the saved official META feed; evidence hash in docs.
-# This observation does not admit the same legacy host for other issuers.
+# Observed independently in the official META feed and the pinned AAPL capture.
+# Each issuer is admitted separately; this does not admit AMZN or unknown CIKs.
 LEGACY_META_CDN_HOST = "d1lge852tjjqow.cloudfront.net"
 ISSUERS = {
+    "AAPL": {"cik": 320193, "origin": "https://investor.apple.com",
+             "cdn_hosts": (CDN_HOST, LEGACY_META_CDN_HOST),
+             "detail_path": "/sec-filings/sec-filings-details/default.aspx"},
     "META": {"cik": 1326801, "origin": "https://investor.atmeta.com",
              "cdn_hosts": (CDN_HOST, LEGACY_META_CDN_HOST),
              "detail_path": "/financials/sec-filings-details/default.aspx"},

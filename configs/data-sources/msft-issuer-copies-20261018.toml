@@ -1,0 +1,154 @@
+schema = "issuer-word-copies.v1"
+issuer = "MSFT"
+cik = 789019
+snapshot_date = "2026-10-18"
+role = "issuer_published_word_copy_not_sec_original"
+identity_basis = "issuer URL filename and reference form/reportDate; not content verified"
+content_identity_verified = false
+historical_bytes_verified = false
+publication_time_verified = false
+ready = false
+
+[[documents]]
+id = "MSFT_FY22Q1_10Q"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY22Q1_10Q"
+bytes = 853011
+sha256 = "df8fbf9f3e6f639ae6fc2464771de05da4bf2825bff4b7f8920dd030b935f3ed"
+form_inferred_from_filename = "10-Q"
+period_end_inferred_from_filename = "2021-09-30"
+accession_candidate = "0001564590-21-051992"
+last_modified_not_publication_evidence = "Fri, 19 Jul 2024 06:17:34 GMT"
+observed_page_urls = ["https://www.microsoft.com/en-us/Investor/earnings/FY-2022-Q1/press-release-webcast"]
+observed_page_sha256 = ["da9965a8d57e11d2bde6eb3f1f67ad8a21931de097ed9144f91571666b97139e"]
+
+[[documents]]
+id = "MSFT_FY22Q2_10Q"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY22Q2_10Q"
+bytes = 934525
+sha256 = "055a204c2d65657fb1d36dfe658706aa5f357c5cfbaf3c591806bed61dab39d1"
+form_inferred_from_filename = "10-Q"
+period_end_inferred_from_filename = "2021-12-31"
+accession_candidate = "0001564590-22-002324"
+last_modified_not_publication_evidence = "Fri, 19 Jul 2024 06:17:16 GMT"
+observed_page_urls = ["https://www.microsoft.com/en-us/Investor/earnings/FY-2022-Q2/press-release-webcast"]
+observed_page_sha256 = ["a9444c99b3ade5e62af18ae95f41dc09c6de0f6a9998df2e58a18572558d6973"]
+
+[[documents]]
+id = "MSFT_FY22Q3_10Q"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY22Q3_10Q"
+bytes = 961202
+sha256 = "59956c44589b2f6441b9ab096c20419a8b8f2dbb858126ab6e88912fe6ea0d1d"
+form_inferred_from_filename = "10-Q"
+period_end_inferred_from_filename = "2022-03-31"
+accession_candidate = "0001564590-22-015675"
+last_modified_not_publication_evidence = "Fri, 19 Jul 2024 06:16:30 GMT"
+observed_page_urls = ["https://www.microsoft.com/en-us/Investor/earnings/FY-2022-Q3/press-release-webcast"]
+observed_page_sha256 = ["ddbd77b722983c079179525c430163db3449e29a86ca66efca02256ba1775770"]
+
+[[documents]]
+id = "MSFT_FY22Q4_10K"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY22Q4_10K"
+bytes = 1065750
+sha256 = "2969fb943f1d399868ebb8c920edcabe8fe2a56cf3a9f9d72bec2fa5a43850a1"
+form_inferred_from_filename = "10-K"
+period_end_inferred_from_filename = "2022-06-30"
+accession_candidate = "0001564590-22-026876"
+last_modified_not_publication_evidence = "Fri, 19 Jul 2024 06:13:26 GMT"
+observed_page_urls = ["https://www.microsoft.com/investor/reports/ar22/download-center/"]
+observed_page_sha256 = ["4d57ca05c26b1722cf3010472f23291b5b6defb251423b9c6050f52b2f0d4a8a"]
+
+[[documents]]
+id = "MSFT_FY23Q1_10Q"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY23Q1_10Q"
+bytes = 875618
+sha256 = "19b524f367b7534842240a358e4089436cede04cbe9a25331f9bcdc094d3cb69"
+form_inferred_from_filename = "10-Q"
+period_end_inferred_from_filename = "2022-09-30"
+accession_candidate = "0001564590-22-035087"
+last_modified_not_publication_evidence = "Thu, 18 Jul 2024 00:46:14 GMT"
+observed_page_urls = ["https://www.microsoft.com/en-us/Investor/earnings/FY-2023-Q1/press-release-webcast"]
+observed_page_sha256 = ["39684657bac714c7916382c2329bc190e5647fcc717a71065de1c30e1b352c66"]
+
+[[documents]]
+id = "MSFT_FY23Q2_10Q"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY23Q2_10Q"
+bytes = 963795
+sha256 = "9b3bad19b071af2823f9e9031674e9e3d5947859bb3fd82159ddf04880841657"
+form_inferred_from_filename = "10-Q"
+period_end_inferred_from_filename = "2022-12-31"
+accession_candidate = "0001564590-23-000733"
+last_modified_not_publication_evidence = "Thu, 18 Jul 2024 00:46:14 GMT"
+observed_page_urls = ["https://www.microsoft.com/en-us/Investor/earnings/FY-2023-Q2/press-release-webcast"]
+observed_page_sha256 = ["20c57f11d881f857152cd19f3188c854840d8526051dcc019457c1f6307ca58c"]
+
+[[documents]]
+id = "MSFT_FY23Q3_10Q"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY23Q3_10Q"
+bytes = 982230
+sha256 = "148fe695ae4c41a01e29d2d70ebf408ae4932616682db694f1a43ca8aa159f91"
+form_inferred_from_filename = "10-Q"
+period_end_inferred_from_filename = "2023-03-31"
+accession_candidate = "0000950170-23-014423"
+last_modified_not_publication_evidence = "Thu, 18 Jul 2024 00:46:14 GMT"
+observed_page_urls = ["https://www.microsoft.com/en-us/Investor/earnings/FY-2023-Q3/press-release-webcast"]
+observed_page_sha256 = ["17f26e5a3b7e26296c1e539ded55426b8c0fcf12a014f03232f2bf0cf288f7b9"]
+
+[[documents]]
+id = "MSFT_FY23Q4_10K"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY23Q4_10K"
+bytes = 1108967
+sha256 = "6cdaa2e9710b930ce5f1ddb186753b82e6b1d659734b7d5e5c8fc69b72a2f17c"
+form_inferred_from_filename = "10-K"
+period_end_inferred_from_filename = "2023-06-30"
+accession_candidate = "0000950170-23-035122"
+last_modified_not_publication_evidence = "Tue, 06 May 2025 08:03:25 GMT"
+observed_page_urls = ["https://www.microsoft.com/investor/reports/ar23/download-center/"]
+observed_page_sha256 = ["d78b55dea31eeb7d259ce90c17e72acd358c28b3d19743bd4c929801a18da5a9"]
+
+[[documents]]
+id = "MSFT_FY24Q1_10Q"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY24Q1_10Q"
+bytes = 863743
+sha256 = "13caedddc887f4abd2798810602984b8cb58ce88ee27bd199dbaaea065044b4f"
+form_inferred_from_filename = "10-Q"
+period_end_inferred_from_filename = "2023-09-30"
+accession_candidate = "0000950170-23-054855"
+last_modified_not_publication_evidence = "Thu, 18 Jul 2024 00:46:14 GMT"
+observed_page_urls = ["https://www.microsoft.com/en-us/Investor/earnings/FY-2024-Q1/press-release-webcast"]
+observed_page_sha256 = ["b23388a37f90083fed806ea36dbacf8ab9af43a405bda91c82c110e2aca91fd5"]
+
+[[documents]]
+id = "MSFT_FY24Q2_10Q"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY24Q2_10Q"
+bytes = 1008845
+sha256 = "725e8588e9e13ddbb470333a52f3981d6aa8c48edc9a8843d7a259fd70984c7e"
+form_inferred_from_filename = "10-Q"
+period_end_inferred_from_filename = "2023-12-31"
+accession_candidate = "0000950170-24-008814"
+last_modified_not_publication_evidence = "Thu, 18 Jul 2024 00:46:14 GMT"
+observed_page_urls = ["https://www.microsoft.com/en-us/Investor/earnings/FY-2024-Q2/press-release-webcast"]
+observed_page_sha256 = ["fd62a61b78035f066560fdd7ed6bdd3511c64eb4609fc01571fb9aad9f96b2c2"]
+
+[[documents]]
+id = "MSFT_FY24Q3_10Q"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY24Q3_10Q"
+bytes = 1025198
+sha256 = "c01659e67b28fd7598693942bf20d3e94ce0ebaf1d65070b0f45e6011608f5c0"
+form_inferred_from_filename = "10-Q"
+period_end_inferred_from_filename = "2024-03-31"
+accession_candidate = "0000950170-24-048288"
+last_modified_not_publication_evidence = "Thu, 18 Jul 2024 00:46:14 GMT"
+observed_page_urls = ["https://www.microsoft.com/en-us/Investor/earnings/FY-2024-Q3/press-release-webcast"]
+observed_page_sha256 = ["c7a7bd8ae44427598542fe5801a259e5722b8ee2f30ad92e216bf4cef4d136de"]
+
+[[documents]]
+id = "MSFT_FY24Q4_10K"
+url = "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/MSFT_FY24Q4_10K"
+bytes = 1240696
+sha256 = "d2634a95701e31734089f6f8f7e080e1fb3ceb44c7a9e7442bd28744d8ec7ab0"
+form_inferred_from_filename = "10-K"
+period_end_inferred_from_filename = "2024-06-30"
+accession_candidate = "0000950170-24-087843"
+last_modified_not_publication_evidence = "Fri, 16 Aug 2024 18:43:00 GMT"
+observed_page_urls = ["https://www.microsoft.com/investor/reports/ar24/download-center/"]
+observed_page_sha256 = ["9c9f06954b1b63bba7e3d21ad99cafb2e768672e57e14de9f5327355a49f811c"]

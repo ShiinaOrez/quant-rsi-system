@@ -233,8 +233,11 @@ def _member_inventory(path):
 
 def cmd_parse(store, out, reference_dir):
     catalog = store.catalog()
+    symbols = sorted({rec["meta"]["symbol"] for rec in catalog.values()})
+    for symbol in symbols:
+        q4.issuer(symbol)
     checks = {s: {m["filing_id"]: m for m in json.loads((out / f"crosscheck-{s}.json").read_text())["matches"]
-                  if m["filing_id"]} for s in FEED_KEYS}
+                  if m["filing_id"]} for s in symbols}
     summary = []
     for key, rec in sorted(catalog.items()):
         meta = rec.get("meta") or {}
@@ -319,11 +322,20 @@ def corroborate(result, symbol, accession, reference_dir):
         "period": agrees("DocumentPeriodEndDate", ref.get("reportDate")),
         "member_stem_is_primary_document": stems == [ref.get("primaryDocument")] if len(stems) == len(members) else None,
     }
+    disagreement = any(value is False for value in checks.values())
+    missing_required = [key for key in ("cik", "form", "period") if checks[key] is None]
+    amended = str(ref.get("form", "")).endswith("/A")
+    base_with_amendment = (agrees("DocumentType", ref.get("form", "")[:-2]) is True
+                           and dei.get("AmendmentFlag") == {"true"}) if amended else None
     return {"dei": {k: sorted(v) for k, v in dei.items()}, "checks": checks,
             "checks_unavailable": [key for key, value in checks.items() if value is None],
+            "requires_context_review": disagreement or bool(missing_required),
+            "required_content_checks_unavailable": missing_required,
+            "base_form_with_amendment_flag_agrees": base_with_amendment,
+            "period_comparison_scope": "DEI financial period versus index reportDate; an 8-K event date can differ" if str(ref.get("form", "")).startswith("8-K") else "DEI period versus index reportDate",
             "primary_document_check_basis": "SEC _htm.xml naming convention" if stems else "not_applicable_to_traditional_instance_name",
             "accession_verified": False,
-            "note": "content agrees with candidate row; accession itself is not in the ZIP"}
+            "note": "Content checks retain disagreements and unavailable evidence; they do not verify accession or publication time."}
 
 
 def _blob_path(store, rec):

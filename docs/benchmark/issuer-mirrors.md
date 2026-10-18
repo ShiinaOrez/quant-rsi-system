@@ -53,3 +53,13 @@ R=artifacts/benchmark-quality/claude/batch-03/archive
 .venv/bin/python -I scripts/issuer_mirror.py coverage --root $R --symbol INTC
 .venv/bin/python -m unittest tests.test_issuer_mirror
 ```
+
+## 2026-10-18：微软官方目录及 Word 副本
+
+Claude 第 14、15 批从 [Microsoft 年报目录](https://www.microsoft.com/en-us/Investor/annual-reports)和各季度 earnings 页面取得 FY1996–FY2025 的 30 年目录，以及 FY2022–FY2024 的 3 份年报、9 份季报 Word 副本，共 11,883,580 字节。季度页地址由已观测模板生成，并明确标注为 locator；Word 地址则必须实际出现在已保存页面中。没有访问 Office viewer，也没有重试受阻的 SEC/gcs-web 主机。
+
+固定的公开 URL、完整哈希、字节数、来源页 URL/哈希和未验证候选编号保存在 `configs/data-sources/msft-issuer-copies-20261018.toml`，可据此重取并核验同一版本；若供应商更换字节，不能覆盖旧哈希来凑出一致。原始文件、逐请求记录和父进程复核留在 `artifacts/benchmark-quality/claude/batch-14/`、`batch-15/`。
+
+第 14 批触及轮数上限，按未完成记录；父进程恢复并复核其 15 份响应（含一次重定向，共 16 次请求）和 6 份 Word。第 15 批正常完成，12 次请求补齐其余 6 份季报。父进程复核全部文件的长度、SHA-256、ZIP CRC 和观测来源链接，并独立重算 12 个参考候选。
+
+Word 正文尚未提取，身份仅按发行人 URL 的财年/季度标签和参考报告期匹配；季度标签用财年，不能当作同年的日历季度。它们是发行人 Word 副本，不等于 SEC as-filed 原件或全部附件。Last-Modified 普遍晚于申报日期，可能是后续上传，不能直接证明当时公开的字节版本。因此清单里的原文身份、历史字节和公开时间验证均为 false，仍不计入正式题目准入。更早的季报和实际下载的全部历史年报也没有因此补齐。

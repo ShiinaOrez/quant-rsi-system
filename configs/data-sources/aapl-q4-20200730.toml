@@ -1,0 +1,13 @@
+schema = "archived-q4-https.v1"
+issuer = "AAPL"
+cik = 320193
+capture_timestamp = "20200730205234"
+source_origin = "https://investor.apple.com"
+source_path = "/feed/SECFiling.svc/GetEdgarFilingList"
+payload_bytes = 2234382
+payload_sha256 = "751a467e8732bcc4c23a03727d92640287e26816a4e48a85c74b2ed66e4eb0b2"
+cdx_digest_sha1_base32 = "NPR2AAG2ECAHYMK2D574EH4SH5GVK57G"
+transport_operation = "http_to_https_same_host_and_path"
+# A transport hypothesis, not proof that HTTPS serves SEC-original bytes.
+sec_original_bytes_verified = false
+publication_time_verified = false

@@ -54,4 +54,4 @@ Meta 170 行、Amazon 360 行与固定参考索引的表单/日期分组无单�
 
 Claude 第 13 批取得 2020-07-30 的 Wayback 原始捕获，2,234,382 字节，SHA-256 `751a467e8732bcc4c23a03727d92640287e26816a4e48a85c74b2ed66e4eb0b2`；父进程复算 SHA-1 Base32，与已保存 CDX digest 一致。捕获有 1,696 行、六类表单 290 行，最新 FilingDate 为 2020-05-12。对照截至 2024-10-04 的 342 行参考索引，280 行只有唯一 accession 候选，10 行分属 5 个同日歧义组，52 行缺失。存档载荷完整性不等于申报原文或公开时间证据。
 
-Apple 当前接口返回 403，后续 CDX 查询返回 503；本批没有取得更新捕获。元数据含 56 个 HTTP XBRL ZIP 链接，未擅自改为 HTTPS 或下载正文。Apple 尚未加入常规 CLI 的发行人配置；本批离线分析只在进程内配置身份，原始文件、完整交接和父进程复核在 `artifacts/benchmark-quality/claude/batch-13/`。
+Apple 当前接口返回 403，后续 CDX 查询返回 503；本批没有取得更新捕获。元数据含 56 个 HTTP XBRL ZIP 链接，未擅自改为 HTTPS 或下载正文。第 13 批离线分析只在进程内配置身份。2026-10-18 增加独立的 [Apple 存档入口和固定传输策略](archived-q4-transport.md)；常规 plan/fetch 默认仍处理 Meta、Amazon。原始捕获、完整交接和父进程复核在 `artifacts/benchmark-quality/claude/batch-13/`。

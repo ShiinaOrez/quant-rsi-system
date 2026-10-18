@@ -204,7 +204,14 @@ class CorroborationTests(unittest.TestCase):
             p.write_text(json.dumps(dict(ref(accession, "8-K/A"), primaryDocument="fb-20220110.htm")))
             self.assertTrue(corroborate(result, "META", accession, tmp)["checks"]["form"])
             fact["value"] = "8-K"
-            self.assertFalse(corroborate(result, "META", accession, tmp)["checks"]["form"])
+            result["documents"][0]["facts"].append({"concept": {
+                "namespace": "http://xbrl.sec.gov/dei/2021q4", "local_name": "AmendmentFlag"},
+                "value": "true", "status": "ok"})
+            check = corroborate(result, "META", accession, tmp)
+            self.assertFalse(check["checks"]["form"])
+            self.assertTrue(check["base_form_with_amendment_flag_agrees"])
+            self.assertTrue(check["requires_context_review"])
+            self.assertNotIn("content agrees", check["note"])
 
 
 class FetcherTests(unittest.TestCase):
