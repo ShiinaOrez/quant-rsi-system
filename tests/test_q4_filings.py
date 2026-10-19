@@ -80,6 +80,18 @@ class PlanTests(unittest.TestCase):
 
 
 class UrlTests(unittest.TestCase):
+    def test_nvidia_archive_routes_do_not_admit_other_issuers(self):
+        url = "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001045810/" + UUID + ".zip"
+        self.assertEqual(q4.check_cdn_url(url, "NVDA", ("zip",)), (True, None))
+        self.assertEqual(q4.check_cdn_url(url.replace("0001045810", "0001326801"),
+                                        "NVDA", ("zip",)), (False, "cik_mismatch"))
+        self.assertEqual(q4.check_cdn_url(url.replace(q4.CDN_HOST, q4.LEGACY_META_CDN_HOST),
+                                        "NVDA", ("zip",)), (False, "foreign_host"))
+        link = "/financial-info/sec-filings/sec-filings-details/default.aspx?FilingId=16058739"
+        self.assertEqual(q4.detail_url(link, "NVDA", 16058739),
+                         ("https://investor.nvidia.com" + link, None))
+        self.assertIsNone(q4.detail_url(link, "META", 16058739)[0])
+
     def test_cdn_url_rules(self):
         ok = META_CDN + UUID + ".zip"
         self.assertEqual(q4.check_cdn_url(ok, "META", ("zip",)), (True, None))

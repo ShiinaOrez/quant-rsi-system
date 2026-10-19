@@ -27,6 +27,10 @@ ISSUERS = {
     "AMZN": {"cik": 1018724, "origin": "https://ir.aboutamazon.com",
              "cdn_hosts": (CDN_HOST,),
              "detail_path": "/sec-filings/sec-filings-details/default.aspx"},
+    # Observed in the hash-verified 2022-09-01 archive of NVIDIA's Q4 feed.
+    "NVDA": {"cik": 1045810, "origin": "https://investor.nvidia.com",
+             "cdn_hosts": (CDN_HOST,),
+             "detail_path": "/financial-info/sec-filings/sec-filings-details/default.aspx"},
 }
 # Q4 DocumentType -> (role, is SEC-original bytes, allowed extensions)
 DOCUMENT_ROLES = {

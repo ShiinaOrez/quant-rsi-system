@@ -1,0 +1,62 @@
+schema = "archived-issuer-quarterly-xbrl.v1"
+issuer = "MU"
+cik = 723125
+scope = "Latest reference 10-Q before each of three fixed MU cutoffs; two archived instances, one unresolved"
+reference_index_release = "2026-09-30"
+reference_index_sha256 = "03b53dc435cf950411fe8000e767620eb58a6ae5e7b27d6c7b2796de5f677671"
+publication_time_verified = false
+sec_original_bytes_verified = false
+attachments_complete = false
+ready = false
+
+[[instances]]
+accession_candidate = "0000723125-22-000072"
+benchmark_as_of = "2022-12-30"
+form = "10-Q"
+filing_date = "2022-12-22"
+report_date = "2022-12-01"
+original_url = "https://investors.micron.com/static-files/a7a723a6-28b9-4018-9295-07b0acca8532"
+capture_url = "https://web.archive.org/web/20230528153926id_/https://investors.micron.com/static-files/a7a723a6-28b9-4018-9295-07b0acca8532"
+observed_link_page = "https://web.archive.org/web/20230204111302id_/https://investors.micron.com/sec-filings/sec-filing/10-q/0000723125-22-000072"
+observed_link_page_sha256 = "3d902b1303c09d597740f079e4fc13157329f6868ba0be7b49e674e4f50a40b9"
+bytes = 1613508
+sha256 = "be0b44fb8b37eb3f200ee971e19e5c6999c99f480920fe4d20da98ba39ac87ef"
+cdx_sha1_base32 = "VZNEJ25XYUBAWU7HYGQS3I5HLWLGIBJB"
+facts = 896
+independent_decimal_checks = 792
+independent_nil_checks = 3
+cdx_digest_verified = true
+reference_check = "DEI CIK/form/period and all context CIKs agree with candidate"
+available_at_status = "unbound"
+ready = false
+
+[[instances]]
+accession_candidate = "0000723125-24-000019"
+benchmark_as_of = "2024-06-28"
+form = "10-Q"
+filing_date = "2024-06-27"
+report_date = "2024-05-30"
+original_url = "https://investors.micron.com/static-files/175a2ce9-765e-46c3-a326-1e6d20a82949"
+capture_url = "https://web.archive.org/web/20250524122548id_/https://investors.micron.com/static-files/175a2ce9-765e-46c3-a326-1e6d20a82949"
+observed_link_page = "https://web.archive.org/web/20240723124056id_/https://investors.micron.com/sec-filings/sec-filing/10-q/0000723125-24-000019"
+observed_link_page_sha256 = "fabe8e7d8905728c35080f562fafb5e94aafd06437448a9265e7b6b1c85f108e"
+bytes = 1493947
+sha256 = "5008b93c049e6db71c273c00eb8e1080c1d4642d2fd624a2b3ac5aa06910d5c3"
+cdx_sha1_base32 = "FTISORQ2EDY6LIMOT2NHDHV3BD7YGHIE"
+facts = 1236
+independent_decimal_checks = 1121
+independent_nil_checks = 2
+cdx_digest_verified = true
+reference_check = "DEI CIK/form/period and all context CIKs agree with candidate"
+available_at_status = "unbound"
+ready = false
+
+[[gaps]]
+accession_candidate = "0000723125-23-000041"
+benchmark_as_of = "2023-06-30"
+form = "10-Q"
+filing_date = "2023-06-29"
+report_date = "2023-06-01"
+status = "Cached host index lacks locator; exact derived legacy URL CDX query returned no rows"
+not_evidence_of_no_archive = true
+ready = false
