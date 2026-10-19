@@ -1,0 +1,90 @@
+schema_version = "r0_readiness_inputs.v1"
+repository_root = "../.."
+suite = "benchmarks/suites/nasdaq-diagnostic-v1.toml"
+
+[market_audit]
+path = "artifacts/benchmark-quality/market-window-audit.json"
+sha256 = "9a664ff522a65350d3b78d02ee18aa412d79316fe54778e72cbedf7ce009dfd3"
+
+[[references]]
+symbol = "AAPL"
+cik = 320193
+path = "artifacts/benchmark-quality/public-index/import-2026-09-30-v2/AAPL.jsonl"
+sha256 = "e94c1e49ffeca605516c9b83fb0bba23ad27ce3cefb6885eed9418b88a29b5fd"
+
+[[references]]
+symbol = "AMZN"
+cik = 1018724
+path = "artifacts/benchmark-quality/public-index/import-2026-09-30-v2/AMZN.jsonl"
+sha256 = "9882c36c953555e1ff97992916324d7d099fc0f9c690c5c7fbbd976361d46bd9"
+
+[[references]]
+symbol = "INTC"
+cik = 50863
+path = "artifacts/benchmark-quality/public-index/import-2026-09-30-v2/INTC.jsonl"
+sha256 = "b37ec8fdc8bc288c8087f2f7110fe30fd72b002fe7516ab413c3998b5bd7a4ed"
+
+[[references]]
+symbol = "META"
+cik = 1326801
+path = "artifacts/benchmark-quality/public-index/import-2026-09-30-v2/META.jsonl"
+sha256 = "a9c28aa54064c9b9a98bccf1f0889cd52f678ddf56c20936eb18dc3d1a1f2c11"
+
+[[references]]
+symbol = "MSFT"
+cik = 789019
+path = "artifacts/benchmark-quality/public-index/import-2026-09-30-v2/MSFT.jsonl"
+sha256 = "9d55b3ad8ff95b171a49b7e78692bbf4d8fd115bb9d7d033193ddd613060141a"
+
+[[references]]
+symbol = "MU"
+cik = 723125
+path = "artifacts/benchmark-quality/public-index/import-2026-09-30-v2/MU.jsonl"
+sha256 = "03b53dc435cf950411fe8000e767620eb58a6ae5e7b27d6c7b2796de5f677671"
+
+[[references]]
+symbol = "NVDA"
+cik = 1045810
+path = "artifacts/benchmark-quality/public-index/import-2026-09-30-v2/NVDA.jsonl"
+sha256 = "180a2592db67c13ec8d22c46b67d17e8848b6d56de0fe73898c6f4a5277f9b29"
+
+[[references]]
+symbol = "PYPL"
+cik = 1633917
+path = "artifacts/benchmark-quality/public-index/import-2026-09-30-v2/PYPL.jsonl"
+sha256 = "c599f2b0f7414bae7fce6b2f9b4e4b9c3b119bb8dd2297035b392c3ae0aec7b2"
+
+[inventory]
+primary_exports = [
+  "artifacts/benchmark-quality/hf-edgar/parent-aapl-all-local",
+  "artifacts/benchmark-quality/hf-edgar/parent-amzn-all-local",
+  "artifacts/benchmark-quality/hf-edgar/parent-pypl-all-local",
+  "artifacts/benchmark-quality/hf-edgar/parent-msft-2022",
+  "artifacts/benchmark-quality/claude/batch-19/extract",
+  "artifacts/benchmark-quality/claude/batch-20/extract-a-first20",
+  "artifacts/benchmark-quality/claude/batch-20/extract-b-last1",
+]
+quarterly_audits = ["artifacts/benchmark-quality/claude/batch-21/parent-review/source-fact-audit.json"]
+mirror_inventories = ["artifacts/benchmark-quality/intc-zip-inventory-verified.json"]
+
+[[inventory.q4]]
+summary = "artifacts/benchmark-quality/q4-expanded-v1/plans/parse-summary.json"
+store = "artifacts/benchmark-quality/q4-expanded-v1/store"
+
+[[inventory.q4]]
+summary = "artifacts/benchmark-quality/q4-expanded-v2/plans/parse-summary.json"
+store = "artifacts/benchmark-quality/q4-expanded-v2/store"
+
+[[inventory.q4]]
+summary = "artifacts/benchmark-quality/aapl-archive-https-v1/plans/parse-summary.json"
+store = "artifacts/benchmark-quality/aapl-archive-https-v1/store"
+
+[[inventory.q4]]
+summary = "artifacts/benchmark-quality/claude/batch-22/plans/parse-summary.json"
+store = "artifacts/benchmark-quality/nvda-archived-q4-v1/store"
+
+[[inventory.single_documents]]
+accession = "0001564590-22-026876"
+scope = "primary_document"
+path = "artifacts/benchmark-quality/hf-edgar/parent-msft-2022/primary-content.html"
+sha256 = "cc48e53a4052180eb7519599fc43f83f393baf5c0111d0511a514a6b751c73c5"
